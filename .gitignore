@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+.claude/
+
+# Large source files not needed on the live site
+Sukhaneskul-portfolio 2026.pdf
+Sukhaneskul-portfolio 2026/
+
+# Numbered raw-export PNGs in img/ root (not used by the website)
+img/[0-9]*.png
+
+# Local dev server
+server.js
