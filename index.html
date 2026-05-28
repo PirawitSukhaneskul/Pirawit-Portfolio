@@ -365,17 +365,20 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
 /* FIX 2 — Minimum body / caption font sizes */
 .pd-content p,.pd-content li{font-size:1rem;line-height:1.75}
 .pd-img-caption{font-size:0.875rem!important;line-height:1.6}
-/* FIX 4 — Woodflex void section layout */
-.void-section{--paper:#f5f3ee;--line:#ded9cf;--text:#4f5b61;--muted:#9a9389;background:var(--paper);color:var(--text);font-family:"Inter","Segoe UI",Arial,sans-serif;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.void-hero{margin:0}
-.void-hero img{display:block;width:100%;max-height:78vh;object-fit:cover;object-position:center}
-.void-caption{padding:16px 3vw 18px;color:var(--muted);font-size:0.95rem;letter-spacing:0.01em;border-bottom:1px solid var(--line)}
-.void-copy-wrap{max-width:850px;margin:0 auto;padding:clamp(48px,7vw,88px) 24px}
-.void-copy-wrap::after{content:"";display:block;clear:both}
-.void-thumb{float:right;width:16.666%;min-width:116px;margin:0 0 18px 42px}
-.void-thumb img{display:block;width:100%;height:auto}
+/* FIX 4 — Woodflex project-spread layout */
+.project-spread{--paper:#f5f3ee;--line:#ded9cf;--text:#4f5b61;--muted:#9a9389;background:var(--paper);color:var(--text);font-family:"Inter","Segoe UI",Arial,sans-serif}
+.image-section,.text-section,.drawing-section{border-top:1px solid var(--line)}
+.image-section figure,.drawing-section figure,.inline-render{margin:0}
+.full-render{display:block;width:100%;max-height:86vh;object-fit:cover;object-position:center}
+.caption{padding:16px 3vw 18px;color:var(--muted);font-size:0.95rem;letter-spacing:0.01em;border-top:1px solid var(--line)}
+.text-inner{max-width:850px;margin:0 auto;padding:clamp(48px,7vw,88px) 24px}
+.text-inner::after{content:"";display:block;clear:both}
+.inline-render{float:left;width:16.666%;min-width:112px;margin:6px 42px 20px 0}
+.inline-render img{display:block;width:100%;height:auto}
 .void-copy{margin:0;font-size:clamp(1rem,1.25vw,1.15rem);line-height:1.78;font-weight:300}
-/* Woodflex section drawing (legacy helper) */
+.void-copy em{font-style:italic}
+.drawing-inner{max-width:1040px;margin:0 auto;padding:clamp(42px,6vw,72px) 24px}
+.section-drawing{display:block;width:100%;height:auto}
 .woodflex-section-img{display:none}
 /* FIX 6 — Mobile hero object-position per project */
 @media(max-width:768px){
@@ -383,9 +386,9 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
   #page-project-dubai .pd-hero-img img{object-position:center 60%}
   #page-project-housing .pd-hero-img img{object-position:65% 55%}
   #page-project-woodflex .pd-hero-img img{object-position:center 70%}
-  .void-hero img{max-height:none;aspect-ratio:4/5}
-  .void-copy-wrap{padding:42px 22px 54px}
-  .void-thumb{width:28%;min-width:96px;margin-left:24px}
+  .full-render{max-height:none;aspect-ratio:4/5}
+  .text-inner{padding:42px 22px 54px}
+  .inline-render{width:30%;min-width:96px;margin-right:24px}
 }
 </style>
 </head>
@@ -1186,23 +1189,36 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
   </div>
   <div class="pd-img-caption">Courtyard terrace — bamboo planting, timber lounge, and indirect daylight void</div>
 
-  <!-- Central void — editorial layout -->
-  <section class="void-section">
-    <figure class="void-hero">
-      <img src="img/optimized/woodflex-courtyard.jpg" alt="Full-height courtyard void with timber screens, bamboo planting, and indirect daylight">
-    </figure>
-    <div class="void-caption">
-      Courtyard terrace — bamboo planting, timber lounge, and indirect daylight void
-    </div>
-    <div class="void-copy-wrap">
-      <figure class="void-thumb">
-        <img src="img/optimized/woodflex-courtyard.jpg" alt="Courtyard void reference">
+  <!-- Central void — project-spread editorial layout -->
+  <main class="project-spread">
+    <section class="image-section">
+      <figure>
+        <img class="full-render" src="img/optimized/woodflex-courtyard.jpg" alt="Full-height courtyard void with bamboo planting, timber lounge, and indirect daylight">
       </figure>
-      <p class="void-copy">
-        The existing shophouse structure — a narrow Bangkok commercial typology — becomes the project's primary design tool. By removing intermediate floors at the building's core, the design creates a full-height central void rising through all four levels. This void acts as a passive ventilation chimney: warm air rises and exits through the open top while cooler air is drawn in from the street-facing facade, reducing reliance on mechanical cooling. The same void channels indirect daylight deep into the plan, illuminating the coffee bar, co-working zones, and circulation without direct solar gain. Together, the void transforms a private interior into a <em>pseudo-public space</em> — visually connected to the street, thermally buffered by structure, and socially activated by the layered programme of coffee, books, and focused work above.
-      </p>
-    </div>
-  </section>
+      <div class="caption">
+        Courtyard terrace — bamboo planting, timber lounge, and indirect daylight void
+      </div>
+    </section>
+
+    <section class="text-section">
+      <div class="text-inner">
+        <figure class="inline-render">
+          <img src="img/optimized/woodflex-courtyard.jpg" alt="Small vertical courtyard render">
+        </figure>
+        <p class="void-copy">
+          The existing shophouse structure — a narrow Bangkok commercial typology — becomes the project's primary design tool. By removing intermediate floors at the building's core, the design creates a full-height central void rising through all four levels. This void acts as a passive ventilation chimney: warm air rises and exits through the open top while cooler air is drawn in from the street-facing facade, reducing reliance on mechanical cooling. The same void channels indirect daylight deep into the plan, illuminating the coffee bar, co-working zones, and circulation without direct solar gain. Together, the void transforms a private interior into a <em>pseudo-public space</em> — visually connected to the street, thermally buffered by structure, and socially activated by the layered programme of coffee, books, and focused work above.
+        </p>
+      </div>
+    </section>
+
+    <section class="drawing-section">
+      <div class="drawing-inner">
+        <figure>
+          <img class="section-drawing" src="img/optimized/woodflex-section.jpg" alt="Architectural section drawing — four productivity levels with central void and green wall">
+        </figure>
+      </div>
+    </section>
+  </main>
 
   <div class="pd-img-full" style="margin-top:3px">
     <img src="img/optimized/woodflex-floor-plans.jpg" alt="Floor plan axonometrics — four productivity levels" style="object-fit:contain;background:var(--bg2);padding:24px;width:100%"/>
