@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Name Card · Pirawit Sukhaneskul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+a{text-decoration:none;color:inherit}
+
+/* ─── SCREEN SHELL ─── */
+body {
+  font-family:'Roboto',sans-serif;
+  background:#0F0E0D;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:80px 40px;
+  gap:52px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page-title {
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#3A3836;
+}
+
+.preview-grid {
+  display:flex;
+  gap:72px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.card-unit {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+.side-label {
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#3A3836;
+}
+
+/* ─── CARD BASE ─── */
+/* Physical size: 85 × 55 mm (European standard). zoom:2.8 for screen preview. */
+.card {
+  width:85mm;
+  height:55mm;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+@media screen {
+  .card {
+    zoom:2.8;
+    box-shadow:0 24px 64px rgba(0,0,0,.55), 0 4px 18px rgba(0,0,0,.35);
+    border-radius:.8mm;
+  }
+}
+
+/* ─── FRONT ─── */
+.card-front {
+  background:#F5F4F0;
+  color:#1A1918;
+  padding:8mm 9mm;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.f-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.f-mono {
+  font-size:6pt;
+  font-weight:600;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:#C8C6C0;
+}
+
+/* Subtle architectural mark — three horizontal rules */
+.f-mark {
+  display:flex;
+  flex-direction:column;
+  gap:1.6mm;
+  padding-top:.5mm;
+}
+.f-mark span {
+  display:block;
+  height:.25mm;
+  background:#DCDAD4;
+}
+.f-mark span:nth-child(1){width:6mm}
+.f-mark span:nth-child(2){width:4.5mm}
+.f-mark span:nth-child(3){width:3mm}
+
+.f-body {
+  display:flex;
+  flex-direction:column;
+}
+
+.f-name {
+  font-size:15.5pt;
+  font-weight:300;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  color:#1A1918;
+}
+
+.f-rule {
+  width:8mm;
+  height:.25mm;
+  background:#1A1918;
+  opacity:.2;
+  margin:3.2mm 0 2.8mm;
+}
+
+.f-role {
+  font-size:6pt;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#5A5854;
+  line-height:1.5;
+}
+
+.f-location {
+  font-size:5.5pt;
+  font-weight:300;
+  color:#9A9890;
+  letter-spacing:.08em;
+  margin-top:1.2mm;
+}
+
+/* ─── BACK ─── */
+.card-back {
+  background:#1A1918;
+  color:#F5F4F0;
+  padding:7.5mm 9mm;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.b-header {
+  font-size:5.5pt;
+  font-weight:500;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#3A3836;
+}
+
+.b-contacts {
+  display:flex;
+  flex-direction:column;
+  gap:2.2mm;
+}
+
+.b-item {
+  display:flex;
+  align-items:baseline;
+  gap:2.5mm;
+}
+
+.b-lbl {
+  font-size:4.5pt;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#5A5854;
+  width:7mm;
+  flex-shrink:0;
+}
+
+.b-val {
+  font-size:5.5pt;
+  font-weight:300;
+  color:#ECEAE4;
+  letter-spacing:.03em;
+  line-height:1.3;
+}
+
+.b-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+
+.b-tagline {
+  font-size:4.5pt;
+  font-weight:300;
+  color:#3A3836;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  line-height:2.1;
+}
+
+.qr-block {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.8mm;
+}
+
+.qr-label {
+  font-size:3.5pt;
+  font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#3A3836;
+}
+
+/* ─── PRINT BUTTON ─── */
+.actions {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.btn-print {
+  font-family:'Roboto',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:14px 40px;
+  border:1px solid #3A3836;
+  background:none;
+  color:#F5F4F0;
+  cursor:pointer;
+  transition:all .2s;
+}
+.btn-print:hover {
+  border-color:#F5F4F0;
+  background:#F5F4F0;
+  color:#1A1918;
+}
+
+.print-note {
+  font-size:9px;
+  color:#3A3836;
+  letter-spacing:.04em;
+  text-align:center;
+  line-height:2.2;
+}
+
+/* ─── PRINT STYLES ─── */
+@media print {
+  body {
+    background:white;
+    padding:0;
+    min-height:auto;
+    gap:0;
+    display:block;
+    text-align:center;
+  }
+  .page-title,.actions,.side-label { display:none }
+  .preview-grid {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12mm;
+    padding-top:10mm;
+  }
+  .card-unit { gap:0 }
+  .card {
+    zoom:1 !important;
+    box-shadow:none !important;
+    border-radius:0 !important;
+    border:0.25mm solid #DCDAD4;
+  }
+  @page { size:A4; margin:20mm }
+}
+
+</style>
+</head>
+<body>
+
+<p class="page-title">Name Card &mdash; Pirawit Sukhaneskul</p>
+
+<div class="preview-grid">
+
+  <!-- ── FRONT ── -->
+  <div class="card-unit">
+    <span class="side-label">Front</span>
+
+    <div class="card card-front">
+
+      <div class="f-top">
+        <span class="f-mono">PS</span>
+        <div class="f-mark">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="f-body">
+        <div class="f-name">Pirawit<br>Sukhaneskul</div>
+        <div class="f-rule"></div>
+        <div class="f-role">BIM &middot; Architectural Designer</div>
+        <div class="f-location">Barcelona, Spain</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── BACK ── -->
+  <div class="card-unit">
+    <span class="side-label">Back</span>
+
+    <div class="card card-back">
+
+      <div class="b-header">Pirawit Sukhaneskul</div>
+
+      <div class="b-contacts">
+        <div class="b-item">
+          <span class="b-lbl">Email</span>
+          <span class="b-val">pirawit.win@gmail.com</span>
+        </div>
+        <div class="b-item">
+          <span class="b-lbl">Tel</span>
+          <span class="b-val">+34 605 732 654</span>
+        </div>
+        <div class="b-item">
+          <span class="b-lbl">In</span>
+          <span class="b-val">linkedin.com/in/pirawitsuk</span>
+        </div>
+        <div class="b-item">
+          <span class="b-lbl">CV</span>
+          <span class="b-val">Pirawit_CV_BIM.pdf</span>
+        </div>
+      </div>
+
+      <div class="b-bottom">
+        <div class="b-tagline">
+          Architecture<br>
+          BIM &middot; Sustainability
+        </div>
+
+        <!-- QR code placeholder (21×21 module grid) -->
+        <div class="qr-block">
+          <svg width="13mm" height="13mm" viewBox="0 0 21 21"
+               xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+            <rect width="21" height="21" fill="#1A1918"/>
+
+            <!-- ── Finder: Top-Left ── -->
+            <rect x="0" y="0" width="7" height="7" fill="#F5F4F0"/>
+            <rect x="1" y="1" width="5" height="5" fill="#1A1918"/>
+            <rect x="2" y="2" width="3" height="3" fill="#F5F4F0"/>
+
+            <!-- ── Finder: Top-Right ── -->
+            <rect x="14" y="0" width="7" height="7" fill="#F5F4F0"/>
+            <rect x="15" y="1" width="5" height="5" fill="#1A1918"/>
+            <rect x="16" y="2" width="3" height="3" fill="#F5F4F0"/>
+
+            <!-- ── Finder: Bottom-Left ── -->
+            <rect x="0" y="14" width="7" height="7" fill="#F5F4F0"/>
+            <rect x="1" y="15" width="5" height="5" fill="#1A1918"/>
+            <rect x="2" y="16" width="3" height="3" fill="#F5F4F0"/>
+
+            <!-- ── Timing strips ── -->
+            <rect x="8"  y="6" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="10" y="6" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="12" y="6" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="6" y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="6" y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="6" y="12" width="1" height="1" fill="#F5F4F0"/>
+
+            <!-- ── Data area modules (simulated) ── -->
+            <rect x="8"  y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="9"  y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="11" y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="13" y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="15" y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="18" y="8"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="8"  width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="8"  y="9"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="10" y="9"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="14" y="9"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="17" y="9"  width="1" height="1" fill="#F5F4F0"/>
+            <rect x="19" y="9"  width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="9"  y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="11" y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="12" y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="15" y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="18" y="10" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="10" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="8"  y="11" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="10" y="11" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="13" y="11" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="17" y="11" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="19" y="11" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="9"  y="12" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="12" y="12" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="14" y="12" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="12" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="18" y="12" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="12" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="8"  y="13" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="11" y="13" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="13" y="13" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="15" y="13" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="17" y="13" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="19" y="13" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="7"  y="14" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="9"  y="14" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="11" y="14" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="14" y="14" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="14" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="18" y="14" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="14" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="8"  y="15" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="10" y="15" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="13" y="15" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="15" y="15" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="17" y="15" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="19" y="15" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="7"  y="16" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="9"  y="16" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="12" y="16" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="14" y="16" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="16" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="18" y="16" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="16" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="8"  y="17" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="10" y="17" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="11" y="17" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="13" y="17" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="15" y="17" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="17" y="17" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="19" y="17" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="7"  y="18" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="9"  y="18" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="12" y="18" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="18" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="18" y="18" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="18" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="8"  y="19" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="10" y="19" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="13" y="19" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="15" y="19" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="17" y="19" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="19" y="19" width="1" height="1" fill="#F5F4F0"/>
+
+            <rect x="7"  y="20" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="9"  y="20" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="11" y="20" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="14" y="20" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="16" y="20" width="1" height="1" fill="#F5F4F0"/>
+            <rect x="20" y="20" width="1" height="1" fill="#F5F4F0"/>
+          </svg>
+          <span class="qr-label">Scan for portfolio</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /preview-grid -->
+
+<div class="actions">
+  <button class="btn-print" onclick="window.print()">Print &middot; Save as PDF</button>
+  <p class="print-note">
+    Print at actual size &middot; Do not scale to fit &middot; 85 &times; 55 mm<br>
+    Set paper margins to 20 mm &middot; Or choose &ldquo;Save as PDF&rdquo; to export
+  </p>
+</div>
+
+</body>
+</html>
