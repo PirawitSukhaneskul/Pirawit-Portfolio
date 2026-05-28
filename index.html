@@ -355,6 +355,26 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
   .profile-logo-strip img{max-height:18px}
   .pd-iso-strip{grid-template-columns:1fr 1fr 1fr}
 }
+/* ══════════════════════════════════════
+   ROUND 3 — REVISION STYLES
+══════════════════════════════════════ */
+/* FIX 1 — UC diagram 3-col row */
+.uc-diagram-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start;padding:32px var(--pad)}
+.uc-diagram-row img{width:100%;height:auto;display:block;background:#fff;padding:16px;box-sizing:border-box}
+.uc-diagram-caption{font-size:0.8rem;line-height:1.5;margin-top:0.5rem;color:#666}
+/* FIX 2 — Minimum body / caption font sizes */
+.pd-content p,.pd-content li{font-size:1rem;line-height:1.75}
+.pd-img-caption{font-size:0.875rem!important;line-height:1.6}
+/* FIX 4 — Woodflex section image — float right at 1/6 width */
+.woodflex-section-img{float:right;width:16.666%;min-width:110px;max-width:180px;height:auto;margin:0 0 1.5rem 2rem;object-fit:contain}
+/* FIX 6 — Mobile hero object-position per project */
+@media(max-width:768px){
+  .uc-diagram-row{grid-template-columns:1fr;padding:24px var(--pad)}
+  #page-project-dubai .pd-hero-img img{object-position:center 60%}
+  #page-project-housing .pd-hero-img img{object-position:65% 55%}
+  #page-project-woodflex .pd-hero-img img{object-position:center 70%}
+  .woodflex-section-img{float:none;width:40%;max-width:160px;margin:0 auto 1.5rem;display:block}
+}
 </style>
 </head>
 <body>
@@ -645,34 +665,42 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
     </ul>
   </div>
 
-  <!-- ① Automation workflow diagram — PRIMARY: most important image -->
-  <div class="pd-diagram-full" style="margin-top:3px">
-    <img src="img/optimized/bim-uc1-workflow.png" alt="BIM automation workflow — Revit model extracted through Dynamo and MS Project to generate 4D schedule, Navisworks animation, and inputs for UC2 and UC3" style="max-height:680px;margin:0 auto"/>
-  </div>
-  <div class="pd-img-caption">Automation workflow — Revit model data is extracted and mapped to WBS codes through Dynamo scripting, processed in MS Project to generate the phase-based Gantt schedule, then fed into Navisworks for construction sequence animation. Duration outputs flow downstream into UC2 (cost) and UC3 (carbon) calculations.</div>
-
-  <!-- ② UC overview framework -->
+  <!-- ① UC overview framework — primary context image -->
   <div class="pd-diagram-full" style="margin-top:3px">
     <img src="img/optimized/bim-uc-overview.png" alt="Use case overview — 4 Revit model scenarios mapped to 5 data types producing UC1 duration, UC2 cost, UC3 sustainability outputs"/>
   </div>
   <div class="pd-img-caption">Use case framework — four construction typology models share five data inputs (transportation, equipment, labour, cost, and emission factors) to produce UC1 duration, UC2 cost estimation, and UC3 sustainability outputs.</div>
 
-  <!-- ③ UC1 / UC2 / UC3 diagrams with captions -->
+  <!-- ② UC1 / UC2 / UC3 — 3-col side-by-side -->
   <div class="pd-content" style="padding-top:48px;padding-bottom:8px">
     <h3>Use Case Diagrams</h3>
   </div>
-
-  <!-- UC2 cost flow -->
-  <div class="pd-diagram-full">
-    <img src="img/optimized/bim-uc2-cost-flow.png" alt="UC2 — Cost estimation: Revit model quantities extracted via Dynamo, mapped to WBS cost database, combined with MS Project duration data to produce total cost in Excel"/>
+  <div class="uc-diagram-row">
+    <div>
+      <img src="img/optimized/bim-uc1-workflow.png" alt="UC1 — 4D workflow: Revit model extracted through Dynamo and MS Project to generate phase-based Gantt schedule and Navisworks animation"/>
+      <p class="uc-diagram-caption">
+        <strong>UC1 — 4D Schedule.</strong> Output: total construction duration per typology
+        (TC 197 days · PF 125 days · PP 94 days · RS 40 days), based on a 6-day working week.
+        Lag logic and activity sequencing in MS Project; Navisworks renders the phase-by-phase animation.
+      </p>
+    </div>
+    <div>
+      <img src="img/optimized/bim-uc2-cost-flow.png" alt="UC2 — 5D Cost workflow: Revit quantities through Dynamo into Excel cross-referenced with OBEC unit rates"/>
+      <p class="uc-diagram-caption">
+        <strong>UC2 — 5D Cost.</strong> Output: total direct cost (material + labour + equipment + transport)
+        per WBS task. Revit quantities flow through Dynamo into Excel, cross-referenced with
+        OBEC 2568 unit rates and INSEE precast pricing.
+      </p>
+    </div>
+    <div>
+      <img src="img/optimized/bim-uc3-carbon-flow.png" alt="UC3 — 6D Carbon workflow: BIM quantities into OneClick LCA with EPD emission factors for A1–A5 embodied carbon"/>
+      <p class="uc-diagram-caption">
+        <strong>UC3 — 6D Carbon.</strong> Output: A1–A5 embodied carbon (kgCO₂e) per scenario.
+        BIM quantities feed OneClick LCA with EPD emission factors and TGO carbon data
+        for a like-for-like environmental comparison across all four typologies.
+      </p>
+    </div>
   </div>
-  <div class="pd-img-caption"><strong>Use Case 2 — 5D Cost Estimation.</strong> Revit model quantities are extracted via Dynamo and mapped to material cost databases. MS Project duration data provides time-dependent labour, equipment, and transport costs. Outputs combine into a total cost per WBS task across all four construction scenarios.</div>
-
-  <!-- UC3 carbon flow -->
-  <div class="pd-diagram-full" style="margin-top:3px">
-    <img src="img/optimized/bim-uc3-carbon-flow.png" alt="UC3 — Embodied carbon: BIM model material quantities processed through OneClick LCA with EPD and TGO emission factors to produce A1–A5 embodied carbon result"/>
-  </div>
-  <div class="pd-img-caption"><strong>Use Case 3 — 6D Embodied Carbon.</strong> Material quantity takeoff from Revit is imported into OneClick LCA along with EPD emission factors and TGO carbon data. The output is embodied carbon (kgCO₂e) per scenario within the A1–A5 lifecycle boundary, enabling scenario-based environmental decision-making.</div>
 
   <!-- ④ Schedule summary — 4D output (Gantt proxy) -->
   <div class="pd-diagram-full" style="margin-top:3px">
@@ -680,22 +708,24 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
   </div>
   <div class="pd-img-caption"><strong>Use Case 1 — 4D Schedule Output.</strong> Generated construction schedule showing phase-based duration per typology: TC (197 days), PF (125 days, −37%), PP (94 days, −52%), and RS partial scope (40 days). Each phase — substructure, structure, roof, and architecture — is driven by productivity data and BIM quantities.</div>
 
-  <!-- ⑤ TC / PF / PP compact isometric comparison strip -->
-  <div class="pd-iso-strip" style="margin-top:3px">
+  <!-- ⑤ TC / PF / PP structural model comparison — 3-col -->
+  <div class="pd-content" style="padding-top:48px;padding-bottom:8px">
+    <h3>Structural Models</h3>
+  </div>
+  <div class="uc-diagram-row">
     <div>
       <img src="img/optimized/bim-tc-structure.jpg" alt="TC — Traditional In-Situ structural model"/>
-      <div class="pd-img-caption" style="border:none;padding:10px 16px 4px;font-size:10.5px;font-weight:400;color:var(--mid)">TC — Traditional In-Situ</div>
+      <p class="uc-diagram-caption"><strong>TC — Traditional In-Situ.</strong> Cast-in-place reinforced concrete. Longest duration (197 days) but lowest precast logistics cost.</p>
     </div>
     <div>
       <img src="img/optimized/bim-pf-frame.jpg" alt="PF — Precast Structural Component frame"/>
-      <div class="pd-img-caption" style="border:none;padding:10px 16px 4px;font-size:10.5px;font-weight:400;color:var(--mid)">PF — Precast Frame</div>
+      <p class="uc-diagram-caption"><strong>PF — Precast Frame.</strong> Factory-fabricated column and beam system. Duration 125 days (−37%). Higher transport and assembly costs offset by faster programme.</p>
     </div>
     <div>
       <img src="img/optimized/bim-pp-structure.jpg" alt="PP — Precast Structural Panel model"/>
-      <div class="pd-img-caption" style="border:none;padding:10px 16px 4px;font-size:10.5px;font-weight:400;color:var(--mid)">PP — Precast Panel</div>
+      <p class="uc-diagram-caption"><strong>PP — Precast Panel.</strong> Large panel wall-slab system. Shortest duration at 94 days (−52%). Highest embodied carbon per m² due to concrete volume in panels.</p>
     </div>
   </div>
-  <div class="pd-img-caption">Structural model comparison — TC (traditional in-situ concrete), PF (precast frame), and PP (precast panel). The same spatial programme was modelled in three construction typologies to enable a like-for-like performance comparison.</div>
 
   <!-- ⑥ Cost and carbon dashboard charts -->
   <div class="pd-plan-grid" style="margin-top:3px">
@@ -1145,10 +1175,22 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
   <div class="pd-img-caption">Courtyard terrace — bamboo planting, timber lounge, and indirect daylight void</div>
 
   <!-- Section and floor plans -->
-  <div class="pd-img-full" style="margin-top:3px">
-    <img src="img/optimized/woodflex-section.jpg" alt="Building section — four productivity levels with biophilic green wall" style="object-fit:contain;background:var(--bg2);padding:24px;width:100%"/>
+  <div class="pd-content" style="padding-top:40px;padding-bottom:32px">
+    <img class="woodflex-section-img" src="img/optimized/woodflex-section.jpg" alt="Building section — four productivity levels with biophilic green wall and central void"/>
+    <p>The existing shophouse structure — a narrow Bangkok commercial typology —
+    becomes the project's primary design tool. By removing intermediate floors
+    at the building's core, the design creates a full-height central void rising
+    through all four levels. This void acts as a passive ventilation chimney:
+    warm air rises and exits through the open top while cooler air is drawn in
+    from the street-facing façade, reducing reliance on mechanical cooling.
+    The same void channels indirect daylight deep into the plan, illuminating
+    the coffee bar, co-working zones, and circulation without direct solar gain.
+    Together, the void transforms a private interior into a
+    <em>pseudo-public space</em> — visually connected to the street,
+    thermally buffered by structure, and socially activated by the layered
+    programme of coffee, books, and focused work above.</p>
+    <div style="clear:both"></div>
   </div>
-  <div class="pd-img-caption">Building section — four productivity zones connected by central void and green wall</div>
 
   <div class="pd-img-full" style="margin-top:3px">
     <img src="img/optimized/woodflex-floor-plans.jpg" alt="Floor plan axonometrics — four productivity levels" style="object-fit:contain;background:var(--bg2);padding:24px;width:100%"/>
@@ -1214,6 +1256,8 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
             <li>Thai Arch. License — Assoc.Arch 27042</li>
             <li>Erasmus Mundus Scholar — 1 of 15</li>
             <li>YAC Gold Mention — Dubai 2022</li>
+            <li>AYDA 3rd Prize — Nippon Paint</li>
+            <li>Alliance Laundry 2nd Prize</li>
             <li>Sheera Finalist — Bangkok 2021</li>
           </ul>
         </div>
@@ -1317,6 +1361,7 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Solibri / BIMcollab</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">BIM 360 / Aconex</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">IFC / ISO 19650</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="60"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Speckle</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="60"></div></div></div>
       </div>
       <div>
         <div class="sk-cat-title">Design &amp; Visualization</div>
@@ -1325,14 +1370,17 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Enscape / D5 / Lumion</span><span class="sk-lv">Expert</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Rhino + Grasshopper</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Adobe Suite</span><span class="sk-lv">Expert</span></div><div class="sk-bar"><div class="sk-fill" data-w="92"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Primavera P6</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="58"></div></div></div>
       </div>
       <div>
         <div class="sk-cat-title">AI &amp; Automation</div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Dynamo</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="70"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">MS Project</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">LLM / AI Workflows</span><span class="sk-lv">Advanced</span></div><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div></div>
         <div class="sk-cat-title" style="margin-top:32px">Sustainability</div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">LEED BD+C / ID+C</span><span class="sk-lv">Experienced</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">WELL Building Standard</span><span class="sk-lv">Experienced</span></div><div class="sk-bar"><div class="sk-fill" data-w="70"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">DIVA / Climate Studio</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">One Click LCA</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="64"></div></div></div>
       </div>
@@ -1348,6 +1396,8 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
     <div class="awards-table">
       <div class="aw-row"><span class="aw-yr">2024</span><span class="aw-name">EU Erasmus Mundus MBUILD Scholarship</span><span class="aw-detail">1 of 15 from 1,000+ global applicants</span></div>
       <div class="aw-row"><span class="aw-yr">2022</span><span class="aw-name">Gold Mention — YAC International Competition</span><span class="aw-detail">4th Prize · Dubai Sea House · Jury: Snøhetta, Foster+Partners, MAD Architects</span></div>
+      <div class="aw-row"><span class="aw-yr">TBC</span><span class="aw-name">3rd Prize — AYDA (Asian Young Designers Awards)</span><span class="aw-detail">Nippon Paint · Thailand</span></div>
+      <div class="aw-row"><span class="aw-yr">TBC</span><span class="aw-name">2nd Prize — Alliance Laundry Design Competition</span><span class="aw-detail">Thailand</span></div>
       <div class="aw-row"><span class="aw-yr">2021</span><span class="aw-name">Finalist — Sheera Design Competition</span><span class="aw-detail">Woodflex Workspace · Bangkok, Thailand</span></div>
       <div class="aw-row"><span class="aw-yr">2023</span><span class="aw-name">Thai Architectural License</span><span class="aw-detail">ID Assoc.Arch 27042 — Architect Council of Thailand</span></div>
     </div>
@@ -1401,12 +1451,15 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
         <span class="ci-val">Barcelona, Spain</span>
       </div>
       <div class="contact-avail">
-        <p>Open to <strong>BIM Coordinator</strong>, <strong>BIM Specialist</strong>, and <strong>Architectural Designer</strong> roles in Europe and beyond. Available from July 2026.</p>
+        <p>Open to <strong>BIM Coordinator</strong>, <strong>BIM Specialist</strong>, and
+        <strong>Architectural Designer</strong> roles —
+        remote from anywhere, or office-based in Asia or Australia.
+        Graduating September 2026 in Spain. Available immediately after.</p>
       </div>
     </div>
     <div>
       <div class="contact-col-title">Credentials</div>
-      <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:24px">Thai-licensed architect · Erasmus Mundus Scholar · BIM &amp; Sustainability Specialist · MSc candidate graduating July 2026.</p>
+      <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:24px">Thai-licensed architect · Erasmus Mundus Scholar · BIM &amp; Sustainability Specialist · MSc candidate graduating September 2026. Open to remote (global) &amp; office-based roles in Asia–Australia.</p>
       <div style="display:flex;flex-direction:column;gap:12px">
         <button class="btn-dark" onclick="window.location.href='mailto:pirawit.win@gmail.com'">Send an Email →</button>
         <a class="btn-outline" href="Pirawit_CV_BIM.pdf" download="Pirawit_Sukhaneskul_CV.pdf">Download CV (PDF) ↓</a>
