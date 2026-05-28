@@ -264,6 +264,16 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
 .tl-dot{width:12px;height:12px;border-radius:50%;border:1px solid var(--dark);background:var(--bg);flex-shrink:0;margin-top:5px;position:relative}
 .tl-item-inner{}
 .tl-period{font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light);margin-bottom:4px}
+/* Education blocks */
+.edu-program-label{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light);padding:0 0 20px;margin-bottom:4px;border-bottom:1px solid var(--border)}
+.edu-block-group{border-left:2px solid var(--border);padding-left:24px;margin-bottom:40px}
+.education-block{display:grid;grid-template-columns:140px 1fr;gap:24px 32px;padding:20px 0;border-bottom:1px solid var(--border)}
+.education-block:last-child{border-bottom:none}
+.edu-date{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--light);padding-top:3px;line-height:1.6}
+.edu-detail strong{display:block;font-size:0.95rem;font-weight:500;margin-bottom:4px;color:var(--dark)}
+.edu-degree{display:block;font-size:0.825rem;color:var(--mid);margin-bottom:10px;font-style:italic}
+.edu-detail p{font-size:0.875rem;line-height:1.65;color:var(--mid);margin:0 0 10px}
+.edu-tags{font-size:0.75rem;letter-spacing:.04em;color:var(--light)}
 .tl-title{font-family:var(--serif);font-size:19px;font-weight:400;color:var(--dark);margin-bottom:2px;line-height:1.3}
 .tl-org{font-size:12px;font-weight:300;color:var(--mid);margin-bottom:10px}
 .tl-desc{font-size:12.5px;font-weight:300;color:var(--light);line-height:1.7}
@@ -1181,11 +1191,6 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
   </div>
   <div class="pd-img-caption">Coffee bar — slatted timber ceiling, terrazzo floor, and glass-block wall</div>
 
-  <div class="pd-img-full" style="margin-top:3px">
-    <img src="img/optimized/woodflex-courtyard.jpg" alt="Woodflex — courtyard terrace with bamboo and lounge seating" class="cover-16-9" style="object-position:center 40%"/>
-  </div>
-  <div class="pd-img-caption">Courtyard terrace — bamboo planting, timber lounge, and indirect daylight void</div>
-
   <!-- Central void — project-spread editorial layout -->
   <main class="project-spread">
     <section class="narrative-section">
@@ -1344,26 +1349,54 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
       <span class="cv-section-num">02</span>
       <h2 class="cv-section-title">Education</h2>
     </div>
-    <div class="cv-grid">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-item-inner">
-          <div class="tl-period">Sep 2024 – Jul 2026</div>
-          <div class="tl-title">MSc Sustainable Construction &amp; Management</div>
-          <div class="tl-org">Erasmus Mundus MBUILD — FEUP Porto · THM Giessen · UC Santander</div>
-          <div class="tl-desc">EU-funded scholarship (1 of 15 / 1,000+). Modules: 3–7D BIM, ISO 19650, Dynamo, sustainable design, Primavera P6. Thesis: Python–Dynamo 4D–6D BIM automation with AI dashboard.</div>
+
+    <!-- Erasmus Mundus group -->
+    <p class="edu-program-label">Erasmus Mundus MBUILD — EU-funded Joint Master's · 1 of 15 selected from 1,000+ applicants worldwide</p>
+    <div class="edu-block-group">
+
+      <div class="education-block">
+        <span class="edu-date">Sep 2024 –<br>Feb 2025</span>
+        <div class="edu-detail">
+          <strong>Faculdade de Engenharia da Universidade do Porto (FEUP)</strong>
+          <span class="edu-degree">MSc Sustainable Design, Construction and Management · 16.2 / 20</span>
+          <p>Construction project management: EVM, CPM, IPD, and Lean Construction. Applied scheduling and waste reduction using Primavera P6. Integrated Project 1 combining sustainability strategy with CM workflows.</p>
+          <span class="edu-tags">Construction Management · EVM · Primavera P6 · Procurement · Lean</span>
         </div>
       </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-item-inner">
-          <div class="tl-period">Aug 2018 – Jun 2023</div>
-          <div class="tl-title">Bachelor of Architecture — First Class Honours</div>
-          <div class="tl-org">Chulalongkorn University · Bangkok, Thailand</div>
-          <div class="tl-desc">Thesis: 30-storey affordable housing BIM model — precast walls, post-tensioned slabs, modular pods, fire compartmentation strategy.</div>
+
+      <div class="education-block">
+        <span class="edu-date">Mar 2025 –<br>Aug 2025</span>
+        <div class="edu-detail">
+          <strong>Technische Hochschule Mittelhessen (THM), Giessen</strong>
+          <span class="edu-degree">MSc Building Construction Technology · 17.6 / 20</span>
+          <p>BIM workflows with Revit, Navisworks, and Dynamo for parametric automation. IFC open standards, BEP development, and ISO 19650 data management. Clash detection, fire safety compliance, and building physics.</p>
+          <span class="edu-tags">BIM · Revit · Navisworks · Dynamo · IFC · ISO 19650</span>
         </div>
+      </div>
+
+      <div class="education-block">
+        <span class="edu-date">Aug 2025 –<br>Sep 2026</span>
+        <div class="edu-detail">
+          <strong>Universidad de Cantabria (UC), Santander</strong>
+          <span class="edu-degree">MSc Sustainable Design, Construction and Management · 16.6 / 20</span>
+          <p>Sustainable infrastructure, circular economy, and advanced construction materials. Life Cycle Assessment (LCA) for environmental performance evaluation. Integrated Project 3: construction entrepreneurship and business development.</p>
+          <span class="edu-tags">LCA · Life-Cycle Costing · Circular Economy · Sustainable Materials · GIS</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Chulalongkorn -->
+    <div class="education-block" style="border-top:1px solid var(--border);margin-top:8px">
+      <span class="edu-date">Aug 2018 –<br>Jun 2023</span>
+      <div class="edu-detail">
+        <strong>Chulalongkorn University, Bangkok</strong>
+        <span class="edu-degree">Bachelor of Architecture — First Class Honours · GPA 3.60 / 4.00</span>
+        <p>Five-year professional architecture degree. Thesis: 30-storey affordable housing BIM model — precast walls, post-tensioned slabs, modular bathroom pods, and fire compartmentation strategy.</p>
+        <span class="edu-tags">Architecture · BIM · Revit · SketchUp · AutoCAD · Interior Design</span>
       </div>
     </div>
+
   </div>
 
   <!-- Skills -->
