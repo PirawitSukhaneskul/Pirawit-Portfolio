@@ -216,13 +216,13 @@ a.lab-card:hover .lab-cta{gap:11px}
    FLOATING CONTACT RAIL
 ══════════════════════════════════════ */
 .contact-rail{position:fixed;right:22px;bottom:22px;z-index:600;display:flex;flex-direction:column;gap:11px;padding-bottom:env(safe-area-inset-bottom)}
-.crail-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--border);box-shadow:0 6px 18px rgba(26,25,24,.14);color:var(--dark);text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}
-.crail-btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(26,25,24,.22)}
+.crail-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;box-shadow:0 6px 18px rgba(26,25,24,.18);color:#fff;text-decoration:none;transition:transform .2s,box-shadow .2s,filter .2s}
+.crail-btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(26,25,24,.26);filter:brightness(1.07)}
 .crail-btn:focus-visible{outline:2px solid var(--dark);outline-offset:2px}
-.crail-btn svg{width:21px;height:21px}
-.crail-btn.line:hover{background:#06c755;border-color:#06c755;color:#fff}
-.crail-btn.mail:hover{background:var(--dark);border-color:var(--dark);color:#fff}
-.crail-btn.fb:hover{background:#1877f2;border-color:#1877f2;color:#fff}
+.crail-btn svg{width:22px;height:22px}
+.crail-btn.line{background:#06c755}
+.crail-btn.mail{background:#1a1918}
+.crail-btn.fb{background:#1877f2}
 .crail-tip{position:absolute;right:56px;top:50%;transform:translateY(-50%);background:var(--dark);color:#fff;font-size:10px;letter-spacing:.06em;padding:5px 9px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
 .crail-btn{position:relative}
 .crail-btn:hover .crail-tip,.crail-btn:focus-visible .crail-tip{opacity:1}
