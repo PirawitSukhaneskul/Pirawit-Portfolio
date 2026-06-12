@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QR Codes - Name Card</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 32px;
+  }
+  h1 { font-size: 12px; color: #666; letter-spacing: 3px; text-transform: uppercase; }
+  .qr-pair { display: flex; gap: 60px; align-items: flex-start; }
+  .qr-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .qr-wrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    overflow: hidden;
+  }
+  .qr-wrap img { width: 200px; height: 200px; display: block; }
+  .qr-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #111;
+    white-space: nowrap;
+  }
+  .qr-label { font-size: 10px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+  button {
+    padding: 7px 18px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid #444;
+    background: white;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  button:hover { background: #333; color: white; }
+  .note { font-size: 10px; color: #aaa; text-align: center; line-height: 1.7; }
+</style>
+</head>
+<body>
+<h1>Name Card — QR Codes</h1>
+<div class="qr-pair">
+  <div class="qr-item">
+    <div class="qr-wrap">
+      <img id="img-port" src="data:image/png;base64,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" alt="Portfolio QR">
+      <div class="qr-center">PORTFOLIO</div>
+    </div>
+    <span class="qr-label">Portfolio</span>
+    <button onclick='dl("img-port","qr_portfolio.png","PORTFOLIO")'>Save PNG</button>
+  </div>
+  <div class="qr-item">
+    <div class="qr-wrap">
+      <img id="img-link" src="data:image/png;base64,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" alt="LinkedIn QR">
+      <div class="qr-center">LINKEDIN</div>
+    </div>
+    <span class="qr-label">LinkedIn</span>
+    <button onclick='dl("img-link","qr_linkedin.png","LINKEDIN")'>Save PNG</button>
+  </div>
+</div>
+<p class="note">Click Save PNG to download with the label baked in.<br>Error correction H — center text is safe to overlay.</p>
+<script>
+function dl(imgId, filename, label) {
+  const img = document.getElementById(imgId);
+  const c = document.createElement("canvas");
+  c.width = 400; c.height = 400;
+  const ctx = c.getContext("2d");
+  ctx.drawImage(img, 0, 0, 400, 400);
+  const fs = 28;
+  ctx.font = "bold " + fs + "px Arial";
+  const tw = ctx.measureText(label).width;
+  const cx = 200, cy = 200;
+  const px = 16, py = 10;
+  ctx.fillStyle = "white";
+  ctx.fillRect(cx - tw/2 - px, cy - fs/2 - py, tw + px*2, fs + py*2);
+  ctx.fillStyle = "#111";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(label, cx, cy);
+  const a = document.createElement("a");
+  a.download = filename;
+  a.href = c.toDataURL("image/png");
+  a.click();
+}
+</script>
+</body>
+</html>

@@ -156,6 +156,25 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
 .ha-stat-label{font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px}
 
 /* ══════════════════════════════════════
+   EIR STUDIO FEATURE STRIP
+══════════════════════════════════════ */
+.eir-strip{background:#0a0f1a;padding:80px var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.eir-browser{border-radius:8px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.08)}
+.eir-browser-bar{background:#1a1f2e;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.eir-browser-dot{width:10px;height:10px;border-radius:50%}
+.eir-browser-url{background:rgba(255,255,255,.07);border-radius:4px;padding:3px 10px;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.02em;flex:1;max-width:260px;margin:0 auto}
+.eir-browser-img{display:block;width:100%}
+.eir-content .section-label{color:rgba(255,255,255,.35)}
+.eir-headline{font-family:var(--serif);font-size:clamp(26px,2.8vw,40px);font-weight:300;line-height:1.25;color:#fff;letter-spacing:-.02em;margin:16px 0 20px}
+.eir-desc{font-size:13.5px;font-weight:300;line-height:1.85;color:rgba(255,255,255,.5);margin-bottom:28px}
+.eir-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.eir-tag{font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(255,255,255,.15);padding:5px 11px;color:rgba(255,255,255,.4);border-radius:2px}
+.eir-built{font-size:10.5px;color:rgba(255,255,255,.28);margin-bottom:28px;font-weight:300;font-style:italic}
+.btn-eir{display:inline-block;background:#2563eb;color:#fff;font-size:12px;font-weight:500;letter-spacing:.06em;padding:13px 28px;text-decoration:none;transition:background .2s}
+.btn-eir:hover{background:#1d4ed8}
+@media(max-width:900px){.eir-strip{grid-template-columns:1fr;gap:40px}}
+
+/* ══════════════════════════════════════
    PROJECTS OVERVIEW PAGE
 ══════════════════════════════════════ */
 .proj-page-header{padding:72px var(--pad) 56px}
@@ -528,6 +547,34 @@ footer span,.footer-link{font-size:11px;font-weight:300;letter-spacing:.04em}
         <div class="ha-stat-num">3</div>
         <div class="ha-stat-label">Countries · EU MSc</div>
       </div>
+    </div>
+  </section>
+
+  <!-- EIR Studio Feature Strip -->
+  <section class="eir-strip">
+    <div class="eir-browser">
+      <div class="eir-browser-bar">
+        <span class="eir-browser-dot" style="background:#ff5f57"></span>
+        <span class="eir-browser-dot" style="background:#febc2e"></span>
+        <span class="eir-browser-dot" style="background:#28c840"></span>
+        <span class="eir-browser-url">pirawitsukhaneskul.github.io/eir-studio</span>
+      </div>
+      <img class="eir-browser-img" src="img/optimized/eir-studio-screenshot.jpg" alt="EIR Studio — ISO 19650 Exchange Information Requirements generator for Thai AEC teams"/>
+    </div>
+    <div class="eir-content">
+      <div class="section-label">Side Project · 2026</div>
+      <h3 class="eir-headline">EIR Studio — ISO 19650<br>Information Requirements<br>Generator</h3>
+      <p class="eir-desc">A bilingual (EN/TH) web app for Thai Architecture, Engineering &amp; Construction teams to define, structure, and export professional Exchange Information Requirements documents — aligned to ISO 19650 BIM standards.</p>
+      <div class="eir-tags">
+        <span class="eir-tag">Next.js 14</span>
+        <span class="eir-tag">ISO 19650</span>
+        <span class="eir-tag">BIM</span>
+        <span class="eir-tag">React PDF</span>
+        <span class="eir-tag">Thai AEC</span>
+        <span class="eir-tag">TypeScript</span>
+      </div>
+      <p class="eir-built">Built with Claude Code &amp; OpenAI Codex — from concept to deployed app.</p>
+      <a class="btn-eir" href="https://pirawitsukhaneskul.github.io/eir-studio/" target="_blank" rel="noopener">Open App →</a>
     </div>
   </section>
 
