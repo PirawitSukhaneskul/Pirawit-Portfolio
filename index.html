@@ -279,6 +279,8 @@ a.lab-card:hover .lab-cta{gap:11px}
 .pd-info-item:last-child{border-right:none}
 .pd-info-label{font-size:9.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--light);margin-bottom:6px}
 .pd-info-val{font-size:13px;font-weight:300;color:var(--dark);line-height:1.4}
+.pd-info-val a{border-bottom:1px solid var(--light);transition:border-color .2s}
+.pd-info-val a:hover{border-color:var(--dark)}
 /* Content area */
 .pd-content{max-width:760px;margin:0 auto;padding:72px var(--pad)}
 .pd-content h3{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--dark);margin-bottom:16px;letter-spacing:-.01em}
@@ -445,6 +447,36 @@ a.lab-card:hover .lab-cta{gap:11px}
   .pd-iso-strip{grid-template-columns:1fr 1fr 1fr}
 }
 /* ══════════════════════════════════════
+   HARLOW HOUSE — PHASE STRUCTURE
+══════════════════════════════════════ */
+.pd-phase{padding:56px var(--pad) 12px;border-top:1px solid var(--border);background:var(--bg2)}
+.pd-phase-inner{max-width:760px;margin:0 auto}
+.pd-phase-num{font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--light);margin-bottom:10px}
+.pd-phase-title{font-family:var(--serif);font-size:clamp(28px,3.6vw,42px);font-weight:300;line-height:1.08;letter-spacing:-.02em;color:var(--dark)}
+.pd-phase-sub{font-size:13px;font-weight:300;color:var(--mid);margin-top:12px;letter-spacing:.02em}
+.pd-phase + .pd-content{padding-top:36px}
+/* Reference / inspiration pairing */
+.pd-ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:0;background:var(--bg2)}
+.pd-ref-grid img{width:100%;aspect-ratio:16/10;object-fit:contain;display:block;background:var(--bg2);padding:20px}
+.pd-ref-grid img.bleed{object-fit:cover;padding:0}
+@media(max-width:768px){.pd-ref-grid{grid-template-columns:1fr}}
+/* Collaborator credit */
+.pd-credit{max-width:760px;margin:0 auto;padding:0 var(--pad) 72px}
+.pd-credit-box{border:1px solid var(--border);padding:28px 30px;background:var(--bg2)}
+.pd-credit-label{font-size:9.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--light);margin-bottom:14px}
+.pd-credit-studio{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--dark);letter-spacing:.02em}
+.pd-credit-studio a{border-bottom:1px solid var(--border);transition:border-color .2s,color .2s}
+.pd-credit-studio a:hover{color:var(--dark);border-color:var(--dark)}
+.pd-credit-names{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.9;margin-top:10px}
+.pd-credit-names a{border-bottom:1px solid var(--border);transition:border-color .2s,color .2s}
+.pd-credit-names a:hover{color:var(--dark);border-color:var(--dark)}
+.pd-credit-role{font-size:13px;font-weight:300;color:var(--mid);line-height:1.85;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+@media(max-width:768px){
+  .pd-phase{padding:40px var(--pad) 8px}
+  .pd-credit-box{padding:22px 20px}
+}
+
+/* ══════════════════════════════════════
    ROUND 3 — REVISION STYLES
 ══════════════════════════════════════ */
 /* FIX 1 — UC diagram 3-col row */
@@ -576,11 +608,11 @@ a.lab-card:hover .lab-cta{gap:11px}
     </div>
     <div class="featured-grid">
       <div class="feat-card" data-nav="project-uk">
-        <div class="feat-card-img"><img src="img/optimized/uk-bathtub-hero.jpg" alt="UK Housing Renovation — Japandi Bathroom" style="object-position:center center"/></div>
+        <div class="feat-card-img"><img src="img/optimized/uk-bathtub-hero.jpg" alt="Harlow House Renovation — Japandi bathroom" style="object-position:center center"/></div>
         <div class="feat-card-body">
           <div class="feat-card-meta"><span class="feat-card-num">02</span><span class="feat-card-year">2026</span></div>
-          <div class="feat-card-title">UK Housing Renovation</div>
-          <div class="feat-card-type">Interior Design · Harlow, Essex, UK</div>
+          <div class="feat-card-title">Harlow House Renovation</div>
+          <div class="feat-card-type">Architecture · Interior Design · Harlow, Essex, UK</div>
         </div>
       </div>
       <div class="feat-card" data-nav="project-dubai">
@@ -802,14 +834,14 @@ a.lab-card:hover .lab-cta{gap:11px}
       </div>
       <div class="proj-card" data-nav="project-uk">
         <div class="proj-card-img">
-          <img src="img/optimized/uk-bathtub-hero.jpg" alt="UK Housing Renovation" style="object-position:center center"/>
+          <img src="img/optimized/uk-bathtub-hero.jpg" alt="Harlow House Renovation" style="object-position:center center"/>
           <div class="proj-card-overlay"><span class="view-btn">View Project →</span></div>
         </div>
         <div class="proj-card-body">
           <div class="proj-card-meta"><span class="proj-card-num">02</span><span class="proj-card-year">2026</span></div>
-          <div class="proj-card-title">UK Housing Renovation</div>
-          <div class="proj-card-cat">Interior Design · Harlow, Essex, UK</div>
-          <p class="proj-card-desc">Japandi-style bathroom proposal translating material atmosphere into layout logic, detail coordination, and visual communication for a residential renovation in Harlow, Essex, United Kingdom.</p>
+          <div class="proj-card-title">Harlow House Renovation</div>
+          <div class="proj-card-cat">Architecture · Interior Design · Harlow, Essex, UK</div>
+          <p class="proj-card-desc">Full residential renovation in Harlow, Essex — renegotiating the relationship between house, landscape, and river through charred timber cladding, spatial unboxing, and an elevated garden pavilion. Developed in collaboration with Cometa Architects, Barcelona.</p>
           <button class="btn-dark" data-nav="project-uk">View Project →</button>
         </div>
       </div>
@@ -1015,7 +1047,7 @@ a.lab-card:hover .lab-cta{gap:11px}
   <div class="pd-next" data-nav="project-uk">
     <div>
       <div class="pd-next-label">Next Project</div>
-      <div class="pd-next-title">UK Housing Renovation</div>
+      <div class="pd-next-title">Harlow House Renovation</div>
     </div>
     <span class="pd-next-arrow">→</span>
   </div>
@@ -1027,7 +1059,7 @@ a.lab-card:hover .lab-cta{gap:11px}
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     PROJECT: UK HOUSING RENOVATION
+     PROJECT: HARLOW HOUSE RENOVATION
 ═══════════════════════════════════════════════════ -->
 <div id="page-project-uk" class="page pd-page">
   <div class="pd-back" data-nav="projects">
@@ -1035,80 +1067,173 @@ a.lab-card:hover .lab-cta{gap:11px}
     All Projects
   </div>
   <div class="pd-hero">
-    <div class="pd-hero-img"><img src="img/optimized/uk-bathtub-hero.jpg" alt="UK Housing Renovation — Japandi bathroom render" style="object-position:center center"/></div>
+    <div class="pd-hero-img"><img src="img/optimized/uk-bathtub-hero.jpg" alt="Harlow House Renovation — Japandi bathroom, soaking tub toward the garden" style="object-position:center center"/></div>
     <div class="pd-hero-grad"></div>
     <div class="pd-hero-text">
-      <div class="pd-hero-label">Interior Design · Harlow, Essex, United Kingdom · 2026</div>
+      <div class="pd-hero-label">Architecture · Interior · Harlow, Essex, United Kingdom · 2026</div>
       <div class="pd-hero-num">02 /</div>
-      <h1 class="pd-hero-title">UK Housing<br>Renovation</h1>
+      <h1 class="pd-hero-title">Harlow House<br>Renovation</h1>
     </div>
   </div>
   <div class="pd-info-bar">
     <div class="pd-info-item"><div class="pd-info-label">Year</div><div class="pd-info-val">Feb – Jun 2026</div></div>
     <div class="pd-info-item"><div class="pd-info-label">Location</div><div class="pd-info-val">Harlow, Essex, United Kingdom</div></div>
-    <div class="pd-info-item"><div class="pd-info-label">Type</div><div class="pd-info-val">Residential Renovation — Bathroom Design</div></div>
-    <div class="pd-info-item"><div class="pd-info-label">Role</div><div class="pd-info-val">Interior Production Drawings · FF&E Layouts · Material Schedules</div></div>
-    <div class="pd-info-item"><div class="pd-info-label">Employer</div><div class="pd-info-val">Cometa Architects (D&B Studio) — Barcelona, Spain</div></div>
+    <div class="pd-info-item"><div class="pd-info-label">Type</div><div class="pd-info-val">Full Residential Renovation · Garden Pavilion</div></div>
+    <div class="pd-info-item"><div class="pd-info-label">Role</div><div class="pd-info-val">Design Development · Production Drawings · FF&amp;E · Visualisation</div></div>
+    <div class="pd-info-item"><div class="pd-info-label">Studio</div><div class="pd-info-val"><a href="https://cometaarchitects.com/about/" target="_blank" rel="noopener">Cometa Architects</a> — Barcelona, Spain</div></div>
     <div class="pd-info-item"><div class="pd-info-label">Tools</div><div class="pd-info-val">AutoCAD · SketchUp · D5 · AI Rendering</div></div>
   </div>
   <div class="pd-content">
     <div class="pd-tag-row">
-      <span class="chip">Interior Design</span>
-      <span class="chip">Japandi</span>
-      <span class="chip">FF&E</span>
+      <span class="chip">Adaptive Reuse</span>
+      <span class="chip">Charred Timber</span>
+      <span class="chip">Riverside Site</span>
+      <span class="chip">Garden Pavilion</span>
       <span class="chip">Production Drawings</span>
-      <span class="chip">Microcement</span>
-      <span class="chip">Natural Stone</span>
+      <span class="chip">FF&amp;E</span>
     </div>
+    <h3>The Site</h3>
+    <p>The existing house sits as a closed brick box on a riverside plot in Harlow, Essex — a plan organised entirely inward while the strongest asset of the site, the water and the mature planting around it, remains outside the field of view. A line of birch runs across the boundary, throwing a rhythm of pale vertical trunks against the dark understorey.</p>
+    <p>The commission began as a single-room brief and grew, through the design process, into a renovation of the whole house and its garden. Both phases are shown here in the order they were developed.</p>
+  </div>
+
+  <!-- ── PHASE 01 — BATHROOM ─────────────────────── -->
+  <div class="pd-phase">
+    <div class="pd-phase-inner">
+      <div class="pd-phase-num">Phase 01 · First Proposal</div>
+      <div class="pd-phase-title">The Bathroom</div>
+      <div class="pd-phase-sub">A single wet room, treated as a test of the material argument for the whole house.</div>
+    </div>
+  </div>
+
+  <div class="pd-content">
     <h3>Concept</h3>
-    <p>A residential bathroom proposal developed as an intimate Japandi retreat, translating material atmosphere into layout logic, detail coordination, and visual communication. The design frames a Japanese-style round bathtub toward the garden view, creating a focal point that connects interior and landscape.</p>
-    <p>The material palette balances warm timber with dark mineral surfaces. Graphite microcement and slate define the wet zone, while wood veneer and lattice screens create warmth and privacy. Curved ceiling moulding conceals 2700K LED lighting, supporting a calm spa-like atmosphere.</p>
-    <h3>Design Strategy</h3>
-    <p>The proposal separates dry and wet zones: a dry area at +0.00 for basin, WC, and transition, and a wet zone elevated by 10–15 cm treated as a continuous shower tray. The core layout uses a 3.40 × 3.60 m bathroom, optimising the relationship between fixtures while respecting the existing structural wall.</p>
+    <p>The first proposal reads the bathroom as an intimate retreat in a Japandi register, translating material atmosphere into layout logic, detail coordination, and drawings a builder can work from. A Japanese-style round bathtub is set square to the garden opening, so the act of bathing is oriented outward rather than into the room.</p>
+    <p>The palette holds warm timber against dark mineral surfaces. Graphite microcement and slate define the wet zone; walnut veneer and a slatted screen introduce warmth and modulate privacy. A curved ceiling moulding conceals a 2700K LED cove, keeping the light source out of view and the atmosphere even.</p>
+    <h3>Spatial Strategy</h3>
+    <p>The plan separates dry from wet without a threshold: a dry zone at +0.00 carrying basin, WC, and circulation, and a wet zone lifted 10–15 cm and detailed as one continuous shower tray. The 3.40 × 3.60 m footprint is worked to hold every fixture in comfortable relationship while leaving the existing structural wall untouched.</p>
     <ul>
-      <li>Wet zone elevated by 10–15 cm — treated as continuous shower tray</li>
-      <li>Japanese-style bathtub positioned toward the framed garden view</li>
-      <li>Ceiling mirror in the dry area enhances height by reflecting warm wooden tones</li>
-      <li>Dedicated anti-fog system — operated with a simple button — keeps mirror clear at all times</li>
-      <li>Layout options clearly communicate renovation constraints to the client</li>
+      <li>Wet zone raised 10–15 cm and falls as a single tray — no upstand, no shower enclosure</li>
+      <li>Round soaking tub set on the garden axis, framed by the timber screen</li>
+      <li>Ceiling mirror over the dry zone doubles apparent height and returns the warm timber tone downward</li>
+      <li>Integrated anti-fog element, on a single button, keeps the mirror usable throughout a bath</li>
+      <li>Alternative layouts drawn in parallel to make the renovation constraints legible to the client</li>
     </ul>
   </div>
 
-  <!-- Key renders — full width hero and gallery -->
   <div class="pd-img-full">
-    <img src="img/optimized/uk-bathtub-sunset.jpg" alt="UK bathroom — bathtub with slatted screen and garden light" class="cover-16-9" style="object-position:center center"/>
+    <img src="img/optimized/uk-bathtub-sunset.jpg" alt="Bathroom — soaking tub with slatted timber screen and garden light" class="cover-16-9" style="object-position:center center"/>
   </div>
-  <div class="pd-img-caption">Bathtub toward garden view — timber screen, natural slate, warm indirect light</div>
+  <div class="pd-img-caption">The tub set on the garden axis — timber screen, natural slate, warm indirect light</div>
 
-  <!-- 2-col renders -->
   <div class="pd-img-grid" style="margin-top:3px">
-    <img class="image-fill" src="img/optimized/uk-basin.jpg" alt="UK bathroom — basin and mirror zone" style="object-position:center"/>
-    <img class="image-fill" src="img/optimized/uk-wc-shower.jpg" alt="UK bathroom — WC and shower zone" style="object-position:center"/>
+    <img class="image-fill" src="img/optimized/uk-basin.jpg" alt="Bathroom — basin and mirror zone" style="object-position:center"/>
+    <img class="image-fill" src="img/optimized/uk-wc-shower.jpg" alt="Bathroom — WC and rain shower zone" style="object-position:center"/>
   </div>
-  <div class="pd-img-caption">Left: Basin zone with ceiling mirror · Right: WC and rain shower</div>
+  <div class="pd-img-caption">Left: Basin zone beneath the ceiling mirror · Right: WC and rain shower within the raised tray</div>
 
   <div class="pd-content">
     <h3>Material Palette</h3>
     <ul>
-      <li><strong>Microcement</strong> — dark warm taupe</li>
-      <li><strong>Stone</strong> — textured natural slate</li>
-      <li><strong>Wood</strong> — walnut warm brown veneer</li>
-      <li><strong>Metal</strong> — gun-black matte finish</li>
+      <li><strong>Microcement</strong> — dark warm taupe, seamless across the wet zone</li>
+      <li><strong>Stone</strong> — textured natural slate underfoot</li>
+      <li><strong>Wood</strong> — walnut veneer, warm brown, in screen and joinery</li>
+      <li><strong>Metal</strong> — gun-black matte to all fittings and trims</li>
     </ul>
-    <p>The material strategy creates a sensory hierarchy: stone floors ground the space, timber walls warm the bathing experience, and dark metal fittings add precision and restraint. Together they produce a retreat that reads as crafted rather than decorated.</p>
+    <p>The strategy sets a sensory hierarchy rather than a decorative one. Stone grounds, timber warms the zone of contact with the body, and dark metal holds the edges. The room is intended to read as built, not as styled — a position carried forward into the second phase.</p>
   </div>
 
-  <!-- Material palette board + floor plans -->
   <div class="pd-img-full">
-    <img src="img/optimized/uk-material-palette.jpg" alt="Material palette — microcement stone wood gun-black metal" style="object-fit:contain;background:var(--bg2);padding:32px;width:100%"/>
+    <img src="img/optimized/uk-material-palette.jpg" alt="Material palette board — microcement, stone, walnut veneer, gun-black metal" style="object-fit:contain;background:var(--bg2);padding:32px;width:100%"/>
   </div>
-  <div class="pd-img-caption">Material palette board — microcement · natural stone · walnut veneer · gun-black metal</div>
+  <div class="pd-img-caption">Material palette board — microcement · natural slate · walnut veneer · gun-black metal</div>
 
   <div class="pd-plan-grid" style="margin-top:3px">
-    <img class="wide" src="img/optimized/uk-bathroom-plan.png" alt="Bathroom floor plan — dry zone +0.00, wet zone +0.10"/>
-    <img class="wide" src="img/optimized/uk-house-plan.png" alt="Existing house floor plan with bathroom location"/>
+    <img class="wide" src="img/optimized/uk-bathroom-plan.png" alt="Bathroom plan — dry zone at +0.00, wet zone at +0.10"/>
+    <img class="wide" src="img/optimized/uk-house-plan.png" alt="Existing house plan showing the bathroom in context"/>
   </div>
-  <div class="pd-img-caption">Left: Bathroom layout — dry/wet zone separation with dimensions · Right: Existing house plan context</div>
+  <div class="pd-img-caption">Left: Bathroom plan — dry / wet separation with setting-out dimensions · Right: Existing house plan, bathroom in context</div>
+
+  <!-- ── PHASE 02 — WHOLE HOUSE ──────────────────── -->
+  <div class="pd-phase">
+    <div class="pd-phase-inner">
+      <div class="pd-phase-num">Phase 02 · Developed Proposal</div>
+      <div class="pd-phase-title">Unboxing the House</div>
+      <div class="pd-phase-sub">The brief opens out: the whole dwelling, its envelope, and a pavilion on the water.</div>
+    </div>
+  </div>
+
+  <div class="pd-content">
+    <h3>Position</h3>
+    <p>The second phase takes the existing volume as the problem rather than the container. The house is a solid box on a site that gives views in every direction — river, garden, canopy, sky — and holds none of them. The move is to unbox it: remove or enlarge every solid panel that stands between the room and the landscape, and open voids upward and downward as well as outward, so the section captures ground and sky alongside the horizon.</p>
+    <p>What remains solid is worked hard. The envelope is reclad in charred timber, laid in a close vertical rhythm read directly from the birch line at the boundary. The blackened face recedes among the trunks and lets the pale bark register as the brighter element; the joint spacing is set against the trees rather than against the building grid. Depth in the elevation comes from the char itself — the grain lifts under raking light — not from applied relief.</p>
+    <h3>Interior Register</h3>
+    <p>Inside, the timber lining continues the vertical logic and warms what the openings make exposed. Against it, a glazed green brick screen carries the tonal brief the client set out: the mood of Hopper's <em>Nighthawks</em> — deep saturated green held against warm interior light, seen from outside at dusk. The same green does a second job, drawing the colour of the garden across the threshold, so the material argument and the atmospheric one land together.</p>
+    <ul>
+      <li>Solid panels removed or enlarged on every elevation to release the river and canopy views</li>
+      <li>Voids opened vertically as well as laterally — sky and ground brought into the section</li>
+      <li>Charred timber cladding, vertical boards spaced to the rhythm of the birch line</li>
+      <li>Glazed green brick as the interior counterpoint — tonal reference to <em>Nighthawks</em>, and nature carried indoors</li>
+      <li>Ground level opened beneath the raised volume, giving covered parking and a sheltered garden approach</li>
+    </ul>
+  </div>
+
+  <div class="pd-img-full">
+    <img src="img/optimized/uk-house-exterior.jpg" alt="Street elevation — charred timber volume raised on green brick piers" class="cover-16-9" style="object-position:center center"/>
+  </div>
+  <div class="pd-img-caption">Street elevation at dusk — the charred volume raised clear of the ground on green brick piers, the undercroft opened to the garden beyond</div>
+
+  <div class="pd-img-full" style="margin-top:3px">
+    <img src="img/optimized/uk-aerial.jpg" alt="Aerial view — house, garden, and pavilion within the birch canopy" class="cover-16-9" style="object-position:center center"/>
+  </div>
+  <div class="pd-img-caption">Aerial — the reclad house, the pavilion on its pool, and the birch canopy that sets the rhythm of the cladding</div>
+
+  <div class="pd-ref-grid">
+    <img src="img/optimized/uk-ref-nighthawks.jpg" alt="Edward Hopper, Nighthawks, 1942 — tonal reference for the interior palette"/>
+    <img class="bleed" src="img/optimized/uk-house-hearth.jpg" alt="Interior — glazed green brick hearth and curved screen under warm light"/>
+  </div>
+  <div class="pd-img-caption">Tonal reference and its translation — left: Edward Hopper, <em>Nighthawks</em>, 1942, Art Institute of Chicago · right: the glazed green brick hearth, deep saturated green held against warm interior light</div>
+
+  <div class="pd-img-full" style="margin-top:3px">
+    <img src="img/optimized/uk-house-living.jpg" alt="Living space — timber lining, glazed green brick screen, opening to the garden" class="cover-16-9" style="object-position:center center"/>
+  </div>
+  <div class="pd-img-caption">Living space — timber lining, glazed green brick screen, and a full-height opening framing the river</div>
+
+  <div class="pd-content">
+    <h3>The Pavilion</h3>
+    <p>A separate garden pavilion completes the scheme. It sits on a shallow black-lined pool, so the water reads as a mirror: the pavilion, the birch, and the elevation of the house behind are all doubled in the surface, and the ground plane appears to fall away beneath the building. The pool is not a feature to be occupied but a device for extending the view downward — the same unboxing logic, worked in the landscape.</p>
+    <p>The pavilion is drawn as the informal counterpart to the house — a curved, closed volume in the same charred timber, entered from the garden side and holding a sunken seating platform at water level. From within, the house is read across the reflection at eye height rather than approached frontally.</p>
+  </div>
+
+  <div class="pd-img-full">
+    <img src="img/optimized/uk-pavilion.jpg" alt="Garden pavilion above the reflecting pool with the house beyond" class="cover-16-9" style="object-position:center center"/>
+  </div>
+  <div class="pd-img-caption">Pavilion and reflecting pool — the house, the birch, and the sky doubled in the water</div>
+
+  <div class="pd-plan-grid" style="margin-top:3px">
+    <img class="wide" src="img/optimized/uk-plan-1f.jpg" alt="First floor plan — living, dining, bedroom, and bathroom at 1:50"/>
+    <img class="tall" src="img/optimized/uk-axonometric.jpg" alt="Exploded axonometric — roof, envelope, interior, undercroft, and pavilion"/>
+  </div>
+  <div class="pd-img-caption">Left: First floor — living, dining, bedroom, and the phase 01 bathroom in place · Right: Exploded axonometric — roof, charred envelope, interior, undercroft, and pavilion</div>
+
+  <!-- ── COLLABORATION ───────────────────────────── -->
+  <div class="pd-phase">
+    <div class="pd-phase-inner">
+      <div class="pd-phase-num">Collaboration</div>
+      <div class="pd-phase-title">Cometa Architects</div>
+    </div>
+  </div>
+  <div class="pd-credit" style="padding-top:32px">
+    <div class="pd-credit-box">
+      <div class="pd-credit-label">Designed with</div>
+      <div class="pd-credit-studio"><a href="https://cometaarchitects.com/about/" target="_blank" rel="noopener">Cometa Architects</a> — Barcelona, Spain</div>
+      <div class="pd-credit-names">
+        <a href="https://cometaarchitects.com/about/" target="_blank" rel="noopener">Faidra Andriana Matziaraki</a> · <a href="https://cometaarchitects.com/about/" target="_blank" rel="noopener">Víctor González Martí</a><br>
+        Founders, Cometa Architects — design and build studio
+      </div>
+      <div class="pd-credit-role">Developed collaboratively across both phases. My contribution covered design development, production drawings — plans, sections, elevations, material schedules and FF&amp;E layouts — and the rendered visualisations used to test the material and lighting proposals with the client.</div>
+    </div>
+  </div>
 
   <div class="pd-next" data-nav="project-dubai">
     <div>
@@ -1557,7 +1682,7 @@ a.lab-card:hover .lab-cta{gap:11px}
             <div class="tl-period">Feb – Jun 2026</div>
             <div class="tl-title">Interior Designer</div>
             <div class="tl-org">Cometa Architects (D&B Studio) · Barcelona, Spain</div>
-            <div class="tl-desc">Interior production drawings — plans, sections, elevations, material schedules, FF&E layouts — for a residential renovation in Harlow, Essex, United Kingdom. AI-assisted rendering and material visualization workflows.</div>
+            <div class="tl-desc">Design development and production drawings — plans, sections, elevations, material schedules, FF&E layouts — for a full residential renovation and garden pavilion in Harlow, Essex, United Kingdom. AI-assisted rendering and material visualization workflows.</div>
           </div>
         </div>
         <div class="tl-item">
@@ -1680,6 +1805,8 @@ a.lab-card:hover .lab-cta{gap:11px}
         <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">MS Project</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">LLM / AI Workflows</span><span class="sk-lv">Advanced</span></div><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Claude Code / Codex</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Terminal / VS Code</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
         <div class="sk-cat-title" style="margin-top:32px">Sustainability</div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">LEED BD+C / ID+C</span><span class="sk-lv">Experienced</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
         <div class="sk-item"><div class="sk-row"><span class="sk-name">WELL Building Standard</span><span class="sk-lv">Experienced</span></div><div class="sk-bar"><div class="sk-fill" data-w="70"></div></div></div>
