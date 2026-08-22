@@ -15,24 +15,29 @@ Reply-To set to the sender, so you can answer straight from the notification.
 
 ## Setup — about 5 minutes, done once
 
-1. Go to <https://sheets.new> and name the sheet e.g. **Partner enquiries — win-architect.com**.
-2. **Extensions → Apps Script**. Delete the sample `function myFunction() {}`.
-3. Paste everything from [`Code.gs`](Code.gs), then save (💾).
-4. **Deploy → New deployment → ⚙ → Web app**, with:
+The script works either as a **standalone** project (script.google.com) or **bound**
+to a sheet (Extensions → Apps Script). Standalone is fine: it creates its own
+spreadsheet the first time it runs and remembers it in Script Properties.
+
+1. In the Apps Script editor, select everything in `Code.gs` (Ctrl+A) and paste
+   [`Code.gs`](Code.gs) over it. Save (💾).
+2. Choose **showSheetUrl** in the function dropdown and press **Run**. Authorize when
+   asked: your account → *Advanced* → *Go to (project name)* → **Allow**. (The
+   "unverified app" screen is normal: it is your own script asking for your own
+   Sheet and Drive.) The Execution log then prints the spreadsheet link —
+   **that is where the enquiries land**. Bookmark it.
+3. **Deploy → New deployment → ⚙ → Web app**, with:
    - *Description*: anything, e.g. `partner form v1`
    - *Execute as*: **Me**
    - *Who has access*: **Anyone** ← must be "Anyone", not "Anyone with Google account"
-5. Click **Deploy**, then **Authorize access** → pick your account → *Advanced* →
-   *Go to (project name)* → **Allow**. (The "unverified app" screen is normal: it is
-   your own script asking for your own Sheet and Drive.)
-6. Copy the **Web app URL** — it ends in `/exec`.
-7. Paste it into `index.html`, in this line near the partner popup script:
+4. Click **Deploy** and copy the **Web app URL** — it ends in `/exec`.
+5. Paste it into `index.html`, in this line near the partner popup script:
 
    ```js
    const PARTNER_ENDPOINT = '';   // ← paste the /exec URL between the quotes
    ```
 
-8. Commit and push. Done — submissions now land in the Sheet.
+6. Commit and push. Done — submissions now land in the Sheet.
 
 ## Check it works
 

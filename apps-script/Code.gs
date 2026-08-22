@@ -5,11 +5,15 @@
  * enquiry to this spreadsheet, and stores the attachment (if any) in a Drive
  * folder, linking it from the row.
  *
- * Deploy: Extensions > Apps Script > Deploy > New deployment >
- *         type "Web app", Execute as "Me", Who has access "Anyone".
- * Re-deploy (New deployment, not Manage) after every code change.
+ * Works either way round: bound to a spreadsheet (Extensions > Apps Script), or
+ * as a standalone script — in that case it creates its own spreadsheet on the
+ * first enquiry and remembers it. Run showSheetUrl() to get the link.
+ *
+ * Deploy: Deploy > New deployment > type "Web app",
+ *         Execute as "Me", Who has access "Anyone".
  */
 
+var SPREADSHEET_ID = '';   // optional: paste a spreadsheet ID to write to that one
 var SHEET_NAME   = 'Partner enquiries';
 var FOLDER_NAME  = 'Partner enquiry files';
 var NOTIFY_EMAIL = 'pirawit.win@gmail.com';   // '' to switch the alert email off
@@ -68,8 +72,28 @@ function doGet() {
   return json({ ok: true, service: 'partner enquiry endpoint' });
 }
 
+/** Run this once from the editor to print the spreadsheet link. */
+function showSheetUrl() {
+  var url = spreadsheet().getUrl();
+  console.log(url);
+  return url;
+}
+
+function spreadsheet() {
+  var bound = SpreadsheetApp.getActiveSpreadsheet();
+  if (bound) return bound;
+
+  var props = PropertiesService.getScriptProperties();
+  var id = SPREADSHEET_ID || props.getProperty('SPREADSHEET_ID');
+  if (id) return SpreadsheetApp.openById(id);
+
+  var created = SpreadsheetApp.create('Partner enquiries — win-architect.com');
+  props.setProperty('SPREADSHEET_ID', created.getId());
+  return created;
+}
+
 function sheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = spreadsheet();
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) {
     sh = ss.insertSheet(SHEET_NAME);
@@ -100,7 +124,7 @@ function notify(first, last, email, message, fileName, fileUrl) {
       subject: 'Partner enquiry — ' + first + ' ' + last,
       body: first + ' ' + last + '\n' + email + '\n\n' + message +
             (fileName ? '\n\nFile: ' + fileName + '\n' + fileUrl : '') +
-            '\n\nSheet: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl()
+            '\n\nSheet: ' + spreadsheet().getUrl()
     });
   } catch (err) {
     console.error('notify failed: ' + err);   // the row is already saved
