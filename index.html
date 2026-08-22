@@ -6,14 +6,14 @@
 <title>Pirawit Sukhaneskul — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@200..700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet"/>
 <style>
 /* ══════════════════════════════════════
    RESET & BASE
 ══════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:15px;scroll-behavior:smooth}
-body{font-family:'Roboto',sans-serif;background:#F5F4F0;color:#1A1918;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:'Roboto','Noto Sans Thai',sans-serif;background:#F5F4F0;color:#1A1918;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%;height:auto}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:inherit}
@@ -28,7 +28,7 @@ button{cursor:pointer;font-family:inherit}
   --mid:#5A5854;
   --light:#9A9890;
   --border:#DCDAD4;
-  --serif:'Roboto',sans-serif;
+  --serif:'Roboto','Noto Sans Thai',sans-serif;
   --sans:'Roboto',sans-serif;
   --nav-h:62px;
   --max:1280px;
@@ -45,27 +45,29 @@ button{cursor:pointer;font-family:inherit}
   padding:0 var(--pad);
   transition:background .35s,box-shadow .35s;
 }
-#nav.solid{background:rgba(245,244,240,.94);backdrop-filter:blur(18px);box-shadow:0 1px 0 var(--border)}
-.nav-logo{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);cursor:pointer}
-.nav-logo.light{color:#fff}
-.nav-links{display:flex;gap:36px}
-.nav-links a{font-size:11px;font-weight:400;letter-spacing:.13em;text-transform:uppercase;color:var(--mid);cursor:pointer;transition:color .2s}
-.nav-links a:hover,.nav-links a.active{color:var(--dark)}
-.nav-links.light a{color:rgba(255,255,255,.7)}
-.nav-links.light a:hover{color:#fff}
-.nav-cv{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:8px 20px;border:1px solid var(--dark);color:var(--dark);background:none;transition:all .2s}
+#nav{background:rgba(245,244,240,.92);backdrop-filter:blur(18px)}
+#nav.solid{background:rgba(245,244,240,.96);box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);cursor:pointer}
+.nav-logo.light{color:var(--dark)}
+.nav-links{display:flex;gap:30px}
+.nav-links a{font-size:13.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);cursor:pointer;transition:opacity .2s}
+.nav-links a:hover{opacity:.6}
+.nav-links a.active{color:var(--dark);opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
+.nav-links.light a{color:var(--dark)}
+.nav-links.light a:hover{color:var(--dark);opacity:.6}
+.nav-cv{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:9px 22px;border:1px solid var(--dark);color:var(--dark);background:none;transition:all .2s}
 .nav-cv:hover{background:var(--dark);color:#fff}
-.nav-cv.light{border-color:#fff;color:#fff}
-.nav-cv.light:hover{background:#fff;color:var(--dark)}
+.nav-cv.light{border-color:var(--dark);color:var(--dark)}
+.nav-cv.light:hover{background:var(--dark);color:#fff}
 .hamburger{display:none;flex-direction:column;gap:6px;background:none;border:none;padding:4px;cursor:pointer}
 .hamburger span{display:block;width:22px;height:1px;background:var(--dark);transition:all .3s}
-.hamburger.light span{background:#fff}
+.hamburger.light span{background:var(--dark)}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .mobile-nav{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(245,244,240,.97);backdrop-filter:blur(20px);z-index:499;padding:12px 0 24px;border-bottom:1px solid var(--border)}
 .mobile-nav.open{display:block}
-.mobile-nav a{display:block;padding:14px var(--pad);font-size:14px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);cursor:pointer}
+.mobile-nav a{display:block;padding:15px var(--pad);font-size:16px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);border-bottom:1px solid var(--border);cursor:pointer}
 .mobile-nav a:hover{color:var(--dark)}
 
 /* ══════════════════════════════════════
@@ -397,9 +399,67 @@ a.lab-card:hover .lab-cta{gap:11px}
 .contact-avail p{font-size:13px;font-weight:300;color:var(--mid);line-height:1.7}
 
 /* ══════════════════════════════════════
+   PARTNER CALL  (CTA band + popup)
+══════════════════════════════════════ */
+.partner-cta{padding:0 var(--pad) 96px}
+.pcta{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;text-align:left;background:var(--dark);color:#fff;border:none;padding:36px 42px;transition:background .25s,transform .25s}
+.pcta:hover{background:#2b2a28;transform:translateY(-2px)}
+.pcta>span:first-child{display:block;flex:1 1 420px;min-width:0}
+.pcta-flag{display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-bottom:12px}
+.pcta-dot{width:7px;height:7px;border-radius:50%;background:#28c840;animation:partnerPulse 2.2s infinite}
+@keyframes partnerPulse{0%{box-shadow:0 0 0 0 rgba(40,200,64,.55)}70%{box-shadow:0 0 0 9px rgba(40,200,64,0)}100%{box-shadow:0 0 0 0 rgba(40,200,64,0)}}
+.pcta-title{display:block;font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);font-weight:300;letter-spacing:-.015em;line-height:1.2;color:#fff;margin-bottom:10px}
+.pcta-sub{display:block;font-size:13.5px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.66);max-width:620px}
+.pcta-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:10px;padding:15px 26px;background:#fff;color:var(--dark);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+
+/* popup */
+.pmodal{position:fixed;inset:0;z-index:900;display:none;overflow-y:auto;padding:calc(var(--nav-h) + 16px) 20px 40px}
+.pmodal.open{display:block}
+.pmodal-backdrop{position:fixed;inset:0;background:rgba(18,17,16,.66);backdrop-filter:blur(4px);animation:pmFade .25s ease}
+@keyframes pmFade{from{opacity:0}to{opacity:1}}
+@keyframes pmDrop{from{opacity:0;transform:translateY(-44px)}to{opacity:1;transform:translateY(0)}}
+.pmodal-panel{position:relative;max-width:660px;margin:0 auto;background:var(--dark);color:#fff;padding:44px 44px 38px;animation:pmDrop .38s cubic-bezier(.22,.75,.3,1) both;box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.pmodal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid rgba(255,255,255,.22);color:#fff;font-size:16px;line-height:1;transition:all .2s}
+.pmodal-close:hover{background:rgba(255,255,255,.12)}
+.pmodal-title{font-family:var(--serif);font-size:clamp(24px,3vw,34px);font-weight:300;line-height:1.16;letter-spacing:-.02em;color:#fff;margin:14px 0 14px}
+.partner-text{font-size:13.5px;font-weight:300;line-height:1.85;color:rgba(255,255,255,.74);margin-bottom:10px}
+.partner-text-th{font-size:13.5px;font-weight:300;line-height:2;color:rgba(255,255,255,.6)}
+.partner-roles{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 26px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.14)}
+.partner-roles li{font-size:11.5px;font-weight:400;letter-spacing:.04em;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);padding:6px 12px}
+.partner-form{display:flex;flex-direction:column;gap:15px}
+.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.pf-field{display:flex;flex-direction:column;gap:8px}
+.pf-label{font-size:9.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.pf-input,.pf-textarea{width:100%;font-family:inherit;font-size:14px;font-weight:300;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);padding:12px 14px;transition:border-color .2s,background .2s}
+.pf-input:focus,.pf-textarea:focus{outline:none;border-color:rgba(255,255,255,.62);background:rgba(255,255,255,.1)}
+.pf-input::placeholder,.pf-textarea::placeholder{color:rgba(255,255,255,.3)}
+.pf-textarea{resize:vertical;min-height:112px;line-height:1.7}
+.pf-input.invalid,.pf-textarea.invalid,.pf-drop.invalid{border-color:#e2725b}
+.pf-drop{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.04);padding:14px;transition:border-color .2s,background .2s}
+.pf-drop.dragover{border-color:rgba(255,255,255,.7);background:rgba(255,255,255,.1)}
+.pf-file-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid rgba(255,255,255,.35);color:#fff;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.pf-file-btn:hover{background:rgba(255,255,255,.14)}
+.pf-file-name{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.7);word-break:break-all;flex:1;min-width:140px}
+.pf-file-clear{background:none;border:none;color:rgba(255,255,255,.55);font-size:15px;line-height:1;padding:2px 6px}
+.pf-file-clear:hover{color:#fff}
+.pf-submit{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 28px;background:#fff;color:var(--dark);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;transition:all .25s}
+.pf-submit:hover{background:rgba(255,255,255,.86);transform:translateY(-1px)}
+.pf-note{font-size:11.5px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.42)}
+.pf-status{font-size:12.5px;font-weight:400;line-height:1.7;color:#9ce6a8}
+@media(max-width:640px){
+  .pcta{padding:28px 24px;gap:22px}
+  .pcta-btn{width:100%;justify-content:center}
+  .pmodal{padding:calc(var(--nav-h) + 8px) 12px 90px}
+  .pmodal-panel{padding:34px 22px 28px}
+  .pf-row{grid-template-columns:1fr}
+}
+
+/* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
 @media(max-width:1024px){
+  .nav-links{gap:22px}
+  .nav-links a{font-size:12.5px;letter-spacing:.08em}
   .about-header{grid-template-columns:1fr;gap:48px}
   .home-about{grid-template-columns:1fr;gap:48px}
   .skills-cats{grid-template-columns:repeat(2,1fr)}
@@ -491,7 +551,7 @@ a.lab-card:hover .lab-cta{gap:11px}
 .pd-content p,.pd-content li{font-size:1rem;line-height:1.75}
 .pd-img-caption{font-size:0.875rem!important;line-height:1.6}
 /* FIX 4 — Woodflex project-spread layout */
-.project-spread{--paper:#f5f3ee;--line:#ded9cf;--text:#4f5b61;--muted:#9a9389;background:var(--paper);color:var(--text);font-family:"Inter","Segoe UI",Arial,sans-serif}
+.project-spread{--paper:#f5f3ee;--line:#ded9cf;--text:#4f5b61;--muted:#9a9389;background:var(--paper);color:var(--text);font-family:"Inter","Segoe UI","Noto Sans Thai",Arial,sans-serif}
 .narrative-section,.drawing-section{border-top:1px solid var(--line)}
 .narrative-inner{display:grid;grid-template-columns:minmax(220px,32%) minmax(0,1fr);align-items:stretch;gap:clamp(34px,5vw,64px);max-width:930px;margin:0 auto;padding:clamp(54px,7vw,92px) 24px}
 .narrative-render{margin:0;width:100%;min-height:100%}
@@ -555,6 +615,60 @@ a.lab-card:hover .lab-cta{gap:11px}
     <span class="crail-tip">Facebook</span>
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
   </a>
+</div>
+
+<!-- ═══════ PARTNER POPUP ═══════ -->
+<div class="pmodal" id="partnerModal" role="dialog" aria-modal="true" aria-labelledby="pmodalTitle" hidden>
+  <div class="pmodal-backdrop" data-partner-close></div>
+  <div class="pmodal-panel">
+    <button class="pmodal-close" type="button" id="partnerClose" aria-label="Close">✕</button>
+    <span class="pcta-flag"><span class="pcta-dot"></span>Open call · กำลังหาทีมร่วมงาน</span>
+    <h2 class="pmodal-title" id="pmodalTitle">ฝากข้อมูลไว้<br>เผื่อมีโปรเจกต์ร่วมกันในอนาคต</h2>
+    <p class="partner-text-th">หาสถาปนิก วิศวกร ผู้รับเหมา ที่ปรึกษา หรือนักพัฒนา — ร่วมงานกันได้หมด
+    กรอกชื่อ นามสกุล อีเมล และข้อความไว้ แนบไฟล์มาด้วยก็ได้ (ไม่เกิน 10 MB) แล้วผมจะเก็บข้อมูลไว้ติดต่อกลับ</p>
+    <ul class="partner-roles">
+      <li>สถาปนิก / Architect</li>
+      <li>วิศวกร / Engineer</li>
+      <li>ผู้รับเหมา / Contractor</li>
+      <li>ที่ปรึกษา / Consultant</li>
+      <li>BIM &amp; Digital</li>
+    </ul>
+
+    <form class="partner-form" id="partnerForm" novalidate>
+      <div class="pf-row">
+        <div class="pf-field">
+          <label class="pf-label" for="pfFirst">ชื่อ / First name</label>
+          <input class="pf-input" type="text" id="pfFirst" name="firstName" placeholder="ชื่อจริง" autocomplete="given-name" required/>
+        </div>
+        <div class="pf-field">
+          <label class="pf-label" for="pfLast">นามสกุล / Last name</label>
+          <input class="pf-input" type="text" id="pfLast" name="lastName" placeholder="นามสกุล" autocomplete="family-name" required/>
+        </div>
+      </div>
+      <div class="pf-field">
+        <label class="pf-label" for="pfEmail">อีเมลติดต่อกลับ / Email</label>
+        <input class="pf-input" type="email" id="pfEmail" name="email" placeholder="you@studio.com" autocomplete="email" required/>
+      </div>
+      <div class="pf-field">
+        <label class="pf-label" for="pfMessage">ข้อความ / Message</label>
+          <textarea class="pf-textarea" id="pfMessage" name="message" placeholder="เล่าสั้น ๆ ว่าทำงานด้านไหน สนใจร่วมงานแบบไหน" required></textarea>
+      </div>
+      <div class="pf-field">
+        <span class="pf-label">ไฟล์แนบ / Attachment — max 10 MB</span>
+        <div class="pf-drop" id="pfDrop">
+          <label class="pf-file-btn" for="pfFile">เลือกไฟล์ / Choose file</label>
+          <input type="file" id="pfFile" name="attachment" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"/>
+          <span class="pf-file-name" id="pfFileName">พอร์ตโฟลิโอ CV แบบร่าง หรือไฟล์อะไรก็ได้ · any file type</span>
+          <button class="pf-file-clear" type="button" id="pfFileClear" style="display:none" aria-label="Remove file">✕</button>
+        </div>
+      </div>
+      <button class="pf-submit" type="submit">ส่งข้อมูล / Send →</button>
+      <p class="pf-status" id="pfStatus" role="status" aria-live="polite"></p>
+      <p class="pf-note">การกดส่งจะเปิดโปรแกรมอีเมลของคุณพร้อมข้อความ ส่งถึง pirawit.win@gmail.com —
+      <strong>ไฟล์แนบต้องกดแนบอีกครั้งในหน้าต่างอีเมลที่เปิดขึ้น</strong> (เว็บนี้เป็น static site จึงส่งไฟล์เข้าเซิร์ฟเวอร์เองไม่ได้)<br>
+      Sending opens your email app with the message pre-filled — please re-attach the file there.</p>
+    </form>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════
@@ -800,6 +914,19 @@ a.lab-card:hover .lab-cta{gap:11px}
     </div>
     <p class="lab-more">More experiments coming soon</p>
   </section>
+
+  <!-- ═══════ PARTNER CALL — opens the popup ═══════ -->
+  <section class="partner-cta" id="partner">
+    <button class="pcta" type="button" id="partnerOpen">
+      <span>
+        <span class="pcta-flag"><span class="pcta-dot"></span>Open call · กำลังหาทีมร่วมงาน</span>
+        <span class="pcta-title">หาสถาปนิก วิศวกร ผู้รับเหมา ที่ปรึกษา — ได้หมด</span>
+        <span class="pcta-sub">ฝากข้อมูลไว้เผื่อมีโปรเจกต์ร่วมกันในอนาคต · Architects, engineers, contractors and consultants — leave your details and a file, and I will keep them on hand for future projects.</span>
+      </span>
+      <span class="pcta-btn">ฝากข้อมูล / Leave your details ↓</span>
+    </button>
+  </section>
+
 
   <footer>
     <span>© 2026 Pirawit Sukhaneskul</span>
@@ -1917,6 +2044,116 @@ a.lab-card:hover .lab-cta{gap:11px}
 ═══════════════════════════════════════════════════ -->
 <script>
 (function(){
+  /* --- PARTNER POPUP + FORM (mailto compose) --- */
+  const partnerModal = document.getElementById('partnerModal');
+  const partnerForm  = document.getElementById('partnerForm');
+  if (partnerModal && partnerForm) {
+    const pfStatus = document.getElementById('pfStatus');
+    const pfFile   = document.getElementById('pfFile');
+    const pfDrop   = document.getElementById('pfDrop');
+    const pfName   = document.getElementById('pfFileName');
+    const pfClear  = document.getElementById('pfFileClear');
+    const MAX_BYTES = 10 * 1024 * 1024;
+    const emptyName = pfName.textContent;
+    let lastFocus = null;
+
+    function openPartner() {
+      lastFocus = document.activeElement;
+      partnerModal.hidden = false;
+      partnerModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('pfFirst').focus(), 260);
+    }
+    function closePartner() {
+      partnerModal.classList.remove('open');
+      partnerModal.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    document.getElementById('partnerOpen').addEventListener('click', openPartner);
+
+    /* auto-open on arrival — once per browser session */
+    try {
+      if (!sessionStorage.getItem('partnerSeen')) {
+        sessionStorage.setItem('partnerSeen', '1');
+        setTimeout(openPartner, 700);
+      }
+    } catch (err) { setTimeout(openPartner, 700); }
+    document.getElementById('partnerClose').addEventListener('click', closePartner);
+    partnerModal.querySelector('[data-partner-close]').addEventListener('click', closePartner);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && partnerModal.classList.contains('open')) closePartner();
+    });
+
+    function setFile(file) {
+      if (!file) return;
+      if (file.size > MAX_BYTES) {
+        pfFile.value = '';
+        pfDrop.classList.add('invalid');
+        pfName.textContent = emptyName;
+        pfClear.style.display = 'none';
+        pfStatus.style.color = '#e2725b';
+        pfStatus.textContent = 'File is ' + (file.size / 1048576).toFixed(1) +
+          ' MB \u2014 the limit is 10 MB. \u0e44\u0e1f\u0e25\u0e4c\u0e43\u0e2b\u0e0d\u0e48\u0e40\u0e01\u0e34\u0e19 10 MB \u0e04\u0e23\u0e31\u0e1a';
+        return;
+      }
+      pfDrop.classList.remove('invalid');
+      pfName.textContent = file.name + '  \u00b7  ' + (file.size / 1048576).toFixed(2) + ' MB';
+      pfClear.style.display = 'block';
+      pfStatus.textContent = '';
+    }
+    pfFile.addEventListener('change', () => setFile(pfFile.files[0]));
+    pfClear.addEventListener('click', () => {
+      pfFile.value = '';
+      pfName.textContent = emptyName;
+      pfClear.style.display = 'none';
+      pfDrop.classList.remove('invalid');
+    });
+    ['dragenter','dragover'].forEach(ev => pfDrop.addEventListener(ev, e => {
+      e.preventDefault(); pfDrop.classList.add('dragover');
+    }));
+    ['dragleave','drop'].forEach(ev => pfDrop.addEventListener(ev, e => {
+      e.preventDefault(); pfDrop.classList.remove('dragover');
+    }));
+    pfDrop.addEventListener('drop', e => {
+      const f = e.dataTransfer.files[0];
+      if (!f) return;
+      if (f.size <= MAX_BYTES) { const dt = new DataTransfer(); dt.items.add(f); pfFile.files = dt.files; }
+      setFile(f);
+    });
+
+    partnerForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const fields = ['pfFirst','pfLast','pfEmail','pfMessage'].map(id => document.getElementById(id));
+      let ok = true;
+      fields.forEach(f => {
+        const bad = !f.value.trim() ||
+          (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value.trim()));
+        f.classList.toggle('invalid', bad);
+        if (bad && ok) { f.focus(); ok = false; }
+      });
+      if (!ok) {
+        pfStatus.style.color = '#e2725b';
+        pfStatus.textContent = '\u0e01\u0e23\u0e38\u0e13\u0e32\u0e01\u0e23\u0e2d\u0e01\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e43\u0e2b\u0e49\u0e04\u0e23\u0e1a\u0e41\u0e25\u0e30\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e2d\u0e35\u0e40\u0e21\u0e25 \u00b7 Please complete every field with a valid email.';
+        return;
+      }
+      const first = fields[0].value.trim(), last = fields[1].value.trim(),
+            email = fields[2].value.trim(), message = fields[3].value.trim();
+      const file = pfFile.files[0];
+      const subject = 'Partner enquiry \u2014 ' + first + ' ' + last;
+      const body = 'Name: ' + first + ' ' + last + '\nEmail: ' + email + '\n\n' + message +
+                   (file ? '\n\n[Attachment to add: ' + file.name + ']' : '') +
+                   '\n\n\u2014 sent from the portfolio partner form';
+      pfStatus.style.color = '#9ce6a8';
+      pfStatus.textContent = file
+        ? '\u0e01\u0e33\u0e25\u0e31\u0e07\u0e40\u0e1b\u0e34\u0e14\u0e42\u0e1b\u0e23\u0e41\u0e01\u0e23\u0e21\u0e2d\u0e35\u0e40\u0e21\u0e25\u2026 \u0e2d\u0e22\u0e48\u0e32\u0e25\u0e37\u0e21\u0e41\u0e19\u0e1a\u0e44\u0e1f\u0e25\u0e4c "' + file.name + '" \u0e01\u0e48\u0e2d\u0e19\u0e01\u0e14\u0e2a\u0e48\u0e07\u0e19\u0e30\u0e04\u0e23\u0e31\u0e1a'
+        : '\u0e01\u0e33\u0e25\u0e31\u0e07\u0e40\u0e1b\u0e34\u0e14\u0e42\u0e1b\u0e23\u0e41\u0e01\u0e23\u0e21\u0e2d\u0e35\u0e40\u0e21\u0e25\u2026 \u0e16\u0e49\u0e32\u0e44\u0e21\u0e48\u0e02\u0e36\u0e49\u0e19 \u0e2a\u0e48\u0e07\u0e21\u0e32\u0e17\u0e35\u0e48 pirawit.win@gmail.com \u0e44\u0e14\u0e49\u0e40\u0e25\u0e22\u0e04\u0e23\u0e31\u0e1a';
+      window.location.href = 'mailto:pirawit.win@gmail.com?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    });
+    partnerForm.addEventListener('input', e => e.target.classList.remove('invalid'));
+  }
+
   /* ─── NAV THEME ─── */
   const nav = document.getElementById('nav');
   const navLogo = nav.querySelector('.nav-logo');
