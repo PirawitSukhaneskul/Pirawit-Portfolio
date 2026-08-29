@@ -210,7 +210,7 @@ header h1 em{color:var(--accent);font-style:normal}
 .tradeoff-title{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tradeoff-tag{display:inline-block;padding:3px 12px;border-radius:999px;font-size:11px;font-weight:600}
 .tradeoff-text{font-size:13px;color:var(--muted);line-height:1.65}
-.callout-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:20px}
+.callout-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-top:20px;margin-bottom:20px}
 @media(max-width:860px){.callout-strip{grid-template-columns:repeat(3,1fr)}}
 .callout-cell{padding:12px 14px;border-right:1px solid var(--border)}
 .callout-cell:last-child{border-right:none}
@@ -322,6 +322,16 @@ header h1 em{color:var(--accent);font-style:normal}
     <button class="dec-btn" onclick="setDec('labour',this)">👷 Labour Efficiency</button>
   </div>
 
+  <div class="tradeoff-box">
+    <div class="tradeoff-title">
+      Recommendation:
+      <span class="tradeoff-tag" id="tradeoffTag"></span>
+    </div>
+    <div class="tradeoff-text" id="tradeoffText"></div>
+  </div>
+
+  <div class="callout-strip" id="calloutStrip"></div>
+
   <div class="uc4-row">
     <div class="chart-box" style="margin-bottom:0">
       <div class="chart-title">Normalised Performance Matrix</div>
@@ -356,16 +366,6 @@ header h1 em{color:var(--accent);font-style:normal}
       <div class="legend" id="radarLegend"></div>
     </div>
   </div>
-
-  <div class="tradeoff-box">
-    <div class="tradeoff-title">
-      Recommendation:
-      <span class="tradeoff-tag" id="tradeoffTag"></span>
-    </div>
-    <div class="tradeoff-text" id="tradeoffText"></div>
-  </div>
-
-  <div class="callout-strip" id="calloutStrip"></div>
 </section>
 
 <!-- ═══════ TAB: UC1 ═══════ -->
