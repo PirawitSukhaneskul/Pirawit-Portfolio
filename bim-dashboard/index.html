@@ -22,10 +22,16 @@
   --accent:   #2d6ff5;
   --good:     #16a35e;
   --bad:      #dc2626;
+  /* fixed z-index scale — no arbitrary values */
+  --z-base:    0;
+  --z-raised:  1;
+  --z-marker:  8;
+  --z-nav:     100;
+  --z-overlay: 400;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.5}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;font-size:15px;line-height:1.5}
 .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
 
 /* HEADER */
@@ -45,7 +51,9 @@ header h1 em{color:var(--accent);font-style:normal}
 .header-right .sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.7}
 
 /* TABS */
-.tab-nav{display:flex;border-bottom:2px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100;padding-top:8px}
+.tab-nav{display:flex;border-bottom:2px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:var(--z-nav);padding-top:8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.tab-nav::-webkit-scrollbar{display:none}
+.tab-btn{scroll-snap-align:start}
 .tab-btn{background:none;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:var(--muted);padding:12px 18px;border-bottom:2.5px solid transparent;position:relative;bottom:-2px;transition:color .2s,border-color .2s;white-space:nowrap}
 .tab-btn:hover{color:var(--text)}
 .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
@@ -73,7 +81,7 @@ header h1 em{color:var(--accent);font-style:normal}
 .kpi-code{font-size:12px;font-weight:700;margin-bottom:3px}
 .kpi-card.tc .kpi-code{color:var(--tc)}.kpi-card.pf .kpi-code{color:var(--pf)}
 .kpi-card.pp .kpi-code{color:var(--pp)}.kpi-card.rs .kpi-code{color:var(--rs)}
-.kpi-value{font-size:clamp(22px,3vw,36px);font-weight:700;line-height:1;color:var(--text)}
+.kpi-value{font-size:clamp(22px,3vw,36px);font-weight:700;line-height:1;color:var(--text);font-variant-numeric:tabular-nums}
 .kpi-unit{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
 .kpi-delta{position:absolute;top:14px;right:12px;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px}
 .delta-good{background:rgba(22,163,94,.1);color:var(--good)}
@@ -116,8 +124,8 @@ header h1 em{color:var(--accent);font-style:normal}
 .gantt-week-label:last-child{border-right:none}
 .gantt-body-wrap{position:relative}
 /* background weekly grid — painted via JS on a canvas below rows */
-.gantt-grid-canvas{position:absolute;top:0;left:170px;right:0;bottom:0;pointer-events:none;z-index:0}
-.gantt-rows-wrap{position:relative;z-index:1}
+.gantt-grid-canvas{position:absolute;top:0;left:170px;right:0;bottom:0;pointer-events:none;z-index:var(--z-base)}
+.gantt-rows-wrap{position:relative;z-index:var(--z-raised)}
 .gantt-phase-hdr{display:flex;align-items:center;margin-bottom:2px;margin-top:10px;background:var(--surface2);border-radius:6px;padding:3px 0}
 .gantt-phase-label{width:170px;flex-shrink:0;text-align:right;padding-right:10px;font-size:11px;font-weight:700;color:var(--text)}
 .gantt-phase-info{flex:1;font-size:10px;color:var(--muted);padding-left:6px}
@@ -197,7 +205,7 @@ header h1 em{color:var(--accent);font-style:normal}
 .matrix-table{width:100%;border-collapse:collapse;font-size:13px}
 .matrix-table th{text-align:center;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:9px 8px;border-bottom:2px solid var(--border);background:var(--surface)}
 .matrix-table th:first-child{text-align:left}
-.matrix-table td{padding:8px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:13px;font-weight:600;vertical-align:top}
+.matrix-table td{padding:8px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:13px;font-weight:600;vertical-align:top;font-variant-numeric:tabular-nums}
 .matrix-table td:first-child{text-align:left;font-weight:600;font-size:12px}
 .matrix-table tr:hover td{background:var(--surface)}
 .cell-best{background:rgba(22,163,94,.12);color:var(--good);border-radius:5px;padding:2px 7px;display:inline-block}
@@ -234,9 +242,95 @@ header h1 em{color:var(--accent);font-style:normal}
 .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
 .leg-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:500}
 .leg-dot{width:12px;height:12px;border-radius:3px}
+
+/* ═══ RESPONSIVE — tablet & phone ═══ */
+.table-scroll{overflow-x:auto}
+/* grid items default to min-width:auto, which stops them shrinking below their
+   content and defeats the inner overflow-x containers — let them shrink */
+.uc4-row>*,.two-col>*,.three-col>*{min-width:0}
+
+/* iPad portrait and below */
+@media(max-width:900px){
+  .wrap{padding:0 20px}
+  header{padding:22px 0 16px}
+  .chart-box{padding:18px}
+}
+
+/* Phone */
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  header{padding:18px 0 14px;gap:14px}
+  .header-right{text-align:left;padding-top:0;gap:14px !important;align-items:flex-start !important}
+  .header-right img{height:84px !important}
+  .header-meta{font-size:12px}
+  .tab-btn{padding:12px 14px;font-size:12.5px}
+
+  /* one card per row: two columns squeezed the value and the delta pill together */
+  .cards-row{grid-template-columns:1fr;gap:12px;margin-bottom:22px}
+  .kpi-delta{position:static;display:inline-block;margin-bottom:8px}
+  .kpi-card{padding:16px 16px 14px}
+
+  .callout-strip{grid-template-columns:repeat(2,1fr)}
+  .callout-cell{border-bottom:1px solid var(--border)}
+  .callout-cell:nth-child(2n){border-right:none}
+  .callout-cell:nth-last-child(-n+2){border-bottom:none}
+
+  .decision-bar{padding:12px 14px;gap:8px}
+  .decision-label{flex:0 0 100%;margin:0 0 2px}
+  .dec-btn{padding:6px 14px;font-size:12px}
+
+  .bar-row{grid-template-columns:88px 1fr 62px;gap:8px}
+  .bar-label{font-size:11px}
+  .stacked-total{width:88px}
+
+  /* tables stay legible and scroll sideways rather than crushing */
+  .matrix-table{min-width:520px}
+  .data-table{min-width:480px}
+
+  .radar-canvas-wrap{min-height:270px}
+  .chart-box iframe{height:420px}
+  .tab-panel{padding:20px 0 40px}
+}
+
+/* ═══ ROTATE HINT — phones held upright only ═══ */
+.rotate-tip{display:none}
+@media(max-width:640px) and (orientation:portrait){
+  .rotate-tip:not([hidden]){
+    display:flex;align-items:center;justify-content:center;
+    position:fixed;inset:0;z-index:var(--z-overlay);
+    background:rgba(15,22,35,.55);
+    padding:calc(24px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right))
+            calc(24px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
+  }
+}
+.rotate-card{background:var(--bg);border-radius:16px;padding:26px 22px 20px;max-width:320px;width:100%;text-align:center;box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1)}
+.rotate-card svg{display:block;margin:0 auto 14px;color:var(--accent)}
+.rotate-card h2{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;text-wrap:balance}
+.rotate-card p{font-size:13px;line-height:1.6;color:var(--muted);margin-bottom:18px;text-wrap:pretty}
+.rotate-btn{width:100%;padding:11px 18px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer}
+
+/* ═══ REDUCED MOTION ═══ */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
 </style>
 </head>
 <body>
+<div class="rotate-tip" id="rotateTip" role="dialog" aria-modal="true" aria-labelledby="rotateTipTitle" hidden>
+  <div class="rotate-card">
+    <svg width="72" height="40" viewBox="0 0 52 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="13" height="26" rx="2.5"></rect>
+      <rect x="30" y="10" width="20" height="13" rx="2.5"></rect>
+      <path d="M20 16h5"></path>
+      <path d="M23 13l3 3-3 3"></path>
+    </svg>
+    <h2 id="rotateTipTitle">Rotate your phone</h2>
+    <p>This dashboard packs wide tables, Gantt charts and a radar plot. Landscape gives them room to breathe.</p>
+    <button type="button" class="rotate-btn" id="rotateTipClose">Got it</button>
+  </div>
+</div>
+
 <div class="wrap">
 
 <!-- HEADER -->
@@ -253,7 +347,7 @@ header h1 em{color:var(--accent);font-style:normal}
     </div>
   </div>
   <div class="header-right" style="display:flex;align-items:center;gap:18px;padding-top:0">
-    <div style="text-align:right">
+    <div>
       <div class="hl">4 Construction Scenarios</div>
       <div class="sub">TC — Traditional Cast-in-Place<br>PF — Precast Frame<br>PP — Precast Panel<br>RS — Renovation / Retrofit</div>
       <div style="font-size:10px;color:var(--light);margin-top:6px">Revit 2025 · GFA 188.91 m² · Pathumthani, Thailand</div>
@@ -336,7 +430,7 @@ header h1 em{color:var(--accent);font-style:normal}
     <div class="chart-box" style="margin-bottom:0">
       <div class="chart-title">Normalised Performance Matrix</div>
       <div class="chart-sub">Performance Index = Value_i / Value_TC × 100 · TC = 100 baseline · Lower index = better · ▼ outperforms TC · ▲ underperforms TC</div>
-      <table class="matrix-table">
+      <div class="table-scroll"><table class="matrix-table">
         <thead>
           <tr>
             <th>Dimension &amp; Unit</th>
@@ -347,7 +441,7 @@ header h1 em{color:var(--accent);font-style:normal}
           </tr>
         </thead>
         <tbody id="matrixBody"></tbody>
-      </table>
+      </table></div>
       <div class="src-note">† RS = partial-scope renovation — not directly comparable to new construction for Time/Cost/Carbon · ‡ Crane: TC=roof crane ×10 d; PF=precast+roof ×21 d; PP=precast+roof ×24 d; RS=0 d (capped at index 0, radar capped 180)</div>
     </div>
     <div class="radar-panel">
@@ -970,11 +1064,43 @@ const MAT_COLORS = {
 // ══════════════════════════════════════════════════════
 // TAB SWITCH
 // ══════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════
+// ROTATE HINT — visibility is CSS-driven (phone + portrait); this only
+// handles dismissal, so rotating the device hides it with no JS at all
+// ════════════════════════════════════════════════════
+(function () {
+  const tip = document.getElementById('rotateTip');
+  if (!tip) return;
+  let seen = false;
+  try { seen = sessionStorage.getItem('rotateTipSeen') === '1'; } catch (e) {}
+  if (seen) return;
+  tip.hidden = false;
+
+  function dismiss() {
+    tip.hidden = true;
+    try { sessionStorage.setItem('rotateTipSeen', '1'); } catch (e) {}
+    document.removeEventListener('keydown', onKey);
+  }
+  function onKey(e) { if (e.key === 'Escape') dismiss(); }
+
+  const closeBtn = document.getElementById('rotateTipClose');
+  closeBtn.addEventListener('click', dismiss);
+  if (getComputedStyle(tip).display !== 'none') closeBtn.focus();
+  tip.addEventListener('click', e => { if (e.target === tip) dismiss(); });
+  document.addEventListener('keydown', onKey);
+})();
+
+// keep the active tab in view when the tab strip scrolls horizontally
+function scrollTabIntoView(btn) {
+  if (btn && btn.scrollIntoView) btn.scrollIntoView({block:'nearest', inline:'center'});
+}
+
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
+  scrollTabIntoView(btn);
   if (id==='overview') requestAnimationFrame(resizeRadar);
   if (id==='uc1') { buildGantt(); buildWBSTable('TC'); }
   if (id==='uc2') { buildStackedCost(); buildPhaseCostTable(); }
