@@ -363,15 +363,16 @@ header h1 em{color:var(--accent);font-style:normal}
 
 <!-- TABS -->
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('overview',this)">UC4 Overview</button>
-  <button class="tab-btn" onclick="switchTab('uc1',this)">UC1 — 4D Scheduling</button>
+  <button class="tab-btn active" onclick="switchTab('uc1',this)">UC1 — 4D Scheduling</button>
   <button class="tab-btn" onclick="switchTab('uc2',this)">UC2 — 5D Cost</button>
   <button class="tab-btn" onclick="switchTab('uc3',this)">UC3 — 6D Carbon</button>
+  <button class="tab-btn" onclick="switchTab('overview',this)">UC4 — Decision Support</button>
+  <button class="tab-btn" onclick="switchTab('3d',this)">3D Model</button>
   <button class="tab-btn" onclick="switchTab('sources',this)">Data Sources</button>
 </nav>
 
 <!-- ═══════ TAB: UC4 OVERVIEW ═══════ -->
-<section class="tab-panel active" id="tab-overview">
+<section class="tab-panel" id="tab-overview">
   <div class="section-label">KPI Summary — Actual Results</div>
   <div class="cards-row">
     <div class="kpi-card tc">
@@ -463,7 +464,7 @@ header h1 em{color:var(--accent);font-style:normal}
 </section>
 
 <!-- ═══════ TAB: UC1 ═══════ -->
-<section class="tab-panel" id="tab-uc1">
+<section class="tab-panel active" id="tab-uc1">
   <div class="section-label">Schedule Summary</div>
   <div class="cards-row">
     <div class="kpi-card tc"><div class="kpi-code">TC</div><div class="kpi-value">197</div><div class="kpi-unit">calendar days</div><div class="kpi-sub">Subst 45d · Struct 64d · Roof 16d · Arch 51d</div></div>
@@ -708,6 +709,43 @@ header h1 em{color:var(--accent);font-style:normal}
   </div>
 </section>
 
+<!-- ═══════ TAB: 3D MODEL ═══════ -->
+<section class="tab-panel" id="tab-3d">
+  <!-- Speckle IFC Model Viewer -->
+  <div class="section-label">IFC Model Viewer</div>
+  <div class="chart-box" style="padding:0;overflow:hidden;border-radius:14px;border:1.5px solid var(--border)">
+    <!-- Viewer header bar -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:13px;font-weight:700;color:var(--text)">3D BIM Model</span>
+        <span style="font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;background:rgba(45,111,245,.1);color:var(--accent);border:1px solid rgba(45,111,245,.25)">Speckle · Live</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:11px;color:var(--muted)">4 federated models · IFC</span>
+        <a href="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=3885182a8ce0768699b4ad5251c917baa2aafe8d1c#embed=%7B%22isEnabled%22%3Atrue%7D" target="_blank"
+          style="font-size:11px;font-weight:600;color:var(--accent);text-decoration:none;padding:3px 10px;border-radius:6px;border:1px solid rgba(45,111,245,.3);background:rgba(45,111,245,.06)">
+          Open in Speckle ↗
+        </a>
+      </div>
+    </div>
+    <!-- Speckle iframe -->
+    <iframe
+      title="Speckle — M41 Thesis BIM Model"
+      src="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=3885182a8ce0768699b4ad5251c917baa2aafe8d1c#embed=%7B%22isEnabled%22%3Atrue%2C%22isTransparent%22%3Atrue%7D"
+      width="100%"
+      height="620"
+      frameborder="0"
+      style="display:block;background:var(--surface2)"
+      allowfullscreen>
+    </iframe>
+    <!-- Viewer footer -->
+    <div style="padding:10px 18px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span style="font-size:11px;color:var(--muted)">Single-family house · Pathumthani, Thailand · GFA 188.91 m²</span>
+      <span style="font-size:11px;color:var(--light)">Pirawit Sukhaneskul · MBUILD FEUP 2026</span>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════ TAB: SOURCES ═══════ -->
 <section class="tab-panel" id="tab-sources">
   <div class="section-label">Data Lineage</div>
@@ -762,39 +800,6 @@ header h1 em{color:var(--accent);font-style:normal}
     </div>
   </div>
 
-  <!-- Speckle IFC Model Viewer -->
-  <div class="section-label" style="margin-top:28px">IFC Model Viewer</div>
-  <div class="chart-box" style="padding:0;overflow:hidden;border-radius:14px;border:1.5px solid var(--border)">
-    <!-- Viewer header bar -->
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--border);gap:12px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:13px;font-weight:700;color:var(--text)">3D BIM Model</span>
-        <span style="font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;background:rgba(45,111,245,.1);color:var(--accent);border:1px solid rgba(45,111,245,.25)">Speckle · Live</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:11px;color:var(--muted)">4 federated models · IFC</span>
-        <a href="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=3885182a8ce0768699b4ad5251c917baa2aafe8d1c#embed=%7B%22isEnabled%22%3Atrue%7D" target="_blank"
-          style="font-size:11px;font-weight:600;color:var(--accent);text-decoration:none;padding:3px 10px;border-radius:6px;border:1px solid rgba(45,111,245,.3);background:rgba(45,111,245,.06)">
-          Open in Speckle ↗
-        </a>
-      </div>
-    </div>
-    <!-- Speckle iframe -->
-    <iframe
-      title="Speckle — M41 Thesis BIM Model"
-      src="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=3885182a8ce0768699b4ad5251c917baa2aafe8d1c#embed=%7B%22isEnabled%22%3Atrue%2C%22isTransparent%22%3Atrue%7D"
-      width="100%"
-      height="520"
-      frameborder="0"
-      style="display:block;background:var(--surface2)"
-      allowfullscreen>
-    </iframe>
-    <!-- Viewer footer -->
-    <div style="padding:10px 18px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <span style="font-size:11px;color:var(--muted)">Single-family house · Pathumthani, Thailand · GFA 188.91 m²</span>
-      <span style="font-size:11px;color:var(--light)">Pirawit Sukhaneskul · MBUILD FEUP 2026</span>
-    </div>
-  </div>
 </section>
 
 </div><!-- /wrap -->
