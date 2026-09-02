@@ -119,6 +119,12 @@ header h1 em{color:var(--accent);font-style:normal}
 .sc-btn.sc-m41{border-color:var(--muted);color:var(--muted)}.sc-btn.sc-m41.sc-active{background:rgba(100,116,139,.1)}
 .sc-btn.sc-all{border-color:var(--muted);color:var(--muted)}.sc-btn.sc-all.sc-active{background:rgba(100,116,139,.1)}
 
+/* 3D tab — size the viewer to the viewport so the whole card fits without scrolling.
+   280px = sticky tab nav 54 + panel padding 28 + section label 33 + card header 49
+           + chip row 54 + card footer 37 + breathing room. */
+#speckleFrame{height:clamp(360px,calc(100vh - 280px),720px)}
+#tab-3d{scroll-margin-top:58px}
+
 /* GANTT */
 .gantt-outer{overflow-x:auto;border:1.5px solid var(--border);border-radius:10px;background:var(--bg)}
 .gantt-header-row{display:flex;margin-left:170px;border-bottom:1.5px solid var(--border)}
@@ -1142,6 +1148,7 @@ function switchTab(id, btn) {
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
   scrollTabIntoView(btn);
+  if (id==='3d') requestAnimationFrame(()=>document.getElementById('tab-3d').scrollIntoView({block:'start',behavior:'smooth'}));
   if (id==='overview') requestAnimationFrame(resizeRadar);
   if (id==='uc1') { buildGantt(); buildWBSTable('TC'); }
   if (id==='uc2') { buildStackedCost(); buildPhaseCostTable(); }
