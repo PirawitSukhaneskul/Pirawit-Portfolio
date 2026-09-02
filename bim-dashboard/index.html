@@ -116,6 +116,8 @@ header h1 em{color:var(--accent);font-style:normal}
 .sc-btn.sc-pf{border-color:var(--pf);color:var(--pf)}.sc-btn.sc-pf.sc-active{background:rgba(22,163,94,.1)}
 .sc-btn.sc-pp{border-color:var(--pp);color:var(--pp)}.sc-btn.sc-pp.sc-active{background:rgba(45,111,245,.1)}
 .sc-btn.sc-rs{border-color:var(--rs);color:var(--rs)}.sc-btn.sc-rs.sc-active{background:rgba(147,51,234,.1)}
+.sc-btn.sc-m41{border-color:var(--muted);color:var(--muted)}.sc-btn.sc-m41.sc-active{background:rgba(100,116,139,.1)}
+.sc-btn.sc-all{border-color:var(--muted);color:var(--muted)}.sc-btn.sc-all.sc-active{background:rgba(100,116,139,.1)}
 
 /* GANTT */
 .gantt-outer{overflow-x:auto;border:1.5px solid var(--border);border-radius:10px;background:var(--bg)}
@@ -721,26 +723,36 @@ header h1 em{color:var(--accent);font-style:normal}
         <span style="font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px;background:rgba(45,111,245,.1);color:var(--accent);border:1px solid rgba(45,111,245,.25)">Speckle · Live</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:11px;color:var(--muted)">4 federated models · IFC</span>
-        <a href="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=3885182a8ce0768699b4ad5251c917baa2aafe8d1c#embed=%7B%22isEnabled%22%3Atrue%7D" target="_blank"
+        <span style="font-size:11px;color:var(--muted)" id="speckleCount">1,800 objects · IFC</span>
+        <a href="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=70161412abac74d14e39b13a7f6d11e3bcf5f37226#embed=%7B%22isEnabled%22%3Atrue%7D" target="_blank" id="speckleOpen"
           style="font-size:11px;font-weight:600;color:var(--accent);text-decoration:none;padding:3px 10px;border-radius:6px;border:1px solid rgba(45,111,245,.3);background:rgba(45,111,245,.06)">
           Open in Speckle ↗
         </a>
       </div>
     </div>
+    <!-- Model switcher -->
+    <div class="filter-row" style="margin:0;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--border)">
+      <span class="filter-label">Model:</span>
+      <button class="sc-btn sc-m41 sc-active" id="mbtn-M41" onclick="switchSpeckle('M41',this)">Architecture</button>
+      <button class="sc-btn sc-tc" id="mbtn-TC" onclick="switchSpeckle('TC',this)">TC</button>
+      <button class="sc-btn sc-pf" id="mbtn-PF" onclick="switchSpeckle('PF',this)">PF</button>
+      <button class="sc-btn sc-pp" id="mbtn-PP" onclick="switchSpeckle('PP',this)">PP</button>
+      <button class="sc-btn sc-all" id="mbtn-ALL" onclick="switchSpeckle('ALL',this)">All federated</button>
+    </div>
     <!-- Speckle iframe -->
     <iframe
+      id="speckleFrame"
       title="Speckle — M41 Thesis BIM Model"
-      src="https://app.speckle.systems/projects/f78fe93bfe/models/0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05?embedToken=3885182a8ce0768699b4ad5251c917baa2aafe8d1c#embed=%7B%22isEnabled%22%3Atrue%2C%22isTransparent%22%3Atrue%7D"
+      src="https://app.speckle.systems/projects/f78fe93bfe/models/b426aafb98?embedToken=70161412abac74d14e39b13a7f6d11e3bcf5f37226#embed=%7B%22isEnabled%22%3Atrue%7D"
       width="100%"
-      height="620"
+      height="720"
       frameborder="0"
-      style="display:block;background:var(--surface2)"
+      style="display:block;background:#101014"
       allowfullscreen>
     </iframe>
     <!-- Viewer footer -->
     <div style="padding:10px 18px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-      <span style="font-size:11px;color:var(--muted)">Single-family house · Pathumthani, Thailand · GFA 188.91 m²</span>
+      <span style="font-size:11px;color:var(--muted)">Single-family house · Pathumthani, Thailand · GFA 188.91 m² &nbsp;·&nbsp; Viewer toolbar (fit view · section · sketch · measure) sits at the bottom of the frame</span>
       <span style="font-size:11px;color:var(--light)">Pirawit Sukhaneskul · MBUILD FEUP 2026</span>
     </div>
   </div>
@@ -808,6 +820,30 @@ header h1 em{color:var(--accent);font-style:normal}
 // ══════════════════════════════════════════════════════
 // CORE DATA
 // ══════════════════════════════════════════════════════
+// ── 3D tab: Speckle model switcher ────────────────────────────────
+const SPECKLE_TOKEN = "70161412abac74d14e39b13a7f6d11e3bcf5f37226";
+const SPECKLE_MODELS = {
+  M41: { ids:"b426aafb98", label:"1,800 objects · IFC" },
+  TC:  { ids:"0f189f2ca7", label:"9,696 objects · IFC" },
+  PF:  { ids:"e633c17e05", label:"544 objects · IFC" },
+  PP:  { ids:"a4b2435a28", label:"602 objects · IFC" },
+  ALL: { ids:"0f189f2ca7,a4b2435a28,b426aafb98,e633c17e05", label:"4 federated models · IFC" }
+};
+function speckleUrl(ids){
+  return "https://app.speckle.systems/projects/f78fe93bfe/models/" + ids +
+         "?embedToken=" + SPECKLE_TOKEN + "#embed=%7B%22isEnabled%22%3Atrue%7D";
+}
+function switchSpeckle(key, btn){
+  const m = SPECKLE_MODELS[key];
+  if(!m) return;
+  document.querySelectorAll("#tab-3d .sc-btn").forEach(b=>b.classList.remove("sc-active"));
+  btn.classList.add("sc-active");
+  const url = speckleUrl(m.ids);
+  document.getElementById("speckleFrame").src = url;
+  document.getElementById("speckleOpen").href = url;
+  document.getElementById("speckleCount").textContent = m.label;
+}
+
 const SCENARIOS = ['TC','PF','PP','RS'];
 const COLORS = { TC:'#e07b1a', PF:'#16a35e', PP:'#2d6ff5', RS:'#9333ea' };
 
