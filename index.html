@@ -374,6 +374,17 @@ a.lab-card:hover .lab-cta{gap:11px}
 .sk-legend-term{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);margin-right:6px}
 @media(max-width:800px){.sk-legend{grid-template-columns:1fr}}
 /* Awards */
+.about-intro{font-family:var(--serif);font-size:21px;font-weight:300;line-height:1.6;color:var(--dark);margin-bottom:36px;max-width:620px}
+.cvt{border-top:1px solid var(--border)}
+.cvt-year{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--border)}
+.cvt-yr{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--dark);line-height:1}
+.cvt-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px}
+.cvt-list li{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:baseline}
+.cvt-tag{font-size:9.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light)}
+.cvt-title{display:block;font-family:var(--serif);font-size:17px;font-weight:400;color:var(--dark);line-height:1.35}
+.cvt-org{display:block;font-size:12px;font-weight:300;color:var(--mid);margin-top:2px}
+.cvt-desc{display:block;font-size:12.5px;font-weight:300;color:var(--light);line-height:1.7;margin-top:4px;max-width:720px}
+@media(max-width:720px){.cvt-year{grid-template-columns:1fr;gap:16px}.cvt-list li{grid-template-columns:1fr;gap:4px}.about-intro{font-size:18px}}
 .awards-table{border-top:1px solid var(--border)}
 .aw-row{display:grid;grid-template-columns:70px 1fr auto;gap:32px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--border)}
 .aw-yr{font-size:11px;font-weight:300;color:var(--light)}
@@ -933,7 +944,7 @@ a.lab-card:hover .lab-cta{gap:11px}
 
   <footer>
     <span>© 2026 Pirawit Sukhaneskul</span>
-    <span>BIM / Architectural Designer · Barcelona</span>
+    <span>Architect · Bangkok, Thailand</span>
     <span class="footer-link" data-nav="contact">pirawit.win@gmail.com</span>
     <span style="font-size:11px;font-weight:300;letter-spacing:.04em;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:6px">
       <span>Visitors</span>
@@ -1766,10 +1777,8 @@ a.lab-card:hover .lab-cta{gap:11px}
           <img src="img/optimized/profile-photo.png" alt="Pirawit Sukhaneskul" class="about-photo"/>
         </div>
         <h1 class="about-name">Pirawit<br>Sukhaneskul</h1>
-        <div class="about-role">BIM / Architectural Designer · Barcelona, Spain</div>
-        <p class="about-bio">Thai-licensed architect and EU-funded Erasmus Mundus scholar, selected from over 1,000 candidates worldwide for a fully-funded MSc in Sustainable Construction across Spain, Germany, and Portugal. Graduated First Class Honours in Architecture from Chulalongkorn University.</p>
-        <div class="about-quote">"Architecture at its best is the translation of environmental logic into spatial experience — measurable, beautiful, and precisely constructed."</div>
-        <p class="about-bio">Experienced across green building certification (LEED ID+C, BD+C), BIM coordination, and construction delivery — from daylight simulation and clash detection to BOQ verification and multi-consultant management across Bangkok and Barcelona.</p>
+        <div class="about-role">Architect · Project Management &amp; Digital Construction · Bangkok, Thailand</div>
+        <p class="about-intro">Architect with experience across design and construction supervision, specialising in project management and digital construction. I have worked in Thailand and abroad, both freelance and with private firms.</p>
         <!-- Logo strip — Dept of Architecture Chulalongkorn · Erasmus Mundus / MBUILD universities -->
         <div class="profile-logo-strip">
           <img src="img/optimized/logo-arch-chula.png" alt="Department of Architecture, Chulalongkorn University" style="max-height:48px;margin-right:-16px"/>
@@ -1780,19 +1789,8 @@ a.lab-card:hover .lab-cta{gap:11px}
         <div class="aside-card">
           <div class="aside-card-title">Contact</div>
           <p>pirawit.win@gmail.com</p>
-          <p style="margin-top:6px">+34 605 732 654</p>
+          <p style="margin-top:6px">+66 84 532 6868</p>
           <p style="margin-top:6px">linkedin.com/in/pirawitsuk</p>
-        </div>
-        <div class="aside-card">
-          <div class="aside-card-title">Credentials</div>
-          <ul>
-            <li>Thai Arch. License — Assoc.Arch 27042</li>
-            <li>Erasmus Mundus Scholar — 1 of 15</li>
-            <li>YAC Gold Mention — Dubai 2022</li>
-            <li>AYDA 3rd Prize — Nippon Paint</li>
-            <li>Alliance Laundry 2nd Prize</li>
-            <li>Sheera Finalist — Bangkok 2021</li>
-          </ul>
         </div>
         <div class="aside-card">
           <div class="aside-card-title">Languages</div>
@@ -1802,116 +1800,79 @@ a.lab-card:hover .lab-cta{gap:11px}
     </div>
   </div>
 
-  <!-- Experience -->
+  <!-- CV timeline — newest first -->
   <div class="cv-section">
     <div class="cv-section-head">
       <span class="cv-section-num">01</span>
-      <h2 class="cv-section-title">Experience</h2>
+      <h2 class="cv-section-title">CV</h2>
     </div>
-    <div class="cv-grid">
-      <div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-item-inner">
-            <div class="tl-period">Feb – Aug 2026</div>
-            <div class="tl-title">Interior Designer</div>
-            <div class="tl-org">Cometa Architects (D&B Studio) · Barcelona, Spain</div>
-            <div class="tl-desc">Design development and production drawings — plans, sections, elevations, material schedules, FF&E layouts — for a full residential renovation and garden pavilion in Harlow, Essex, United Kingdom. AI-assisted rendering and material visualization workflows.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-item-inner">
-            <div class="tl-period">May – Jul 2024</div>
-            <div class="tl-title">Site Architect</div>
-            <div class="tl-org">NUSA Construction · Bangkok, Thailand</div>
-            <div class="tl-desc">Supervised construction of a 1,500 m² luxury residential project. Produced resolution drawings for MEP clashes, tank relocations, and layout conflicts in real time.</div>
-          </div>
-        </div>
+    <div class="cvt">
+      <div class="cvt-year">
+        <div class="cvt-yr">2026</div>
+        <ul class="cvt-list">
+          <li><span class="cvt-tag">Teaching</span><div><strong class="cvt-title">Guest Lecturer — Using Claude AI for Architectural Projects</strong><span class="cvt-org">Faculty of Architecture, Rangsit University · Thailand</span></div></li>
+          <li><span class="cvt-tag">Teaching</span><div><strong class="cvt-title">Instructor — “Claude for Architect” Workshop</strong><span class="cvt-org">Online &amp; on-site cohorts · October 2026</span></div></li>
+          <li><span class="cvt-tag">Education</span><div><strong class="cvt-title">MSc Sustainable Construction &amp; Management — Erasmus Mundus MBUILD</strong><span class="cvt-org">Universidad de Cantabria, Santander · final term, 16.6 / 20 · graduated Sep 2026</span>
+            <span class="cvt-desc">Thesis: Python-Dynamo scripts that turn one Revit model into 4D schedule, 5D cost and 6D embodied-carbon outputs, read through an analytics dashboard.</span></div></li>
+          <li><span class="cvt-tag">Work</span><div><strong class="cvt-title">Interior Designer (part-time)</strong><span class="cvt-org">Cometa Architects (D&amp;B Studio) · Barcelona, Spain · Feb – Jun 2026</span>
+            <span class="cvt-desc">Production drawings, material schedules and FF&amp;E for a house renovation and garden pavilion in Harlow, Essex, United Kingdom.</span></div></li>
+          <li><span class="cvt-tag">Freelance</span><div><strong class="cvt-title">Architecture &amp; Digital Tools</strong><span class="cvt-org">Thailand · remote</span>
+            <span class="cvt-desc">Residential renovation and a swimming-school project; built web tools for practice — BIM EIR generator, cash-flow simulator, construction cost estimator.</span></div></li>
+        </ul>
       </div>
-      <div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-item-inner">
-            <div class="tl-period">Jul 2023 – Apr 2024</div>
-            <div class="tl-title">Green Building Specialist</div>
-            <div class="tl-org">Africus Co., Ltd. · Bangkok, Thailand</div>
-            <div class="tl-desc">LEED BD+C for O2 Bangkok @ One Bangkok (RFI/RFA via Aconex, Thai Obayashi, ITD-Takenaka). LEED ID+C Gold for a confidential corporate fit-out @ FYI Center — daylight simulation and material coordination with CBRE.</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-item-inner">
-            <div class="tl-period">2021 – 2022</div>
-            <div class="tl-title">Architectural Intern</div>
-            <div class="tl-org">Tandem Architects + STUD/O Architect · Bangkok</div>
-            <div class="tl-desc">Central Embassy 2 (with BIG / Bjarke Ingels Group, Denmark): GFA and saleable-area calculations. Central Nakorn Pathom: retention pond sizing and NBS landscape integration.</div>
-          </div>
-        </div>
+      <div class="cvt-year">
+        <div class="cvt-yr">2025</div>
+        <ul class="cvt-list">
+          <li><span class="cvt-tag">Teaching</span><div><strong class="cvt-title">Guest Lecturer — Studying &amp; Working in the EU: Digital Construction, BIM and IFC</strong><span class="cvt-org">5th-year Seminar, Faculty of Architecture, Chulalongkorn University</span></div></li>
+          <li><span class="cvt-tag">Education</span><div><strong class="cvt-title">MSc term — Building Construction Technology</strong><span class="cvt-org">Technische Hochschule Mittelhessen (THM), Giessen, Germany · 17.6 / 20</span>
+            <span class="cvt-desc">Revit, Navisworks, Dynamo, IFC, BEP and ISO 19650 information management, clash detection.</span></div></li>
+        </ul>
       </div>
-    </div>
-  </div>
-
-  <!-- Education -->
-  <div class="cv-section" style="background:var(--bg2)">
-    <div class="cv-section-head">
-      <span class="cv-section-num">02</span>
-      <h2 class="cv-section-title">Education</h2>
-    </div>
-
-    <!-- Erasmus Mundus group -->
-    <p class="edu-program-label">Erasmus Mundus MBUILD — EU-funded Joint Master's · 1 of 15 selected from 1,000+ applicants worldwide</p>
-    <div class="edu-block-group">
-
-      <div class="education-block">
-        <span class="edu-date">Sep 2024 –<br>Feb 2025</span>
-        <div class="edu-detail">
-          <strong>Faculdade de Engenharia da Universidade do Porto (FEUP)</strong>
-          <span class="edu-degree">MSc Sustainable Design, Construction and Management · 16.2 / 20</span>
-          <p>Construction project management: EVM, CPM, IPD, and Lean Construction. Applied scheduling and waste reduction using Primavera P6. Integrated Project 1 combining sustainability strategy with CM workflows.</p>
-          <span class="edu-tags">Construction Management · EVM · Primavera P6 · Procurement · Lean</span>
-        </div>
+      <div class="cvt-year">
+        <div class="cvt-yr">2024</div>
+        <ul class="cvt-list">
+          <li><span class="cvt-tag">Award</span><div><strong class="cvt-title">Erasmus Mundus MBUILD Scholarship</strong><span class="cvt-org">EU fully funded · 1 of 15 selected from 1,000+ applicants worldwide</span></div></li>
+          <li><span class="cvt-tag">Education</span><div><strong class="cvt-title">MSc term — Sustainable Design, Construction and Management</strong><span class="cvt-org">FEUP, University of Porto, Portugal · 16.2 / 20</span>
+            <span class="cvt-desc">EVM, CPM, Primavera P6, Lean; precast flood-resilient social housing for Brazil.</span></div></li>
+          <li><span class="cvt-tag">Work</span><div><strong class="cvt-title">Site Architect</strong><span class="cvt-org">NUSA Construction · Bangkok · May – Jul 2024</span>
+            <span class="cvt-desc">Supervised a 1,500 m² luxury residence; resolution drawings for MEP clashes and layout conflicts on site.</span></div></li>
+          <li><span class="cvt-tag">Freelance</span><div><strong class="cvt-title">Interior &amp; MEP Drawings</strong><span class="cvt-org">Bangkok</span>
+            <span class="cvt-desc">Condominium interior re-planning and electrical / plumbing shop drawings.</span></div></li>
+        </ul>
       </div>
-
-      <div class="education-block">
-        <span class="edu-date">Mar 2025 –<br>Aug 2025</span>
-        <div class="edu-detail">
-          <strong>Technische Hochschule Mittelhessen (THM), Giessen</strong>
-          <span class="edu-degree">MSc Building Construction Technology · 17.6 / 20</span>
-          <p>BIM workflows with Revit, Navisworks, and Dynamo for parametric automation. IFC open standards, BEP development, and ISO 19650 data management. Clash detection, fire safety compliance, and building physics.</p>
-          <span class="edu-tags">BIM · Revit · Navisworks · Dynamo · IFC · ISO 19650</span>
-        </div>
+      <div class="cvt-year">
+        <div class="cvt-yr">2023</div>
+        <ul class="cvt-list">
+          <li><span class="cvt-tag">Work</span><div><strong class="cvt-title">Green Building Specialist</strong><span class="cvt-org">Africus Co., Ltd. · Bangkok · Jul 2023 – Apr 2024</span>
+            <span class="cvt-desc">LEED BD+C for O2 Bangkok @ One Bangkok — RFI/RFA via Aconex with Thai Obayashi and ITD-Takenaka. LEED ID+C Gold for a confidential corporate fit-out @ FYI Center — daylight simulation to 45.3% sDA.</span></div></li>
+          <li><span class="cvt-tag">Credential</span><div><strong class="cvt-title">Thai Architectural License</strong><span class="cvt-org">Assoc.Arch 27042 · Architect Council of Thailand</span></div></li>
+          <li><span class="cvt-tag">Education</span><div><strong class="cvt-title">Bachelor of Architecture — First Class Honours</strong><span class="cvt-org">Chulalongkorn University, Bangkok · GPA 3.60 / 4.00</span>
+            <span class="cvt-desc">Thesis: 30-storey affordable housing in BIM — precast walls, post-tensioned slabs, modular bathroom pods, fire compartmentation.</span></div></li>
+        </ul>
       </div>
-
-      <div class="education-block">
-        <span class="edu-date">Aug 2025 –<br>Sep 2026</span>
-        <div class="edu-detail">
-          <strong>Universidad de Cantabria (UC), Santander</strong>
-          <span class="edu-degree">MSc Sustainable Design, Construction and Management · 16.6 / 20</span>
-          <p>Sustainable infrastructure, circular economy, and advanced construction materials. Life Cycle Assessment (LCA) for environmental performance evaluation. Integrated Project 3: construction entrepreneurship and business development.</p>
-          <span class="edu-tags">LCA · Life-Cycle Costing · Circular Economy · Sustainable Materials · GIS</span>
-        </div>
+      <div class="cvt-year">
+        <div class="cvt-yr">2022</div>
+        <ul class="cvt-list">
+          <li><span class="cvt-tag">Award</span><div><strong class="cvt-title">Gold Mention (4th place) — YAC Young Architects Competitions</strong><span class="cvt-org">Dubai Sea House · Bologna, Italy · jury: Snøhetta, Foster + Partners, MAD Architects</span></div></li>
+          <li><span class="cvt-tag">Work</span><div><strong class="cvt-title">Architectural Intern</strong><span class="cvt-org">Tandem Architects + STUD/O Architect · Bangkok · 2021 – 2022</span>
+            <span class="cvt-desc">Central Embassy 2 with BIG / Bjarke Ingels Group — GFA and saleable-area calculations. Central Nakorn Pathom — retention pond sizing and nature-based landscape.</span></div></li>
+        </ul>
       </div>
-
-    </div>
-
-    <!-- Chulalongkorn -->
-    <div class="education-block" style="border-top:1px solid var(--border);margin-top:8px">
-      <span class="edu-date">Aug 2018 –<br>Jun 2023</span>
-      <div class="edu-detail">
-        <strong>Chulalongkorn University, Bangkok</strong>
-        <span class="edu-degree">Bachelor of Architecture — First Class Honours · GPA 3.60 / 4.00</span>
-        <p>Five-year professional architecture degree. Thesis: 30-storey affordable housing BIM model — precast walls, post-tensioned slabs, modular bathroom pods, and fire compartmentation strategy.</p>
-        <span class="edu-tags">Architecture · BIM · Revit · SketchUp · AutoCAD · Interior Design</span>
+      <div class="cvt-year">
+        <div class="cvt-yr">2021</div>
+        <ul class="cvt-list">
+          <li><span class="cvt-tag">Award</span><div><strong class="cvt-title">3rd Prize — AYDA Asia Young Designer Awards</strong><span class="cvt-org">Nippon Paint · Thailand</span></div></li>
+          <li><span class="cvt-tag">Award</span><div><strong class="cvt-title">2nd Prize — Alliance Laundry Design Competition</strong><span class="cvt-org">Thailand</span></div></li>
+          <li><span class="cvt-tag">Award</span><div><strong class="cvt-title">Finalist — Sheera Design Competition</strong><span class="cvt-org">Woodflex Workspace · Bangkok</span></div></li>
+        </ul>
       </div>
     </div>
-
   </div>
 
   <!-- Skills -->
   <div class="cv-section">
     <div class="cv-section-head">
-      <span class="cv-section-num">03</span>
+      <span class="cv-section-num">02</span>
       <h2 class="cv-section-title">Skills &amp; Tools</h2>
     </div>
     <div class="skills-cats">
@@ -1955,22 +1916,6 @@ a.lab-card:hover .lab-cta{gap:11px}
     </div>
   </div>
 
-  <!-- Awards -->
-  <div class="cv-section" style="background:var(--bg2)">
-    <div class="cv-section-head">
-      <span class="cv-section-num">04</span>
-      <h2 class="cv-section-title">Awards &amp; Credentials</h2>
-    </div>
-    <div class="awards-table">
-      <div class="aw-row"><span class="aw-yr">2024</span><span class="aw-name">EU Erasmus Mundus MBUILD Scholarship</span><span class="aw-detail">1 of 15 from 1,000+ global applicants</span></div>
-      <div class="aw-row"><span class="aw-yr">2022</span><span class="aw-name">Gold Mention — YAC International Competition</span><span class="aw-detail">4th Prize · Dubai Sea House · Jury: Snøhetta, Foster+Partners, MAD Architects</span></div>
-      <div class="aw-row"><span class="aw-yr">TBC</span><span class="aw-name">3rd Prize — AYDA (Asian Young Designers Awards)</span><span class="aw-detail">Nippon Paint · Thailand</span></div>
-      <div class="aw-row"><span class="aw-yr">TBC</span><span class="aw-name">2nd Prize — Alliance Laundry Design Competition</span><span class="aw-detail">Thailand</span></div>
-      <div class="aw-row"><span class="aw-yr">2021</span><span class="aw-name">Finalist — Sheera Design Competition</span><span class="aw-detail">Woodflex Workspace · Bangkok, Thailand</span></div>
-      <div class="aw-row"><span class="aw-yr">2023</span><span class="aw-name">Thai Architectural License</span><span class="aw-detail">ID Assoc.Arch 27042 — Architect Council of Thailand</span></div>
-    </div>
-  </div>
-
   <!-- Download CV -->
   <div class="cv-download-bar">
     <div>
@@ -2002,12 +1947,8 @@ a.lab-card:hover .lab-cta{gap:11px}
         <span class="ci-label">Email</span>
         <span class="ci-val">pirawit.win@gmail.com</span>
       </a>
-      <a href="tel:+34605732654" class="contact-item" style="display:flex">
-        <span class="ci-label">Phone</span>
-        <span class="ci-val">+34 605 732 654</span>
-      </a>
       <a href="tel:+66845326868" class="contact-item" style="display:flex">
-        <span class="ci-label">Alt. Phone</span>
+        <span class="ci-label">Phone</span>
         <span class="ci-val">+66 84 532 6868</span>
       </a>
       <a href="https://linkedin.com/in/pirawitsuk" target="_blank" class="contact-item" style="display:flex">
@@ -2016,18 +1957,18 @@ a.lab-card:hover .lab-cta{gap:11px}
       </a>
       <div class="contact-item" style="display:flex">
         <span class="ci-label">Based</span>
-        <span class="ci-val">Barcelona, Spain</span>
+        <span class="ci-val">Bangkok, Thailand</span>
       </div>
       <div class="contact-avail">
         <p>Open to <strong>BIM Coordinator</strong>, <strong>BIM Specialist</strong>, and
         <strong>Architectural Designer</strong> roles —
         remote from anywhere, or office-based in Asia or Australia.
-        Graduating September 2026 in Spain. Available immediately after.</p>
+        Graduated September 2026. Available now.</p>
       </div>
     </div>
     <div>
       <div class="contact-col-title">Credentials</div>
-      <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:24px">Thai-licensed architect · Erasmus Mundus Scholar · BIM &amp; Sustainability Specialist · MSc candidate graduating September 2026. Open to remote (global) &amp; office-based roles in Asia–Australia.</p>
+      <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.85;margin-bottom:24px">Thai-licensed architect · Erasmus Mundus Scholar · BIM &amp; Sustainability Specialist · MSc graduate, September 2026. Open to remote (global) &amp; office-based roles in Asia–Australia.</p>
       <div style="display:flex;flex-direction:column;gap:12px">
         <button class="btn-dark" onclick="window.location.href='mailto:pirawit.win@gmail.com'">Send an Email →</button>
         <a class="btn-outline" href="Pirawit_CV_BIM.pdf" download="Pirawit_Sukhaneskul_CV.pdf">Download CV (PDF) ↓</a>
@@ -2037,7 +1978,7 @@ a.lab-card:hover .lab-cta{gap:11px}
   </div>
   <footer>
     <span>© 2026 Pirawit Sukhaneskul</span>
-    <span>BIM / Architectural Designer · Barcelona</span>
+    <span>Architect · Bangkok, Thailand</span>
     <span>pirawit.win@gmail.com</span>
   </footer>
 </div>
