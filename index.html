@@ -364,12 +364,10 @@ a.lab-card:hover .lab-cta{transform:translateX(4px)}
 /* Skills grid */
 .skills-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 56px}
 .sk-cat-title{font-size:9.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dark);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.sk-item{margin-bottom:12px}
-.sk-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.sk-item{padding:9px 0;border-bottom:1px solid var(--border)}
+.sk-row{display:flex;justify-content:space-between;align-items:baseline}
 .sk-name{font-size:12.5px;font-weight:300;color:var(--mid)}
 .sk-lv{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--light)}
-.sk-bar{height:1px;background:var(--border)}
-.sk-fill{height:1px;background:var(--dark);width:100%;transform:scaleX(0);transform-origin:left;transition:transform .8s ease-out}
 .sk-legend{margin-top:40px;padding-top:24px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);gap:20px 32px}
 .sk-legend-item{font-size:11px;font-weight:300;color:var(--light);line-height:1.6}
 .sk-legend-term{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);margin-right:6px}
@@ -1887,35 +1885,35 @@ p{text-wrap:pretty}
     <div class="skills-cats">
       <div>
         <div class="sk-cat-title">BIM &amp; Coordination</div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Revit</span><span class="sk-lv">Advanced</span></div><div class="sk-bar"><div class="sk-fill" data-w="90"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Navisworks</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="70"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Solibri / BIMcollab</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">BIM 360 / Aconex</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">IFC / ISO 19650</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="60"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Speckle</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="60"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Revit</span><span class="sk-lv">Advanced</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Navisworks</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Solibri / BIMcollab</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">BIM 360 / Aconex</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">IFC / ISO 19650</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Speckle</span><span class="sk-lv">Intermediate</span></div></div>
       </div>
       <div>
         <div class="sk-cat-title">Design &amp; Visualization</div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">AutoCAD</span><span class="sk-lv">Advanced</span></div><div class="sk-bar"><div class="sk-fill" data-w="88"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">SketchUp</span><span class="sk-lv">Advanced</span></div><div class="sk-bar"><div class="sk-fill" data-w="85"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Enscape / D5 / Lumion</span><span class="sk-lv">Expert</span></div><div class="sk-bar"><div class="sk-fill" data-w="95"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Rhino + Grasshopper</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Adobe Suite</span><span class="sk-lv">Expert</span></div><div class="sk-bar"><div class="sk-fill" data-w="92"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Primavera P6</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="58"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">AutoCAD</span><span class="sk-lv">Advanced</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">SketchUp</span><span class="sk-lv">Advanced</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Enscape / D5 / Lumion</span><span class="sk-lv">Expert</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Rhino + Grasshopper</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Adobe Suite</span><span class="sk-lv">Expert</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Primavera P6</span><span class="sk-lv">Intermediate</span></div></div>
       </div>
       <div>
         <div class="sk-cat-title">AI &amp; Automation</div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Dynamo</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="70"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">MS Project</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">LLM / AI Workflows</span><span class="sk-lv">Advanced</span></div><div class="sk-bar"><div class="sk-fill" data-w="82"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Claude Code / Codex</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">Terminal / VS Code</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="65"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Dynamo</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Python</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">MS Project</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">LLM / AI Workflows</span><span class="sk-lv">Advanced</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Claude Code / Codex</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">Terminal / VS Code</span><span class="sk-lv">Intermediate</span></div></div>
         <div class="sk-cat-title" style="margin-top:32px">Sustainability</div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">LEED BD+C / ID+C</span><span class="sk-lv">Experienced</span></div><div class="sk-bar"><div class="sk-fill" data-w="78"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">WELL Building Standard</span><span class="sk-lv">Experienced</span></div><div class="sk-bar"><div class="sk-fill" data-w="70"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">DIVA / Climate Studio</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="68"></div></div></div>
-        <div class="sk-item"><div class="sk-row"><span class="sk-name">One Click LCA</span><span class="sk-lv">Intermediate</span></div><div class="sk-bar"><div class="sk-fill" data-w="64"></div></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">LEED BD+C / ID+C</span><span class="sk-lv">Experienced</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">WELL Building Standard</span><span class="sk-lv">Experienced</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">DIVA / Climate Studio</span><span class="sk-lv">Intermediate</span></div></div>
+        <div class="sk-item"><div class="sk-row"><span class="sk-name">One Click LCA</span><span class="sk-lv">Intermediate</span></div></div>
       </div>
     </div>
     <div class="sk-legend">
@@ -2275,32 +2273,7 @@ p{text-wrap:pretty}
   const ticker = document.querySelector('.ticker');
   if (ticker) new IntersectionObserver(([e]) => ticker.classList.toggle('is-off', !e.isIntersecting)).observe(ticker);
 
-  /* ─── SKILL BARS ─── */
-  const skillObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.sk-fill').forEach(b => {
-          b.style.transform = 'scaleX(' + b.dataset.w / 100 + ')';
-        });
-        skillObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  const skillsBlock = document.querySelector('#page-about .skills-cats');
-  if (skillsBlock) skillObs.observe(skillsBlock);
-
-  const _nav = navigate;
-  window.navigateTo = function(t) {
-    _nav(t);
-    if (t === 'about') {
-      setTimeout(() => {
-        document.querySelectorAll('#page-about .sk-fill').forEach(b => {
-          b.style.transform = 'scaleX(' + b.dataset.w / 100 + ')';
-        });
-      }, 400);
-    }
-  };
+  window.navigateTo = navigate;
 
   /* ─── LAB LIVE EMBEDS (scale + lazy-load) ─── */
   const labEmbeds = [...document.querySelectorAll('.lab-embed')];
