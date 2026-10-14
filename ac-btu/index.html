@@ -1,0 +1,931 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>แอร์กี่ BTU ดี</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --ground:#FFFFFF; --surface:#F7F6F5; --surface-2:#EFEDEB;
+  --ink:#171514; --ink-2:#5F5A57; --ink-3:#918B87;
+  --line:#E4E1DE; --line-2:#C9C4C0;
+  --orange:#E1590A; --orange-2:#F2A65A; --orange-soft:#FBEADF; --orange-line:#F0B487;
+  --plan:#FCF8F5; --h-sun:#F0A400; --h-ppl:#5E86A8; --h-gear:#B4A99E;
+  --shadow:0 1px 2px rgba(23,21,20,.05), 0 12px 32px -24px rgba(23,21,20,.55);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#161413; --surface:#1E1B1A; --surface-2:#272322;
+    --ink:#EFECEA; --ink-2:#A9A29E; --ink-3:#7C7571;
+    --line:#312D2B; --line-2:#453F3C;
+    --orange:#FF8038; --orange-2:#C9762F; --orange-soft:#3A2114; --orange-line:#7A4423;
+    --plan:#201B18; --h-sun:#E8B23C; --h-ppl:#7FA6C9; --h-gear:#7B716A;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px -22px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#161413; --surface:#1E1B1A; --surface-2:#272322;
+  --ink:#EFECEA; --ink-2:#A9A29E; --ink-3:#7C7571;
+  --line:#312D2B; --line-2:#453F3C;
+  --orange:#FF8038; --orange-2:#C9762F; --orange-soft:#3A2114; --orange-line:#7A4423;
+  --plan:#201B18; --h-sun:#E8B23C; --h-ppl:#7FA6C9; --h-gear:#7B716A;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px -22px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  margin:0;overflow:hidden;touch-action:manipulation;background:var(--ground);color:var(--ink);
+  font-family:"Mitr","IBM Plex Sans Thai",system-ui,sans-serif;
+  font-size:14.5px;line-height:1.55;
+  display:flex;flex-direction:column;
+}
+.bar-top{
+  flex:none;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+  padding:12px 18px 10px;border-bottom:1px solid var(--line);
+}
+.bar-top h1{
+  font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-weight:600;
+  font-size:19px;margin:0;letter-spacing:-.01em;
+}
+.bar-top .tag{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--orange);margin:0;
+}
+.bar-top .now{margin-left:auto;font-size:12.5px;color:var(--ink-3)}
+
+main{flex:1 1 auto;min-height:0;position:relative}
+.step{
+  position:absolute;inset:0;display:none;flex-direction:column;
+  padding:14px 18px;gap:10px;overflow:auto;
+}
+.step.on{display:flex}
+
+/* ---------- step 1 : plan ---------- */
+.tools{flex:none;display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+button{
+  font:inherit;font-size:13px;font-weight:500;cursor:pointer;
+  background:var(--ground);color:var(--ink-2);
+  border:1px solid var(--line-2);border-radius:7px;padding:6px 12px;transition:.14s;
+}
+button:hover{border-color:var(--ink-3);color:var(--ink)}
+button.on{background:var(--orange);border-color:var(--orange);color:#fff}
+button.ghost{border-style:dashed}
+.filebtn{position:relative;overflow:hidden;display:inline-flex}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:200px}
+.tools .msg{font-size:12px;color:var(--ink-3);margin-left:auto;text-align:right;max-width:46ch}
+.tools .msg b{color:var(--orange)}
+
+.canvaswrap{
+  flex:1 1 auto;min-height:0;position:relative;
+  background:var(--plan);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+}
+svg#plan{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+svg#plan.editing{cursor:default}
+.hud{
+  position:absolute;left:12px;top:12px;
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2);
+  background:var(--ground);border:1px solid var(--line);border-radius:6px;
+  padding:4px 9px;pointer-events:none;
+}
+.scalepop{
+  position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;
+  background:var(--ground);border:1px solid var(--orange-line);border-radius:10px;
+  padding:9px 12px;box-shadow:var(--shadow);max-width:calc(100% - 24px);
+}
+.scalepop[hidden],.tutwrap[hidden],.zoomer[hidden]{display:none}
+.scalepop span{font-size:12.5px;color:var(--ink-2)}
+.zoomer{position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:5px}
+.zoomer button{
+  width:34px;height:34px;padding:0;display:grid;place-items:center;
+  font-size:16px;line-height:1;background:var(--ground);box-shadow:var(--shadow);
+}
+.zoomer button.fit{font-size:12px}
+.tutwrap{position:absolute;inset:0;background:rgba(23,21,20,.4);display:grid;place-items:center;padding:16px;z-index:5}
+.tut{
+  position:relative;background:var(--ground);border:1px solid var(--line);border-radius:13px;
+  padding:16px 17px;max-width:360px;box-shadow:var(--shadow);
+}
+.tut h3{font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-size:14px;font-weight:600;margin:0 0 10px}
+.tut ol{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-2)}
+.tut ol b{color:var(--ink);font-weight:600}
+.tut .kbd{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;background:var(--orange-soft);
+  color:var(--orange);border:1px solid var(--orange-line);border-radius:4px;padding:0 5px;
+}
+.tut .go{margin-top:13px;width:100%;background:var(--orange);border-color:var(--orange);color:#fff;padding:9px}
+.scalepop input{width:96px}
+.scalepop button{background:var(--orange);border-color:var(--orange);color:#fff}
+
+/* ---------- forms ---------- */
+input[type="number"],select{
+  font:inherit;font-size:14px;color:var(--ink);background:var(--ground);
+  border:1px solid var(--line-2);border-radius:7px;padding:7px 9px;width:100%;
+  font-variant-numeric:tabular-nums;
+}
+select{appearance:none}
+input:focus-visible,select:focus-visible,button:focus-visible,.filebtn:focus-within{
+  outline:2px solid var(--orange);outline-offset:2px;
+}
+label,.lbl{font-size:12.5px;color:var(--ink-2);font-weight:500}
+
+.grid2{
+  flex:1 1 auto;min-height:0;display:grid;gap:12px;align-content:start;
+  grid-template-columns:1fr;
+}
+@media (min-width:780px){.grid2{grid-template-columns:1fr 1fr;gap:14px 22px}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.card h2{
+  font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-size:11.5px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px;
+}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.field{flex:1 1 92px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{
+  cursor:pointer;padding:5px 11px;border-radius:999px;font-size:12.5px;
+  border:1px solid var(--line-2);background:var(--ground);color:var(--ink-2);
+}
+.seg input:checked + label{background:var(--orange-soft);border-color:var(--orange);color:var(--orange);font-weight:600}
+.seg input:focus-visible + label{outline:2px solid var(--orange);outline-offset:2px}
+.checks{display:flex;flex-direction:column;gap:5px}
+.check{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-2);cursor:pointer}
+.check input{accent-color:var(--orange);margin:0}
+.check em{font-style:normal;color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-size:11px}
+
+/* ---------- step 3 : result ---------- */
+.res-grid{display:grid;gap:12px;grid-template-columns:1fr;align-content:start}
+@media (min-width:820px){.res-grid{grid-template-columns:300px minmax(0,1fr);gap:16px}}
+.headline{background:var(--ink);border-radius:12px;padding:18px;box-shadow:var(--shadow)}
+.headline .cap{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ground);opacity:.55;margin:0}
+.headline .big{
+  font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-weight:600;font-size:46px;line-height:1;
+  margin:6px 0 0;letter-spacing:-.02em;color:var(--orange);font-variant-numeric:tabular-nums;
+}
+.headline .big em{font-style:normal;font-size:15px;font-weight:500;color:var(--ground);opacity:.6;margin-left:6px}
+.headline .need{margin:8px 0 0;font-size:12px;color:var(--ground);opacity:.7;font-family:"IBM Plex Mono",monospace;line-height:1.6;white-space:pre-line}
+.kind{margin-top:14px;padding-top:13px;border-top:1px dashed rgba(255,255,255,.25)}
+.kcap{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ground);opacity:.5;margin:0}
+.kname{margin:5px 0 0;font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-weight:600;font-size:15px;color:var(--orange);line-height:1.35}
+.knote{margin:5px 0 0;font-size:11.5px;color:var(--ground);opacity:.65;line-height:1.55}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.15);margin-top:14px;border-radius:8px;overflow:hidden}
+.stat{background:var(--ink);padding:10px 11px;color:var(--ground)}
+.stat .k{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.5;font-family:"IBM Plex Mono",monospace}
+.stat .v{font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-weight:600;font-size:18px;font-variant-numeric:tabular-nums;line-height:1.35}
+.stat .v small{font-size:10.5px;font-weight:500;opacity:.6;margin-left:3px}
+
+.tiers{display:grid;gap:10px;grid-template-columns:1fr}
+@media (min-width:560px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier{border:1px solid var(--line);border-radius:11px;padding:13px;background:var(--surface)}
+.tier.mid{border-color:var(--orange);background:var(--orange-soft)}
+.tier .t{font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-weight:600;font-size:13px;margin:0}
+.tier .p{
+  font-family:"Mitr","IBM Plex Sans Thai",sans-serif;font-weight:600;font-size:21px;margin:5px 0 2px;
+  font-variant-numeric:tabular-nums;color:var(--ink);
+}
+.tier.mid .p{color:var(--orange)}
+.tier .p small{font-size:11px;font-weight:500;color:var(--ink-3);margin-left:3px}
+.tier .b{font-size:11.5px;color:var(--ink-2);line-height:1.6;margin:6px 0 0}
+.subnote{font-size:11.5px;color:var(--ink-3);margin:8px 0 0}
+
+.bar{display:flex;height:8px;border-radius:5px;overflow:hidden;background:var(--surface-2);margin:0 0 9px}
+.bar i{display:block;height:100%}
+.keys{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px}
+.keys li{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
+.keys .dot{width:8px;height:8px;border-radius:2px;flex:none}
+.keys .n{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink);font-variant-numeric:tabular-nums}
+.warn{
+  border-left:3px solid var(--orange);background:var(--orange-soft);
+  padding:8px 11px;border-radius:0 7px 7px 0;font-size:12.5px;color:var(--ink);margin:0;
+}
+.fine{font-size:11px;color:var(--ink-3);line-height:1.6;margin:0}
+.fine a{color:var(--orange)}
+
+/* ---------- bottom step nav ---------- */
+.nav{
+  flex:none;display:flex;gap:8px;align-items:stretch;
+  padding:10px 18px calc(10px + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);background:var(--surface);
+}
+.nav .tab{
+  flex:1 1 0;display:flex;align-items:center;gap:9px;justify-content:center;
+  padding:9px 8px;border-radius:9px;border:1px solid transparent;background:transparent;
+  color:var(--ink-3);font-size:13px;font-weight:500;
+}
+.nav .tab i{
+  font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  width:19px;height:19px;border-radius:5px;display:grid;place-items:center;flex:none;
+  background:var(--line);color:var(--ink-2);
+}
+.nav .tab.on{background:var(--ground);border-color:var(--line-2);color:var(--ink);font-weight:600}
+.nav .tab.on i{background:var(--orange);color:#fff}
+.nav .tab .txt{display:inline;white-space:nowrap}
+@media (max-width:430px){
+  .nav{gap:5px;padding-inline:12px}
+  .nav .tab{gap:6px;padding:9px 4px;font-size:12px}
+  .nav .tab i{width:17px;height:17px;font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="bar-top">
+  <p class="tag">Plan → BTU → ค่าไฟ</p>
+  <h1>แอร์กี่ BTU ดี</h1>
+  <div class="now" id="nowLine">14.00 ตร.ม.</div>
+</div>
+
+<main>
+
+  <!-- ============ STEP 1 ============ -->
+  <section class="step on" id="step1">
+    <div class="tools">
+      <button type="button" id="bDraw">วาดห้องใหม่</button>
+      <button type="button" id="bDone" hidden>ปิดรูป</button>
+      <span class="filebtn"><button type="button" tabindex="-1">อัปโหลดรูปแปลน</button><input type="file" id="img" accept="image/*"></span>
+      <button type="button" id="bClearImg" hidden>เอารูปออก</button>
+      <button type="button" id="bRect" class="ghost">รีเซ็ตสี่เหลี่ยม</button>
+      <button type="button" id="bTut" class="ghost">วิธีใช้</button>
+      <p class="msg" id="msg"><b>ลากมุมหรือลากผนังได้เลย</b> เส้นล็อกมุมฉากอัตโนมัติ กดค้างที่ผนังเพื่อใส่ระยะจริง</p>
+    </div>
+    <div class="canvaswrap">
+      <svg id="plan" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet" role="img" aria-label="แปลนห้อง"></svg>
+      <div class="hud" id="hud">14.00 ตร.ม.</div>
+      <div class="zoomer">
+        <button type="button" id="bZin" aria-label="ซูมเข้า">+</button>
+        <button type="button" id="bZout" aria-label="ซูมออก">−</button>
+        <button type="button" id="bFit" class="fit" aria-label="พอดีจอ">100%</button>
+      </div>
+
+      <div class="tutwrap" id="tutWrap">
+        <div class="tut">
+          <h3>วิธีวาดแปลนห้อง</h3>
+          <ol>
+            <li><b>คลิกทีละมุม</b> แล้วคลิกจุดแรกซ้ำเพื่อปิดห้อง</li>
+            <li><b>ลากมุมหรือลากผนัง</b> เพื่อปรับขนาด ซูมด้วยสองนิ้วได้</li>
+            <li><span class="kbd">กดค้าง</span> ที่ผนัง เพื่อใส่ระยะจริง</li>
+          </ol>
+          <button type="button" class="go" id="bTutClose">เริ่มวาดเลย</button>
+        </div>
+      </div>
+      <div class="scalepop" id="scalePop" hidden>
+        <span id="scaleMsg">ระยะจริงของเส้นนี้</span>
+        <input type="number" id="realLen" step="0.01" min="0.1" max="80" placeholder="เมตร">
+        <button type="button" id="bScale">ตั้งระยะ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 2 ============ -->
+  <section class="step" id="step2">
+    <div class="grid2">
+      <div class="card">
+        <h2>ขนาดและคนใช้งาน</h2>
+        <div class="row">
+          <div class="field"><label for="fc">F-C สูงถึงฝ้า (ม.)</label><input type="number" id="fc" value="2.6" min="2" max="6" step="0.05"></div>
+          <div class="field"><label for="ppl">คนในห้อง</label><input type="number" id="ppl" value="2" min="0" max="40" step="1"></div>
+          <div class="field"><label for="hrs">เปิดวันละ (ชม.)</label><input type="number" id="hrs" value="9" min="1" max="24" step="1"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>ใช้ห้องทำอะไร</h2>
+        <div class="seg">
+          <input type="radio" name="use" id="u1" value="700" checked><label for="u1">ห้องนอน</label>
+          <input type="radio" name="use" id="u2" value="800"><label for="u2">นั่งเล่น</label>
+          <input type="radio" name="use" id="u3" value="850"><label for="u3">ทำงาน</label>
+          <input type="radio" name="use" id="u4" value="1000"><label for="u4">ร้าน / ออฟฟิศ</label>
+          <input type="radio" name="use" id="u5" value="1150"><label for="u5">ครัว</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>แดดและหลังคา</h2>
+        <div class="seg" style="margin-bottom:10px">
+          <input type="radio" name="sun" id="s1" value="1.00"><label for="s1">ไม่โดนแดด</label>
+          <input type="radio" name="sun" id="s2" value="1.10" checked><label for="s2">โดนบ้าง</label>
+          <input type="radio" name="sun" id="s3" value="1.22"><label for="s3">แดดจัด ทิศตะวันตก</label>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="roof">ชั้นบนสุด หรือ ใต้หลังคา <em>×1.12</em></label>
+          <label class="check"><input type="checkbox" id="insul">มีฉนวนกันความร้อนที่ฝ้า <em>×0.93</em></label>
+          <label class="check"><input type="checkbox" id="glass">กระจกบานใหญ่ หรือ ผนังกระจก <em>×1.08</em></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>ความร้อนในห้อง และ ค่าไฟ</h2>
+        <div class="checks" style="margin-bottom:12px">
+          <label class="check"><input type="checkbox" id="pc">คอมพิวเตอร์ หรือ ทีวีจอใหญ่ <em>+600 BTU</em></label>
+          <label class="check"><input type="checkbox" id="cook">เครื่องครัวไฟฟ้าในห้อง <em>+1,200 BTU</em></label>
+        </div>
+        <div class="row">
+          <div class="field"><label for="type">คอมเพรสเซอร์</label>
+            <select id="type"><option value="12.5" selected>Inverter</option><option value="10.2">Non-inverter</option></select>
+          </div>
+          <div class="field"><label for="rate">ค่าไฟ (บาท/หน่วย)</label><input type="number" id="rate" value="4.5" min="1" max="12" step="0.1"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STEP 3 ============ -->
+  <section class="step" id="step3">
+    <div class="res-grid">
+      <div class="headline">
+        <p class="cap">ขนาดเครื่องที่ควรใช้</p>
+        <p class="big" id="pick">15,000<em>BTU</em></p>
+        <p class="need" id="need"></p>
+        <div class="kind">
+          <p class="kcap">ประเภทเครื่องที่เหมาะ</p>
+          <p class="kname" id="kindName">ติดผนัง (Wall Type) แบบ Split</p>
+          <p class="knote" id="kindNote"></p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="k">พื้นที่</div><div class="v" id="sArea">14.00<small>ตร.ม.</small></div></div>
+          <div class="stat"><div class="k">ปริมาตร</div><div class="v" id="sVol">36.4<small>ลบ.ม.</small></div></div>
+          <div class="stat"><div class="k">กินไฟ</div><div class="v" id="sW">1,200<small>W</small></div></div>
+          <div class="stat"><div class="k">ค่าไฟ</div><div class="v" id="sCost">947<small>บ./ด.</small></div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div>
+          <h2 style="font-family:'Mitr','IBM Plex Sans Thai',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 9px">ยี่ห้อและราคาโดยประมาณ (รวมติดตั้งมาตรฐาน)</h2>
+          <div class="tiers">
+            <div class="tier">
+              <p class="t">รุ่นประหยัด</p>
+              <p class="p" id="p1">0<small>บาท</small></p>
+              <p class="b">Haier · TCL · Carrier Copper · Central Air</p>
+            </div>
+            <div class="tier mid">
+              <p class="t">รุ่นกลาง คุ้มสุด</p>
+              <p class="p" id="p2">0<small>บาท</small></p>
+              <p class="b">Daikin · LG · Panasonic · Samsung · Carrier X-Inverter</p>
+            </div>
+            <div class="tier">
+              <p class="t">รุ่นพรีเมียม</p>
+              <p class="p" id="p3">0<small>บาท</small></p>
+              <p class="b">Mitsubishi Electric · Mitsubishi Heavy · Hitachi · Daikin ตัวท็อป</p>
+            </div>
+          </div>
+          <p class="subnote">ราคาประมาณจากตลาดไทยปี 2026 สำหรับรุ่น inverter ราคาจริงขึ้นกับโปรโมชัน ร้าน และค่าเดินท่อเกินระยะมาตรฐาน</p>
+        </div>
+
+        <div class="card">
+          <h2>ความร้อนมาจากไหน</h2>
+          <div class="bar" id="barEl"></div>
+          <ul class="keys" id="keysEl"></ul>
+        </div>
+
+        <p class="warn" id="warn" hidden></p>
+
+        <p class="fine">ตัวเลขนี้เป็นการประมาณแบบ rule of thumb สำหรับที่พักอาศัยในไทย ไม่ใช่ cooling load calculation ตาม ASHRAE ค่าไฟคิดจาก BTU ÷ ค่าประสิทธิภาพ โดยเผื่อว่าคอมเพรสเซอร์ทำงานจริงราว 65% ของเวลาที่เปิด · เกณฑ์ BTU ต่อตารางเมตรอ้างอิง <a href="https://carrierthailand.com/carrier-article/how-to-calculate-btu/">Carrier Thailand</a> ราคาอ้างอิง <a href="https://thaiaircool.com/btu/12000-btu/">thaiaircool</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="nav">
+  <button type="button" class="tab on" data-go="1"><i>1</i><span class="txt">วาดแปลน</span></button>
+  <button type="button" class="tab" data-go="2"><i>2</i><span class="txt">ข้อมูลห้อง</span></button>
+  <button type="button" class="tab" data-go="3"><i>3</i><span class="txt">ผลลัพธ์</span></button>
+</nav>
+
+<script>
+/* lock the page: no pinch zoom, no double-tap zoom, no rubber-band scroll */
+(function(){
+  var m=document.querySelector('meta[name="viewport"]');
+  if(!m){ m=document.createElement('meta'); m.name='viewport'; document.head.appendChild(m); }
+  m.setAttribute('content','width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover');
+  ['gesturestart','gesturechange','gestureend'].forEach(function(t){
+    document.addEventListener(t,function(e){ e.preventDefault(); },{passive:false});
+  });
+  document.addEventListener('touchmove',function(e){
+    if(e.touches.length>1||(e.scale&&e.scale!==1)) e.preventDefault();
+  },{passive:false});
+  var lastTap=0,lx=0,ly=0;
+  document.addEventListener('touchend',function(e){
+    var t=e.changedTouches&&e.changedTouches[0], now=Date.now();
+    if(t){
+      if(now-lastTap<330&&Math.hypot(t.clientX-lx,t.clientY-ly)<30) e.preventDefault();
+      lx=t.clientX; ly=t.clientY;
+    }
+    lastTap=now;
+  },{passive:false});
+  document.addEventListener('wheel',function(e){ if(e.ctrlKey) e.preventDefault(); },{passive:false});
+})();
+
+(function(){
+var $=function(id){return document.getElementById(id);};
+var svg=$('plan'), NS='http://www.w3.org/2000/svg';
+var W=800,H=800;   /* กระดาษ 20 x 20 ม. ตรึงไว้ 1px = 0.025 ม. */
+var STD=[9000,12000,15000,18000,20000,24000,30000,36000,40000,48000];
+var MAXM=20;
+function machine(total,h,units){
+  if(total>150000) return {name:'ระบบ Chiller หรือ AHU',
+    note:'โหลดระดับนี้เกินเครื่องสำเร็จรูปทั่วไป เป็นงานระบบปรับอากาศเต็มรูปแบบ ต้องให้วิศวกรงานระบบออกแบบ'};
+  if(total>96000) return {name:'ระบบ VRF / VRV หรือ Package Unit',
+    note:'ใช้คอยล์ร้อนตัวเดียวจ่ายหลายจุดในอาคาร คุมอุณหภูมิแยกห้องได้ ต้องออกแบบท่อน้ำยาและตำแหน่งคอยล์ร้อนโดยวิศวกร'};
+  if(total>48000) return {name:'แบบฝังฝ้า 4 ทิศ (Cassette) หรือ ต่อท่อลม (Ducted)',
+    note:'พื้นที่ระดับนี้ต้องกระจายลมหลายทิศ ใช้ '+units+' เครื่อง หรือรวมเป็นชุดต่อท่อลมชุดเดียวก็ได้'};
+  if(h>3.5) return {name:'แบบแขวนใต้ฝ้า (Ceiling Suspended)',
+    note:'ฝ้าสูงกว่า 3.5 ม. เครื่องแบบติดผนังส่งลมลงไม่ถึงพื้นที่ใช้งาน แขวนใต้ฝ้าจะกระจายลมได้ไกลกว่า'};
+  if(total>36000) return {name:'แขวนใต้ฝ้า หรือ Cassette หรือแยกเป็น '+units+' เครื่อง',
+    note:'ห้องใหญ่เกินกว่าเครื่องติดผนังตัวเดียวจะเป่าถึงทั่ว แบ่งเครื่องหรือเปลี่ยนประเภทจะเย็นสม่ำเสมอกว่า'};
+  return {name:'ติดผนัง (Wall Type) แบบ Split',
+    note:'ขนาดนี้เป็นเครื่องติดผนังทั่วไป หาซื้อและหาช่างล้างง่ายที่สุด'};
+}
+var fmt=function(n){return Math.round(n).toLocaleString('en-US');};
+var round=function(n,to){return Math.round(n/to)*to;};
+
+var st={
+  pts:[{x:320,y:330},{x:480,y:330},{x:480,y:470},{x:320,y:470}],
+  closed:true, mode:'edit', mpp:MAXM/800, sel:-1, drag:-1, img:null, mouse:null,
+  eDrag:null, press:0,
+  view:{x:0,y:0,w:W,h:H}, gest:null, pan:null
+};
+var ptrs=new Map();
+
+/* ---------- zoom & pan ---------- */
+function applyView(){
+  var v=st.view;
+  svg.setAttribute('viewBox',v.x.toFixed(2)+' '+v.y.toFixed(2)+' '+v.w.toFixed(2)+' '+v.h.toFixed(2));
+  $('bFit').textContent=Math.round(W/v.w*100)+'%';
+}
+function clampView(){
+  var v=st.view;
+  v.w=Math.max(W/10,Math.min(W,v.w)); v.h=v.w*(H/W);
+  v.x=Math.max(-W*0.2,Math.min(W-v.w+W*0.2,v.x));
+  v.y=Math.max(-H*0.2,Math.min(H-v.h+H*0.2,v.y));
+}
+function pxPerUnit(rect,w,h){ return Math.min(rect.width/w,rect.height/h); }
+function zoomBy(f,cx,cy){
+  var rect=svg.getBoundingClientRect(), v=st.view;
+  if(cx==null){ cx=rect.left+rect.width/2; cy=rect.top+rect.height/2; }
+  var s0=pxPerUnit(rect,v.w,v.h);
+  var ax=v.x+((cx-rect.left)-(rect.width-v.w*s0)/2)/s0;
+  var ay=v.y+((cy-rect.top)-(rect.height-v.h*s0)/2)/s0;
+  var nw=Math.max(W/10,Math.min(W,v.w/f)), nh=nw*(H/W);
+  var s=pxPerUnit(rect,nw,nh);
+  v.w=nw; v.h=nh;
+  v.x=ax-((cx-rect.left)-(rect.width-nw*s)/2)/s;
+  v.y=ay-((cy-rect.top)-(rect.height-nh*s)/2)/s;
+  clampView(); applyView(); render();
+}
+$('bZin').addEventListener('click',function(){ zoomBy(1.4); });
+$('bZout').addEventListener('click',function(){ zoomBy(1/1.4); });
+$('bFit').addEventListener('click',function(){
+  st.view={x:0,y:0,w:W,h:H}; applyView(); render();
+});
+svg.addEventListener('wheel',function(e){
+  e.preventDefault();
+  zoomBy(e.deltaY<0?1.15:1/1.15,e.clientX,e.clientY);
+},{passive:false});
+
+$('bTut').addEventListener('click',function(){ $('tutWrap').hidden=false; });
+$('bTutClose').addEventListener('click',function(){ $('tutWrap').hidden=true; });
+$('tutWrap').addEventListener('click',function(e){ if(e.target===this) this.hidden=true; });
+
+/* ---------- steps ---------- */
+function go(n){
+  [1,2,3].forEach(function(i){ $('step'+i).classList.toggle('on',i===n); });
+  document.querySelectorAll('.nav .tab').forEach(function(b){
+    b.classList.toggle('on',+b.dataset.go===n);
+  });
+  if(n===1) requestAnimationFrame(render);
+}
+document.querySelectorAll('.nav .tab').forEach(function(b){
+  b.addEventListener('click',function(){ go(+b.dataset.go); });
+});
+
+/* ---------- geometry ---------- */
+function areaPx(){
+  var p=st.pts,a=0;
+  for(var i=0;i<p.length;i++){var j=(i+1)%p.length;a+=p[i].x*p[j].y-p[j].x*p[i].y;}
+  return Math.abs(a)/2;
+}
+function edgeLen(i){
+  var p=st.pts,j=(i+1)%p.length;
+  return Math.hypot(p[j].x-p[i].x,p[j].y-p[i].y)*st.mpp;
+}
+function toSvg(ev){
+  var pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;
+  var r=pt.matrixTransform(svg.getScreenCTM().inverse());
+  return {x:Math.max(10,Math.min(W-10,r.x)),y:Math.max(10,Math.min(H-10,r.y))};
+}
+/* lock a point to the horizontal or vertical axis of an anchor */
+function ortho(anchor,q){
+  return Math.abs(q.x-anchor.x)>=Math.abs(q.y-anchor.y)
+    ? {x:q.x,y:anchor.y} : {x:anchor.x,y:q.y};
+}
+var KV=function(){return st.view.w/W;};
+var SNAP=function(){return 12*KV();}, MERGE=function(){return 9*KV();};
+/* snap the free axis of a candidate point onto any existing corner nearby */
+function snapToPoints(q,last){
+  var freeX=Math.abs(q.y-last.y)<0.01;
+  for(var i=0;i<st.pts.length;i++){
+    var p=st.pts[i];
+    if(freeX){ if(Math.abs(q.x-p.x)<SNAP()){ q.x=p.x; break; } }
+    else     { if(Math.abs(q.y-p.y)<SNAP()){ q.y=p.y; break; } }
+  }
+  return q;
+}
+/* drop stub edges and redundant in-line corners */
+function cleanup(){
+  var p=st.pts,i;
+  for(i=p.length-1;i>0;i--){
+    if(p.length<=4) break;
+    if(Math.hypot(p[i].x-p[i-1].x,p[i].y-p[i-1].y)<MERGE()) p.splice(i,1);
+  }
+  if(p.length>4&&Math.hypot(p[0].x-p[p.length-1].x,p[0].y-p[p.length-1].y)<MERGE()) p.pop();
+  for(i=p.length-1;i>=0;i--){
+    if(p.length<=4) break;
+    var a=p[(i-1+p.length)%p.length], b=p[i], c=p[(i+1)%p.length];
+    if((Math.abs(a.x-b.x)<1.5&&Math.abs(b.x-c.x)<1.5)||(Math.abs(a.y-b.y)<1.5&&Math.abs(b.y-c.y)<1.5)) p.splice(i,1);
+  }
+}
+function bboxPx(){
+  var xs=st.pts.map(function(p){return p.x;}), ys=st.pts.map(function(p){return p.y;});
+  return {w:Math.max.apply(null,xs)-Math.min.apply(null,xs),
+          h:Math.max.apply(null,ys)-Math.min.apply(null,ys)};
+}
+/* keep the room inside the 20 x 20 m limit while a corner or wall moves */
+function clampWithin(q,moving){
+  var L=MAXM/st.mpp, xs=[], ys=[];
+  st.pts.forEach(function(p,i){ if(moving.indexOf(i)<0){ xs.push(p.x); ys.push(p.y); } });
+  if(xs.length){
+    q.x=Math.max(Math.max.apply(null,xs)-L,Math.min(Math.min.apply(null,xs)+L,q.x));
+    q.y=Math.max(Math.max.apply(null,ys)-L,Math.min(Math.min.apply(null,ys)+L,q.y));
+  }
+  return q;
+}
+/* keep every edge axis-aligned after a corner moves */
+function keepOrtho(i){
+  var p=st.pts,n=p.length;
+  var pv=p[(i-1+n)%n], nx=p[(i+1)%n], me=p[i];
+  if(Math.abs(pv.x-me.x)<=Math.abs(pv.y-me.y)) pv.x=me.x; else pv.y=me.y;
+  if(Math.abs(nx.x-me.x)<=Math.abs(nx.y-me.y)) nx.x=me.x; else nx.y=me.y;
+}
+
+/* ---------- render ---------- */
+function el(n,at){var e=document.createElementNS(NS,n);for(var k in at)e.setAttribute(k,at[k]);return e;}
+
+function render(){
+  svg.textContent='';
+  svg.classList.toggle('editing',st.mode==='edit');
+  var k=st.view.w/W;
+
+  if(st.img) svg.appendChild(el('image',{href:st.img.src,x:st.img.x,y:st.img.y,
+    width:st.img.w,height:st.img.h,opacity:'0.5',preserveAspectRatio:'none'}));
+
+  var g=el('g',{}), step=0.5/st.mpp;
+  if(step/k>=12&&step<=600){
+    for(var gx=0;gx<W;gx+=step) g.appendChild(el('line',{x1:gx,y1:0,x2:gx,y2:H,stroke:'var(--line)','stroke-width':k}));
+    for(var gy=0;gy<H;gy+=step) g.appendChild(el('line',{x1:0,y1:gy,x2:W,y2:gy,stroke:'var(--line)','stroke-width':k}));
+  }
+  svg.appendChild(g);
+
+  var p=st.pts;
+  if(p.length>1){
+    var d='M'+p.map(function(q){return q.x+','+q.y;}).join('L')+(st.closed?'Z':'');
+    svg.appendChild(el('path',{d:d,fill:st.closed?'var(--orange-soft)':'none',
+      stroke:'var(--orange)','stroke-width':2.5*k,'stroke-linejoin':'miter','fill-opacity':st.closed?'.8':'0'}));
+  }
+  if(!st.closed&&p.length&&st.mouse){
+    var last=p[p.length-1], m=snapToPoints(ortho(last,st.mouse),last);
+    var willClose=p.length>2&&Math.hypot(st.mouse.x-p[0].x,st.mouse.y-p[0].y)<34*k;
+    if(willClose) m=p[0];
+    svg.appendChild(el('line',{x1:last.x,y1:last.y,x2:m.x,y2:m.y,
+      stroke:'var(--orange)','stroke-width':1.5*k,'stroke-dasharray':(6*k)+' '+(5*k),opacity:'.75'}));
+    if(willClose){
+      svg.appendChild(el('line',{x1:p[0].x,y1:p[0].y,x2:last.x,y2:last.y,
+        stroke:'var(--orange)','stroke-width':1.5*k,'stroke-dasharray':(2*k)+' '+(6*k),opacity:'.5'}));
+      svg.appendChild(el('circle',{cx:p[0].x,cy:p[0].y,r:17*k,fill:'none',
+        stroke:'var(--orange)','stroke-width':2.5*k}));
+    }
+  }
+
+  if(st.closed&&p.length>2){
+    for(var i=0;i<p.length;i++){
+      var j=(i+1)%p.length, mx=(p[i].x+p[j].x)/2, my=(p[i].y+p[j].y)/2;
+      var hz=Math.abs(p[j].y-p[i].y)<Math.abs(p[j].x-p[i].x);
+      svg.appendChild(el('line',{x1:p[i].x,y1:p[i].y,x2:p[j].x,y2:p[j].y,
+        stroke:'transparent','stroke-width':22*k,'data-edge':i,
+        style:'cursor:'+(hz?'ns-resize':'ew-resize')}));
+      if(i===st.sel) svg.appendChild(el('line',{x1:p[i].x,y1:p[i].y,x2:p[j].x,y2:p[j].y,
+        stroke:'var(--ink)','stroke-width':4*k,'stroke-linecap':'round'}));
+      var horiz=Math.abs(p[j].y-p[i].y)<Math.abs(p[j].x-p[i].x);
+      var t=el('text',{x:mx,y:my+(horiz?-9*k:0),'text-anchor':'middle','data-edge':i,
+        'dominant-baseline':horiz?'auto':'middle',
+        style:'cursor:pointer;font-family:\"IBM Plex Mono\",monospace;font-size:'+(14*k)+'px;font-weight:600;'+
+              'paint-order:stroke;stroke:var(--plan);stroke-width:'+(5*k)+'px;'+
+              'fill:'+(i===st.sel?'var(--ink)':'var(--orange)')});
+      t.textContent=edgeLen(i).toFixed(2)+' ม.';
+      svg.appendChild(t);
+    }
+  }
+
+  for(var k2=0;k2<p.length;k2++){
+    svg.appendChild(el('rect',{x:p[k2].x-8*k,y:p[k2].y-8*k,width:16*k,height:16*k,rx:3*k,
+      fill:'var(--ground)',stroke:'var(--orange)','stroke-width':2.5*k,'data-pt':k2,style:'cursor:grab'}));
+  }
+
+  if(st.closed&&p.length>2){
+    var c=p.reduce(function(a,q){return{x:a.x+q.x/p.length,y:a.y+q.y/p.length};},{x:0,y:0});
+    var lab=el('text',{x:c.x,y:c.y,'text-anchor':'middle','dominant-baseline':'middle',
+      style:'font-family:\"Mitr\",sans-serif;font-size:'+(24*k)+'px;font-weight:600;fill:var(--orange);opacity:.5;pointer-events:none'});
+    lab.textContent=(areaPx()*st.mpp*st.mpp).toFixed(2)+' ตร.ม.';
+    svg.appendChild(lab);
+  }
+}
+
+/* ---------- interaction ---------- */
+function twoPts(){ var a=[]; ptrs.forEach(function(v){a.push(v);}); return a; }
+function gestStart(){
+  var a=twoPts(), v=st.view;
+  st.gest={d0:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)||1,
+           mx:(a[0].x+a[1].x)/2, my:(a[0].y+a[1].y)/2,
+           v0:{x:v.x,y:v.y,w:v.w,h:v.h}, rect:svg.getBoundingClientRect()};
+  clearTimeout(st.press); st.eDrag=null; st.drag=-1; st.pan=null;
+}
+function gestMove(){
+  var a=twoPts(), g=st.gest; if(!g||a.length<2) return;
+  var d1=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)||1;
+  var m1x=(a[0].x+a[1].x)/2, m1y=(a[0].y+a[1].y)/2;
+  var nw=Math.max(W/10,Math.min(W,g.v0.w/(d1/g.d0))), nh=nw*(H/W);
+  var s0=pxPerUnit(g.rect,g.v0.w,g.v0.h), s=pxPerUnit(g.rect,nw,nh);
+  var ax=g.v0.x+((g.mx-g.rect.left)-(g.rect.width-g.v0.w*s0)/2)/s0;
+  var ay=g.v0.y+((g.my-g.rect.top)-(g.rect.height-g.v0.h*s0)/2)/s0;
+  st.view.w=nw; st.view.h=nh;
+  st.view.x=ax-((m1x-g.rect.left)-(g.rect.width-nw*s)/2)/s;
+  st.view.y=ay-((m1y-g.rect.top)-(g.rect.height-nh*s)/2)/s;
+  clampView(); applyView(); render();
+}
+
+svg.addEventListener('pointerdown',function(ev){
+  ptrs.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
+  if(ptrs.size===2){ gestStart(); ev.preventDefault(); return; }
+  if(ptrs.size>2) return;
+  var t=ev.target, pi=t.getAttribute&&t.getAttribute('data-pt');
+  if(st.mode==='edit'&&pi!=null){ st.drag=+pi; svg.setPointerCapture(ev.pointerId); ev.preventDefault(); return; }
+  var ei=t.getAttribute&&t.getAttribute('data-edge');
+  if(st.mode==='edit'&&ei!=null){
+    var i=+ei, j=(i+1)%st.pts.length, q0=toSvg(ev);
+    st.eDrag={i:i,j:j,start:q0,moved:false,
+              ay:st.pts[i].y,by:st.pts[j].y,ax:st.pts[i].x,bx:st.pts[j].x,
+              horiz:Math.abs(st.pts[j].y-st.pts[i].y)<Math.abs(st.pts[j].x-st.pts[i].x)};
+    st.press=setTimeout(function(){
+      if(st.eDrag&&!st.eDrag.moved){ var k=st.eDrag.i; st.eDrag=null; selectEdge(k); }
+    },420);
+    svg.setPointerCapture(ev.pointerId); ev.preventDefault();
+    st.sel=i; render();
+    return;
+  }
+  if(st.mode==='draw'){
+    var q=toSvg(ev);
+    if(st.pts.length){
+      var last=st.pts[st.pts.length-1], f=st.pts[0];
+      if(st.pts.length>2&&Math.hypot(q.x-f.x,q.y-f.y)<34*KV()){ closeShape(); return; }
+      q=clampWithin(snapToPoints(ortho(last,q),last),[]);
+      if(st.pts.length>2&&Math.hypot(q.x-f.x,q.y-f.y)<MERGE()){ closeShape(); return; }
+    }
+    st.pts.push(q); render(); update();
+    $('bDone').hidden=st.pts.length<3;
+  }else if(st.mode==='edit'){
+    var v=st.view;
+    st.pan={sx:ev.clientX,sy:ev.clientY,v0:{x:v.x,y:v.y,w:v.w,h:v.h},rect:svg.getBoundingClientRect()};
+    try{svg.setPointerCapture(ev.pointerId);}catch(e){}
+  }
+});
+svg.addEventListener('pointermove',function(ev){
+  if(ptrs.has(ev.pointerId)) ptrs.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
+  if(ptrs.size>=2){ if(st.gest) gestMove(); return; }
+  if(st.pan){
+    var g=st.pan, s=pxPerUnit(g.rect,g.v0.w,g.v0.h);
+    st.view.x=g.v0.x-(ev.clientX-g.sx)/s;
+    st.view.y=g.v0.y-(ev.clientY-g.sy)/s;
+    clampView(); applyView();
+    return;
+  }
+  if(st.drag>=0){
+    var q=toSvg(ev), n=st.pts.length, pv=(st.drag-1+n)%n, nx=(st.drag+1)%n;
+    for(var i=0;i<n;i++){
+      if(i===st.drag||i===pv||i===nx) continue;
+      if(Math.abs(q.x-st.pts[i].x)<SNAP()) q.x=st.pts[i].x;
+      if(Math.abs(q.y-st.pts[i].y)<SNAP()) q.y=st.pts[i].y;
+    }
+    st.pts[st.drag]=clampWithin(q,[st.drag]); keepOrtho(st.drag); render(); update();
+  }else if(st.eDrag){
+    var e=st.eDrag, c=toSvg(ev);
+    var dx=c.x-e.start.x, dy=c.y-e.start.y;
+    if(!e.moved&&Math.hypot(dx,dy)>7*KV()){ e.moved=true; clearTimeout(st.press); $('scalePop').hidden=true; }
+    if(e.moved){
+      if(e.horiz){
+        var ny=clampWithin({x:st.pts[e.i].x,y:Math.max(10,Math.min(H-10,e.ay+dy))},[e.i,e.j]).y;
+        st.pts[e.i].y=ny; st.pts[e.j].y=ny;
+      }else{
+        var nxx=clampWithin({x:Math.max(10,Math.min(W-10,e.ax+dx)),y:st.pts[e.i].y},[e.i,e.j]).x;
+        st.pts[e.i].x=nxx; st.pts[e.j].x=nxx;
+      }
+      render(); update();
+    }
+  }else if(st.mode==='draw'&&st.pts.length){
+    st.mouse=toSvg(ev); render();
+  }
+});
+svg.addEventListener('pointercancel',function(ev){
+  ptrs.delete(ev.pointerId); if(ptrs.size<2) st.gest=null;
+  clearTimeout(st.press); st.eDrag=null; st.drag=-1; st.pan=null;
+});
+svg.addEventListener('pointerup',function(ev){
+  ptrs.delete(ev.pointerId);
+  if(ptrs.size<2) st.gest=null;
+  if(st.pan){ st.pan=null; try{svg.releasePointerCapture(ev.pointerId);}catch(e){} }
+  if(st.drag>=0){
+    st.drag=-1; try{svg.releasePointerCapture(ev.pointerId);}catch(e){}
+    cleanup(); st.sel=-1; $('scalePop').hidden=true; render(); update();
+  }
+  if(st.eDrag){
+    var moved=st.eDrag.moved;
+    clearTimeout(st.press); st.eDrag=null;
+    try{svg.releasePointerCapture(ev.pointerId);}catch(e){}
+    if(moved){ cleanup(); st.sel=-1; render(); update(); }
+    else if($('scalePop').hidden){ st.sel=-1; render(); }
+  }
+});
+
+function selectEdge(i){
+  st.sel=i;
+  $('scalePop').hidden=false;
+  $('scaleMsg').textContent='เส้นนี้ยาว '+edgeLen(i).toFixed(2)+' ม. ระยะจริงคือ';
+  $('realLen').value=edgeLen(i).toFixed(2);
+  $('realLen').focus(); $('realLen').select();
+  render();
+}
+function applyScale(){
+  if(st.sel<0) return;
+  var real=+$('realLen').value, cur=edgeLen(st.sel);
+  if(!(real>0)||cur<=0) return;
+  var f=real/cur;
+  var xs=st.pts.map(function(p){return p.x;}), ys=st.pts.map(function(p){return p.y;});
+  var minx=Math.min.apply(null,xs), maxx=Math.max.apply(null,xs);
+  var miny=Math.min.apply(null,ys), maxy=Math.max.apply(null,ys);
+  var cx=(minx+maxx)/2, cy=(miny+maxy)/2;
+  var fmax=Math.min((W-20)/Math.max(maxx-minx,1),(H-20)/Math.max(maxy-miny,1));
+  var hit=false;
+  if(f>fmax){ f=fmax; hit=true; }
+  if(f<0.02) f=0.02;
+  st.pts.forEach(function(p){ p.x=cx+(p.x-cx)*f; p.y=cy+(p.y-cy)*f; });
+  /* keep the room on the sheet */
+  xs=st.pts.map(function(p){return p.x;}); ys=st.pts.map(function(p){return p.y;});
+  var dx=0, dy=0;
+  if(Math.min.apply(null,xs)<10) dx=10-Math.min.apply(null,xs);
+  if(Math.max.apply(null,xs)+dx>W-10) dx=W-10-Math.max.apply(null,xs);
+  if(Math.min.apply(null,ys)<10) dy=10-Math.min.apply(null,ys);
+  if(Math.max.apply(null,ys)+dy>H-10) dy=H-10-Math.max.apply(null,ys);
+  if(dx||dy) st.pts.forEach(function(p){ p.x+=dx; p.y+=dy; });
+  $('msg').innerHTML = hit
+    ? '<b>ชนขอบ 20 × 20 ม.</b> เครื่องมือนี้รองรับห้องไม่เกินขนาดนี้ ระยะถูกย่อลงมาที่ขอบเขตแล้ว'
+    : '<b>ตั้งระยะแล้ว</b> เส้นที่เหลือปรับตามให้เรียบร้อย กดขั้นที่ 2 ต่อได้เลย';
+  $('scalePop').hidden=true; st.sel=-1;
+  render(); update();
+}
+$('bScale').addEventListener('click',applyScale);
+$('realLen').addEventListener('keydown',function(e){ if(e.key==='Enter'){e.preventDefault();applyScale();} });
+
+function closeShape(){
+  if(st.pts.length<3) return;
+  var last=st.pts[st.pts.length-1], first=st.pts[0];
+  if(Math.abs(last.x-first.x)>1.5&&Math.abs(last.y-first.y)>1.5){
+    var prev=st.pts[st.pts.length-2];
+    var lastHoriz=Math.abs(last.y-prev.y)<Math.abs(last.x-prev.x);
+    st.pts.push(lastHoriz?{x:last.x,y:first.y}:{x:first.x,y:last.y});
+  }else{
+    if(Math.abs(last.x-first.x)<=1.5) last.x=first.x; else last.y=first.y;
+  }
+  cleanup();
+  st.closed=true; st.mode='edit'; st.mouse=null;
+  $('bDraw').classList.remove('on'); $('bDone').hidden=true;
+  $('msg').innerHTML='<b>ปิดรูปแล้ว</b> คลิกที่เส้นที่รู้ระยะจริง แล้วใส่ระยะเพื่อตั้งสเกลทั้งแปลน';
+  render(); update();
+}
+$('bDone').addEventListener('click',closeShape);
+
+$('bDraw').addEventListener('click',function(){
+  st.pts=[]; st.closed=false; st.mode='draw'; st.sel=-1; st.mouse=null;
+  this.classList.add('on'); $('bDone').hidden=true; $('scalePop').hidden=true;
+  $('msg').innerHTML='<b>คลิกทีละมุม</b> เส้นล็อกเป็นแนวนอนหรือแนวตั้งเท่านั้น คลิกจุดแรกอีกครั้งเพื่อปิดรูป';
+  render(); update();
+});
+$('bRect').addEventListener('click',function(){
+  st.pts=[{x:320,y:330},{x:480,y:330},{x:480,y:470},{x:320,y:470}];
+  st.closed=true; st.mode='edit'; st.sel=-1;
+  $('bDraw').classList.remove('on'); $('bDone').hidden=true; $('scalePop').hidden=true;
+  render(); update();
+});
+
+$('img').addEventListener('change',function(e){
+  var f=e.target.files&&e.target.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    var im=new Image();
+    im.onload=function(){
+      var s=Math.min(W/im.width,H/im.height), w=im.width*s, h=im.height*s;
+      st.img={src:r.result,w:w,h:h,x:(W-w)/2,y:(H-h)/2};
+      $('bClearImg').hidden=false;
+      st.pts=[]; st.closed=false; st.mode='draw'; st.sel=-1; st.mouse=null;
+      $('bDraw').classList.add('on'); $('scalePop').hidden=true;
+      $('msg').innerHTML='<b>ลากทับรูป</b> คลิกตามมุมห้อง เส้นล็อกมุมฉากให้ ปิดรูปแล้วคลิกผนังที่รู้ระยะจริงเพื่อตั้งสเกล';
+      render(); update();
+    };
+    im.src=r.result;
+  };
+  r.readAsDataURL(f); e.target.value='';
+});
+$('bClearImg').addEventListener('click',function(){ st.img=null; this.hidden=true; render(); });
+
+/* ---------- calculation ---------- */
+function update(){
+  var area=areaPx()*st.mpp*st.mpp, h=+$('fc').value||2.5;
+  var bb=bboxPx();
+  $('hud').textContent=area.toFixed(2)+' ตร.ม. · กว้าง '+(bb.w*st.mpp).toFixed(2)+
+    ' × ลึก '+(bb.h*st.mpp).toFixed(2)+' ม. · กระดาษ 20 × 20 ม.';
+  $('nowLine').textContent=area.toFixed(2)+' ตร.ม. · F-C '+h.toFixed(2)+' ม.';
+
+  if(!st.closed||st.pts.length<3||area<=0){
+    $('pick').innerHTML='&mdash;<em>BTU</em>';
+    $('need').textContent='ปิดรูปห้องในขั้นที่ 1 ก่อน';
+    return;
+  }
+
+  var base=+document.querySelector('input[name="use"]:checked').value;
+  var sun=+document.querySelector('input[name="sun"]:checked').value;
+  var hFac=Math.min(1.3,Math.max(0.9,h/2.5));
+  var env=area*base*hFac;
+  if($('roof').checked) env*=1.12;
+  if($('insul').checked) env*=0.93;
+  var solar=env*(sun-1);
+  if($('glass').checked) solar+=env*0.08;
+  var people=Math.max(0,(+$('ppl').value||0)-2)*600;
+  var gear=($('pc').checked?600:0)+($('cook').checked?1200:0);
+  var total=env+solar+people+gear;
+
+  /* how many units, and which type of machine */
+  var units=1, per;
+  if(total<=48000){ per=STD.filter(function(s){return s>=total;})[0]||48000; }
+  else{
+    units=Math.ceil(total/36000);
+    per=STD.filter(function(s){return s>=total/units;})[0]||48000;
+  }
+  var pick=per*units;
+  var kind=machine(total,h,units);
+
+  $('pick').innerHTML=(units>1?units+' × ':'')+fmt(per)+'<em>BTU</em>';
+  $('need').textContent='ห้องต้องการจริง '+fmt(round(total,100))+' BTU/hr\n'+
+    (total/12000).toFixed(1)+' ตัน · '+fmt(total/area)+' BTU ต่อ ตร.ม.';
+  $('kindName').textContent=kind.name;
+  $('kindNote').textContent=kind.note;
+  $('sArea').innerHTML=area.toFixed(2)+'<small>ตร.ม.</small>';
+  $('sVol').innerHTML=(area*h).toFixed(1)+'<small>ลบ.ม.</small>';
+
+  var eer=+$('type').value, hrs=+$('hrs').value||0, rate=+$('rate').value||0;
+  var watts=pick/eer, kwhDay=watts/1000*hrs*0.65;
+  $('sW').innerHTML=fmt(watts)+'<small>W</small>';
+  $('sCost').innerHTML=fmt(kwhDay*30*rate)+'<small>บ./ด.</small>';
+
+  $('p1').innerHTML=fmt(round(units*(1000+1.083*per),500))+'<small>บาท</small>';
+  $('p2').innerHTML=fmt(round(units*(2000+1.25*per),500))+'<small>บาท</small>';
+  $('p3').innerHTML=fmt(round(units*(2000+1.667*per),500))+'<small>บาท</small>';
+
+  var parts=[
+    {k:'พื้นที่และผนังห้อง',v:env,c:'var(--orange)'},
+    {k:'แดดและกระจก',v:solar,c:'var(--h-sun)'},
+    {k:'คนในห้อง',v:people,c:'var(--h-ppl)'},
+    {k:'เครื่องใช้ไฟฟ้า',v:gear,c:'var(--h-gear)'}
+  ].filter(function(p){return p.v>0;});
+  $('barEl').innerHTML=parts.map(function(p){return '<i style="width:'+(p.v/total*100)+'%;background:'+p.c+'"></i>';}).join('');
+  $('keysEl').innerHTML=parts.map(function(p){
+    return '<li><span class="dot" style="background:'+p.c+'"></span>'+p.k+'<span class="n">'+fmt(p.v)+'</span></li>';
+  }).join('');
+
+  var warn='';
+  if(total>48000) warn='โหลดระดับนี้ไม่ใช่งานเลือกแอร์สำเร็จรูปแล้ว ราคาที่แสดงเป็นเพียงกรอบงบเบื้องต้น ควรให้วิศวกรงานระบบคำนวณและออกแบบตำแหน่งจ่ายลม';
+  else if(area<8) warn='ห้องเล็กมาก แอร์ 9,000 BTU เป็นขนาดเล็กสุดที่หาซื้อได้ทั่วไป อาจใหญ่เกินจนห้องชื้น';
+  $('warn').textContent=warn; $('warn').hidden=!warn;
+}
+
+['fc','ppl','type','hrs','rate','roof','insul','glass','pc','cook'].forEach(function(id){
+  $(id).addEventListener('input',update); $(id).addEventListener('change',update);
+});
+document.querySelectorAll('input[name="use"],input[name="sun"]').forEach(function(r){
+  r.addEventListener('change',update);
+});
+window.addEventListener('resize',render);
+
+render(); update();
+})();
+</script>
+
+</body></html>

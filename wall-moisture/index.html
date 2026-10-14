@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>เช็กความชื้นในผนัง</title>
+<meta name="description" content="เทียบผนัง 2 แบบ ดูอุณหภูมิ ความชื้นสัมพัทธ์ และแรงดันไอน้ำในแต่ละชั้นผนัง ด้วยวิธี Glaser สำหรับคัดกรองความเสี่ยงหยดน้ำและเชื้อรา">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#fbfaf7;--surface:#f1efe8;--surface2:#ffffff;--text:#1d1d1b;--text2:#5b5a55;--border:rgba(0,0,0,0.16);--border-strong:rgba(0,0,0,0.32);
+--accent:#2a78d6;--accent-bg:#e6f1fb;--accent-text:#0c447c;--ok-bg:#eaf3de;--ok-text:#27500a;--warn-bg:#faeeda;--warn-text:#633806;--bad-bg:#fcebeb;--bad-text:#791f1f;--grid:rgba(0,0,0,0.09)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#171716;--surface:#232321;--surface2:#1d1d1b;--text:#f0efec;--text2:#b8b7ae;--border:rgba(255,255,255,0.16);--border-strong:rgba(255,255,255,0.34);--accent:#3987e5;--accent-bg:#0c447c;--accent-text:#b5d4f4;--ok-bg:#27500a;--ok-text:#c0dd97;--warn-bg:#633806;--warn-text:#fac775;--bad-bg:#791f1f;--bad-text:#f7c1c1;--grid:rgba(255,255,255,0.1)}}
+:root[data-theme="dark"]{--bg:#171716;--surface:#232321;--surface2:#1d1d1b;--text:#f0efec;--text2:#b8b7ae;--border:rgba(255,255,255,0.16);--border-strong:rgba(255,255,255,0.34);--accent:#3987e5;--accent-bg:#0c447c;--accent-text:#b5d4f4;--ok-bg:#27500a;--ok-text:#c0dd97;--warn-bg:#633806;--warn-text:#fac775;--bad-bg:#791f1f;--bad-text:#f7c1c1;--grid:rgba(255,255,255,0.1)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 "Mitr","Noto Sans Thai",system-ui,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:22px;font-weight:500;margin:0 0 4px;text-wrap:balance}
+.sub{font-size:14px;color:var(--text2);margin:0 0 18px;text-wrap:pretty}
+.row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.lbl{font-size:12.5px;color:var(--text2)}
+select,input,button{font:inherit;font-size:14px;color:var(--text);background:var(--surface2);border:0.5px solid var(--border-strong);border-radius:8px;height:36px;padding:0 10px}
+input{min-width:0;font-variant-numeric:tabular-nums}
+button{cursor:pointer;background:transparent}
+button:hover{background:var(--surface)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.card{background:var(--surface);border-radius:8px;padding:10px 12px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.badge{display:inline-block;font-size:12px;padding:2px 8px;border-radius:8px;margin-top:4px}
+.ok{background:var(--ok-bg);color:var(--ok-text)}
+.warn{background:var(--warn-bg);color:var(--warn-text)}
+.bad{background:var(--bad-bg);color:var(--bad-text)}
+.seg button{flex:1;font-size:13px;padding:0 6px}
+.seg button.on{border-color:var(--accent);background:var(--accent-bg);color:var(--accent-text)}
+.sw{display:inline-block;width:18px;height:0;border-top:2px solid;vertical-align:middle;margin-right:4px}
+.strip{display:flex;height:30px;border:0.5px solid var(--border-strong);border-radius:4px;overflow:hidden}
+.strip div{min-width:3px;border-right:0.5px solid rgba(0,0,0,0.25)}
+.strip div:last-child{border-right:0}
+.chip{display:inline-block;width:11px;height:11px;border-radius:2px;border:0.5px solid rgba(0,0,0,0.3);vertical-align:-1px;margin-right:4px}
+.grip{width:26px;height:34px;flex:none;border-radius:4px;border:0.5px solid rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;color:rgba(0,0,0,0.6);font-size:14px;line-height:1}
+.row.drag{background:var(--surface);outline:1.5px solid var(--accent);border-radius:8px}
+.note{font-size:12.5px;color:var(--text2);margin-top:20px;text-wrap:pretty}
+.x{width:36px;padding:0;font-size:18px;line-height:1}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<main>
+  <h1>เช็กความชื้นในผนัง</h1>
+  <p class="sub">เทียบผนัง 2 แบบ ดูว่าจุดไหนในผนังเสี่ยงเกิดหยดน้ำหรือเชื้อรา คำนวณด้วยวิธี Glaser แบบสภาวะคงที่ ใช้คัดกรองเบื้องต้นเท่านั้น</p>
+
+  <div class="row"><span class="lbl" style="min-width:56px">สภาพอากาศ</span>
+    <select id="clim" style="flex:1"></select></div>
+  <div class="grid2" style="margin-bottom:10px">
+    <div class="row" style="margin:0"><span class="lbl" style="min-width:70px">นอก °C</span><input type="number" id="To" step="1" style="width:100%"></div>
+    <div class="row" style="margin:0"><span class="lbl" style="min-width:70px">นอก RH %</span><input type="number" id="Ho" step="1" style="width:100%"></div>
+    <div class="row" style="margin:0"><span class="lbl" style="min-width:70px">ใน °C</span><input type="number" id="Ti" step="1" style="width:100%"></div>
+    <div class="row" style="margin:0"><span class="lbl" style="min-width:70px">ใน RH %</span><input type="number" id="Hi" step="1" style="width:100%"></div>
+  </div>
+
+  <div style="margin-bottom:12px">
+    <div class="row" style="margin-bottom:3px"><span class="lbl" style="min-width:52px">ผนัง A</span><span class="lbl" style="margin-left:auto">ภายนอก → ภายใน</span></div>
+    <div class="strip" id="stA"></div>
+    <div class="row" style="margin:8px 0 3px"><span class="lbl" style="min-width:52px">ผนัง B</span></div>
+    <div class="strip" id="stB"></div>
+    <div id="mleg" style="display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--text2);margin-top:8px"></div>
+  </div>
+
+  <div class="grid2" id="cards" style="margin-bottom:12px"></div>
+
+  <div class="row seg" id="seg">
+    <button data-m="rh" class="on">ความชื้น RH</button>
+    <button data-m="t">อุณหภูมิ</button>
+    <button data-m="p">แรงดันไอน้ำ</button>
+  </div>
+  <div class="row seg" id="shseg">
+    <span class="lbl" style="min-width:86px">แสดงชั้นของ</span>
+    <button data-s="A" class="on">ผนัง A</button>
+    <button data-s="B">ผนัง B</button>
+  </div>
+  <div id="leg" style="display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--text2);margin:6px 0"></div>
+  <div style="position:relative;width:100%;height:280px">
+    <canvas id="ch" role="img" aria-label="กราฟเส้นเทียบค่าในผนัง A และผนัง B จากภายนอกเข้าภายใน มีแถบสีแสดงชั้นวัสดุเป็นพื้นหลัง">กราฟค่าผ่านผนัง A และ B</canvas>
+  </div>
+
+  <div style="margin-top:20px">
+    <div class="lbl" style="margin-bottom:4px">ผนัง A จากภายนอกเข้าภายใน · กดค้างที่แถบสีแล้วลากเพื่อสลับลำดับชั้น</div>
+    <div id="edA"></div>
+    <div class="lbl" style="margin:12px 0 4px">ผนัง B จากภายนอกเข้าภายใน</div>
+    <div id="edB"></div>
+  </div>
+
+  <p class="note">ไม่ใช่ WUFI ไม่ได้คิดการเคลื่อนที่ของน้ำในรูปของเหลว ฝนสาด ความร้อนจากแดด การสะสมความชื้นในวัสดุ หรือข้อมูลอากาศรายชั่วโมง ค่าวัสดุเป็นค่าทั่วไป ควรแทนด้วยข้อมูลจากผู้ผลิต · RH ที่รอยต่อตั้งแต่ 100% หมายถึงเกิดหยดน้ำ (ควบแน่น) ตั้งแต่ 80% หมายถึงเสี่ยงเชื้อรา</p>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const M={render:['ปูนฉาบภายนอก',0.8,25,'#b4b2a9'],brick:['อิฐมอญ',0.6,10,'#d9825b'],conc:['คอนกรีต',1.65,80,'#7d7c76'],aac:['อิฐมวลเบา (AAC)',0.16,8,'#8fd3b8'],eps:['โฟม EPS',0.035,40,'#7fb3e8'],wool:['ฉนวนใยหิน',0.04,1.2,'#efc358'],plast:['ปูนฉาบยิปซัม',0.4,8,'#e4e0d4'],board:['แผ่นยิปซัมบอร์ด',0.25,8,'#c3b9f0'],cav:['ช่องว่างอากาศ',0.14,1,'#f6f5f0'],pe:['แผ่นกันไอน้ำ PE',0.35,100000,'#d4537e'],osb:['แผ่นไม้ OSB',0.13,50,'#c8a26b']};
+const C={bkk:['กรุงเทพฯ · ห้องแอร์',32,75,24,55],bkkr:['กรุงเทพฯ หน้าฝน · แอร์ 22 °C',30,90,22,55],bcnw:['บาร์เซโลนา · ฤดูหนาว',6,75,20,55],bcns:['บาร์เซโลนา · ฤดูร้อน',28,65,24,50]};
+const S={A:[{m:'render',d:15},{m:'eps',d:60},{m:'brick',d:200},{m:'plast',d:15}],B:[{m:'render',d:15},{m:'brick',d:200},{m:'eps',d:60},{m:'board',d:12.5}]};
+const col={A:'#2a78d6',B:'#eb6834'};
+let mode='rh',shade='A';
+const $=id=>document.getElementById(id);
+const clim=$('clim');
+Object.keys(C).forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=C[k][0];clim.appendChild(o)});
+function setClim(k){const c=C[k];$('To').value=c[1];$('Ho').value=c[2];$('Ti').value=c[3];$('Hi').value=c[4]}
+setClim('bkk');
+clim.addEventListener('change',()=>{setClim(clim.value);run()});
+['To','Ho','Ti','Hi'].forEach(id=>$(id).addEventListener('input',run));
+
+function ps(T){return T>=0?610.5*Math.exp(17.269*T/(237.3+T)):610.5*Math.exp(21.875*T/(265.5+T))}
+
+function calc(layers){
+  const To=+$('To').value,Ti=+$('Ti').value,Ho=+$('Ho').value,Hi=+$('Hi').value;
+  const L=layers.map(l=>({n:M[l.m][0],d:Math.max(+l.d||0.01,0.01),lam:M[l.m][1],mu:M[l.m][2]}));
+  let Rt=0.04+0.13;L.forEach(l=>{l.R=l.d/1000/l.lam;Rt+=l.R});
+  const q=(Ti-To)/Rt;
+  let T=To+q*0.04,x=0,sd=0;
+  const sdT=L.reduce((a,l)=>a+l.mu*l.d/1000,0);
+  const pvo=Ho/100*ps(To),pvi=Hi/100*ps(Ti);
+  const pts=[{x:0,T:T,sd:0,lab:'ผิวนอก'}];
+  L.forEach((l,i)=>{T+=q*l.R;x+=l.d;sd+=l.mu*l.d/1000;pts.push({x:x,T:T,sd:sd,lab:i==L.length-1?'ผิวใน':l.n+' | '+L[i+1].n})});
+  pts.forEach(p=>{p.pv=pvo+(pvi-pvo)*p.sd/sdT;p.ps=ps(p.T);p.rh=p.pv/p.ps*100});
+  let mx=pts[0];pts.forEach(p=>{if(p.rh>mx.rh)mx=p});
+  return {U:1/Rt,pts:pts,mx:mx,sdT:sdT};
+}
+
+function card(k,r){
+  const rh=r.mx.rh;
+  const st=rh>=100?['bad','เกิดหยดน้ำ']:rh>=80?['warn','เสี่ยงเชื้อรา']:['ok','ปลอดภัย'];
+  return '<div class="card"><div style="font-size:13.5px;font-weight:500"><span class="sw" style="border-color:'+col[k]+'"></span>ผนัง '+k+'</div>'+
+  '<div class="lbl" style="margin-top:4px">ค่า U <span class="num">'+r.U.toFixed(2)+'</span> W/m²K</div>'+
+  '<div class="lbl">RH สูงสุด <span class="num">'+Math.round(rh)+'%</span></div>'+
+  '<div class="lbl">ที่ '+r.mx.lab+'</div>'+
+  '<span class="badge '+st[0]+'">'+st[1]+'</span></div>';
+}
+
+function strips(){
+  ['A','B'].forEach(k=>{
+    $('st'+k).innerHTML=S[k].map(l=>'<div title="'+M[l.m][0]+' '+l.d+' มม." style="flex:'+Math.max(+l.d||0.01,0.01)+' 1 0;background:'+M[l.m][3]+'"></div>').join('');
+  });
+  const used=[];[...S.A,...S.B].forEach(l=>{if(used.indexOf(l.m)<0)used.push(l.m)});
+  $('mleg').innerHTML=used.map(m=>'<span><span class="chip" style="background:'+M[m][3]+'"></span>'+M[m][0]+'</span>').join('');
+}
+
+const bands={id:'bands',beforeDatasetsDraw(c){
+  const x=c.scales.x,a=c.chartArea,g=c.ctx;
+  let pos=0;
+  S[shade].forEach(l=>{
+    const d=Math.max(+l.d||0.01,0.01);
+    const x0=x.getPixelForValue(pos),x1=x.getPixelForValue(pos+d);
+    g.save();g.globalAlpha=0.38;g.fillStyle=M[l.m][3];
+    g.fillRect(x0,a.top,Math.max(x1-x0,1),a.bottom-a.top);
+    g.restore();pos+=d;
+  });
+}};
+
+Chart.defaults.font.family='"Mitr","Noto Sans Thai",system-ui,sans-serif';
+const ch=new Chart($('ch'),{type:'line',data:{datasets:[]},plugins:[bands],options:{responsive:true,maintainAspectRatio:false,animation:false,
+  interaction:{mode:'nearest',intersect:false},
+  plugins:{legend:{display:false},tooltip:{callbacks:{title:it=>it.length?Math.round(it[0].parsed.x)+' มม. จากผิวนอก':''}}},
+  scales:{x:{type:'linear',title:{display:true,text:'มม. จากผิวนอก'},grid:{color:'rgba(128,128,128,0.15)'}},y:{title:{display:true,text:''},grid:{color:'rgba(128,128,128,0.15)'}}}}});
+
+function theme(){
+  const cs=getComputedStyle(document.documentElement);
+  const t=cs.getPropertyValue('--text2').trim(),g=cs.getPropertyValue('--grid').trim();
+  Chart.defaults.color=t;
+  ['x','y'].forEach(a=>{ch.options.scales[a].ticks={color:t};ch.options.scales[a].title.color=t;ch.options.scales[a].grid.color=g});
+}
+
+function ds(label,data,color,dash,w){return {label:label,data:data,borderColor:color,backgroundColor:color,borderDash:dash||[],borderWidth:w||2,pointRadius:w===1?0:3,tension:0}}
+
+function legend(items){
+  $('leg').innerHTML=items.map(i=>'<span><span class="sw" style="border-color:'+i[0]+';border-top-style:'+(i[1]?'dashed':'solid')+'"></span>'+i[2]+'</span>').join('');
+}
+
+function run(){
+  const rA=calc(S.A),rB=calc(S.B);
+  $('cards').innerHTML=card('A',rA)+card('B',rB);
+  strips();
+  const mxX=Math.max(rA.pts[rA.pts.length-1].x,rB.pts[rB.pts.length-1].x);
+  ch.options.scales.x.min=0;ch.options.scales.x.max=Math.ceil(shade==='A'?rA.pts[rA.pts.length-1].x:rB.pts[rB.pts.length-1].x);
+  const f=(r,key)=>r.pts.map(p=>({x:p.x,y:p[key]}));
+  let sets=[],lg=[],yt='';
+  if(mode==='rh'){
+    yt='ความชื้นสัมพัทธ์ที่รอยต่อ %';
+    sets=[ds('ผนัง A',f(rA,'rh'),col.A),ds('ผนัง B',f(rB,'rh'),col.B,[6,4]),
+      ds('100%',[{x:0,y:100},{x:mxX,y:100}],'#d03b3b',[2,3],1),ds('80%',[{x:0,y:80},{x:mxX,y:80}],'#c98500',[2,3],1)];
+    lg=[[col.A,0,'ผนัง A'],[col.B,1,'ผนัง B'],['#d03b3b',1,'100% เกิดหยดน้ำ'],['#c98500',1,'80% เสี่ยงเชื้อรา']];
+    ch.options.scales.y.suggestedMax=110;ch.options.scales.y.min=0;
+  }else if(mode==='t'){
+    yt='อุณหภูมิ °C';
+    sets=[ds('ผนัง A',f(rA,'T'),col.A),ds('ผนัง B',f(rB,'T'),col.B,[6,4])];
+    lg=[[col.A,0,'ผนัง A'],[col.B,1,'ผนัง B']];
+    ch.options.scales.y.suggestedMax=undefined;ch.options.scales.y.min=undefined;
+  }else{
+    yt='แรงดันไอน้ำ Pa';
+    sets=[ds('A ไอน้ำจริง',f(rA,'pv'),col.A),ds('A อิ่มตัว',f(rA,'ps'),col.A,[2,3],1),ds('B ไอน้ำจริง',f(rB,'pv'),col.B,[6,4]),ds('B อิ่มตัว',f(rB,'ps'),col.B,[2,3],1)];
+    lg=[[col.A,0,'A ไอน้ำจริง'],[col.A,1,'A ค่าอิ่มตัว'],[col.B,0,'B ไอน้ำจริง'],[col.B,1,'B ค่าอิ่มตัว']];
+    ch.options.scales.y.suggestedMax=undefined;ch.options.scales.y.min=undefined;
+  }
+  ch.options.scales.y.title.text=yt;
+  theme();
+  ch.data.datasets=sets;ch.update();legend(lg);
+}
+
+if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',run);
+
+$('seg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  mode=b.dataset.m;[...$('seg').children].forEach(x=>x.classList.toggle('on',x===b));run();
+});
+$('shseg').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  shade=b.dataset.s;[...$('shseg').querySelectorAll('button')].forEach(x=>x.classList.toggle('on',x===b));run();
+});
+
+function opts(sel){return Object.keys(M).map(k=>'<option value="'+k+'"'+(k===sel?' selected':'')+'>'+M[k][0]+'</option>').join('')}
+function ed(k){
+  $('ed'+k).innerHTML=S[k].map((l,i)=>'<div class="row" data-k="'+k+'" data-i="'+i+'"><span class="grip" data-chip aria-label="ลากเพื่อสลับลำดับชั้น" style="background:'+M[l.m][3]+'">&#8942;&#8942;</span><select data-f="m" style="flex:1;min-width:0" aria-label="วัสดุ">'+opts(l.m)+'</select><input type="number" data-f="d" value="'+l.d+'" min="0.1" step="any" style="width:76px" aria-label="ความหนา มม."><span class="lbl">มม.</span><button class="x" data-act="del" aria-label="ลบชั้นนี้">&times;</button></div>').join('')+
+  '<button data-act="add" data-k="'+k+'" style="font-size:13px">+ เพิ่มชั้น</button>';
+}
+
+function startDrag(k,row){
+  const el=$('ed'+k);
+  row.classList.add('drag');
+  const move=ev=>{
+    ev.preventDefault();
+    const rows=[...el.querySelectorAll('.row')];
+    const cur=rows.indexOf(row);
+    const others=rows.filter(r=>r!==row);
+    const y=ev.clientY;
+    const t=others.filter(r=>{const b=r.getBoundingClientRect();return y>b.top+b.height/2}).length;
+    if(t!==cur){
+      if(t>=others.length)others[others.length-1].after(row);else others[t].before(row);
+      const it=S[k].splice(cur,1)[0];S[k].splice(t,0,it);
+      [...el.querySelectorAll('.row')].forEach((r,i)=>{r.dataset.i=i});
+      run();
+    }
+  };
+  const up=()=>{
+    row.classList.remove('drag');
+    document.removeEventListener('pointermove',move);
+    document.removeEventListener('pointerup',up);
+    document.removeEventListener('pointercancel',up);
+  };
+  document.addEventListener('pointermove',move,{passive:false});
+  document.addEventListener('pointerup',up);
+  document.addEventListener('pointercancel',up);
+}
+
+['A','B'].forEach(k=>{
+  const el=$('ed'+k);
+  el.addEventListener('pointerdown',e=>{
+    const g=e.target.closest('.grip');if(!g)return;
+    e.preventDefault();
+    startDrag(k,g.closest('.row'));
+  });
+  el.addEventListener('input',e=>{
+    const row=e.target.closest('.row');if(!row)return;
+    const i=+row.dataset.i,f=e.target.dataset.f;
+    if(f==='d')S[k][i].d=+e.target.value;
+    run();
+  });
+  el.addEventListener('change',e=>{
+    const row=e.target.closest('.row');if(!row)return;
+    if(e.target.dataset.f==='m'){
+      const i=+row.dataset.i;S[k][i].m=e.target.value;
+      row.querySelector('[data-chip]').style.background=M[S[k][i].m][3];
+      run();
+    }
+  });
+  el.addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.act==='del'){
+      if(S[k].length<=1)return;
+      S[k].splice(+b.closest('.row').dataset.i,1);ed(k);run();
+    }else if(b.dataset.act==='add'){
+      S[k].push({m:'plast',d:15});ed(k);run();
+    }
+  });
+  ed(k);
+});
+run();
+</script>
+</body>
+</html>
