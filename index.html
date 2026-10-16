@@ -416,30 +416,13 @@ p{text-wrap:pretty}
 .contact-avail p{font-size:13px;font-weight:300;color:var(--mid);line-height:1.7}
 
 /* ══════════════════════════════════════
-   PARTNER CALL  (CTA band + popup)
+   FIND PARTNER  (own page, after About)
 ══════════════════════════════════════ */
-.partner-cta{padding:0 var(--pad) 96px}
-.pcta{max-width:var(--max);margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;text-align:left;background:var(--dark);color:#fff;border:none;padding:36px 42px;transition:background-color .2s,transform .2s}
-.pcta:hover{background:#2b2a28;transform:translateY(-2px)}
-.pcta>span:first-child{display:block;flex:1 1 420px;min-width:0}
+.partner-page{padding:calc(var(--nav-h) + 72px) var(--pad) 96px;max-width:var(--max);margin:0 auto}
+.partner-panel{max-width:760px;margin:24px 0 0;background:var(--dark);color:#fff;padding:48px 48px 40px}
 .pcta-flag{display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-bottom:12px}
 .pcta-dot{position:relative;width:7px;height:7px;border-radius:50%;background:#28c840}
-.pcta-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#28c840;animation:partnerPulse 2.2s ease-out infinite}
-@keyframes partnerPulse{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(3.6);opacity:0}}
-.pcta-title{display:block;font-family:var(--serif);font-size:clamp(22px,2.4vw,30px);font-weight:300;letter-spacing:-.015em;line-height:1.2;color:#fff;margin-bottom:10px}
-.pcta-sub{display:block;font-size:13.5px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.66);max-width:620px}
-.pcta-btn{flex-shrink:0;display:inline-flex;align-items:center;gap:10px;padding:15px 26px;background:#fff;color:var(--dark);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-
-/* popup */
-.pmodal{position:fixed;inset:0;z-index:900;display:none;overflow-y:auto;padding:calc(var(--nav-h) + 16px) 20px 40px}
-.pmodal.open{display:block}
-.pmodal-backdrop{position:fixed;inset:0;background:rgba(18,17,16,.74);animation:pmFade .2s ease-out}
-@keyframes pmFade{from{opacity:0}to{opacity:1}}
-@keyframes pmDrop{from{opacity:0;transform:translateY(-44px)}to{opacity:1;transform:translateY(0)}}
-.pmodal-panel{position:relative;max-width:660px;margin:0 auto;background:var(--dark);color:#fff;padding:44px 44px 38px;animation:pmDrop .25s ease-out both;box-shadow:0 40px 90px rgba(0,0,0,.45)}
-.pmodal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid rgba(255,255,255,.22);color:#fff;font-size:16px;line-height:1;transition:background-color .2s}
-.pmodal-close:hover{background:rgba(255,255,255,.12)}
-.pmodal-title{font-family:var(--serif);font-size:clamp(24px,3vw,34px);font-weight:300;line-height:1.16;letter-spacing:-.02em;color:#fff;margin:14px 0 14px}
+.pmodal-title{font-family:var(--serif);font-size:clamp(26px,3.4vw,40px);font-weight:300;line-height:1.16;letter-spacing:-.02em;color:#fff;margin:14px 0 14px}
 .partner-text{font-size:13.5px;font-weight:300;line-height:1.85;color:rgba(255,255,255,.74);margin-bottom:10px}
 .partner-text-th{font-size:13.5px;font-weight:300;line-height:2;color:rgba(255,255,255,.6)}
 .partner-roles{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 26px;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.14)}
@@ -465,10 +448,8 @@ p{text-wrap:pretty}
 .pf-note{font-size:11.5px;font-weight:300;line-height:1.7;color:rgba(255,255,255,.42)}
 .pf-status{font-size:12.5px;font-weight:400;line-height:1.7;color:#9ce6a8}
 @media(max-width:640px){
-  .pcta{padding:28px 24px;gap:22px}
-  .pcta-btn{width:100%;justify-content:center}
-  .pmodal{padding:calc(var(--nav-h) + 8px) 12px 90px}
-  .pmodal-panel{padding:34px 22px 28px}
+  .partner-page{padding:calc(var(--nav-h) + 40px) var(--pad) 96px}
+  .partner-panel{padding:34px 22px 28px}
   .pf-row{grid-template-columns:1fr}
 }
 
@@ -602,6 +583,7 @@ p{text-wrap:pretty}
     <a data-nav="projects">Work</a>
     <a data-nav="lab">Lab</a>
     <a data-nav="about">About</a>
+    <a data-nav="partner">Find Partner</a>
     <a data-nav="contact">Contact</a>
   </div>
   <button class="nav-cv" data-nav="contact">Get in Touch</button>
@@ -612,6 +594,7 @@ p{text-wrap:pretty}
   <a data-nav="projects">Work</a>
   <a data-nav="lab">Lab</a>
   <a data-nav="about">About</a>
+  <a data-nav="partner">Find Partner</a>
   <a data-nav="contact">Contact</a>
 </div>
 
@@ -633,62 +616,6 @@ p{text-wrap:pretty}
     <span class="crail-tip">Facebook</span>
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
   </a>
-</div>
-
-<!-- ═══════ PARTNER POPUP ═══════ -->
-<div class="pmodal" id="partnerModal" role="dialog" aria-modal="true" aria-labelledby="pmodalTitle" hidden>
-  <div class="pmodal-backdrop" data-partner-close></div>
-  <div class="pmodal-panel">
-    <button class="pmodal-close" type="button" id="partnerClose" aria-label="Close">✕</button>
-    <span class="pcta-flag"><span class="pcta-dot"></span>Open call · กำลังหาทีมร่วมงาน</span>
-    <h2 class="pmodal-title" id="pmodalTitle">ฝากข้อมูลไว้<br>เผื่อมีโปรเจกต์ร่วมกันในอนาคต</h2>
-    <p class="partner-text-th">หาสถาปนิก วิศวกร ผู้รับเหมา ที่ปรึกษา หรือนักพัฒนา — ร่วมงานกันได้หมด
-    กรอกชื่อ นามสกุล อีเมล และข้อความไว้ แนบไฟล์มาด้วยก็ได้ (ไม่เกิน 10 MB) แล้วผมจะเก็บข้อมูลไว้ติดต่อกลับ</p>
-    <ul class="partner-roles">
-      <li>สถาปนิก / Architect</li>
-      <li>วิศวกร / Engineer</li>
-      <li>ผู้รับเหมา / Contractor</li>
-      <li>ที่ปรึกษา / Consultant</li>
-      <li>BIM &amp; Digital</li>
-    </ul>
-
-    <form class="partner-form" id="partnerForm" novalidate>
-      <div class="pf-row">
-        <div class="pf-field">
-          <label class="pf-label" for="pfFirst">ชื่อ / First name</label>
-          <input class="pf-input" type="text" id="pfFirst" name="firstName" placeholder="ชื่อจริง" autocomplete="given-name" required/>
-        </div>
-        <div class="pf-field">
-          <label class="pf-label" for="pfLast">นามสกุล / Last name</label>
-          <input class="pf-input" type="text" id="pfLast" name="lastName" placeholder="นามสกุล" autocomplete="family-name" required/>
-        </div>
-      </div>
-      <div class="pf-field">
-        <label class="pf-label" for="pfEmail">อีเมลติดต่อกลับ / Email</label>
-        <input class="pf-input" type="email" id="pfEmail" name="email" placeholder="you@studio.com" autocomplete="email" required/>
-      </div>
-      <div class="pf-field">
-        <label class="pf-label" for="pfMessage">ข้อความ / Message</label>
-          <textarea class="pf-textarea" id="pfMessage" name="message" placeholder="เล่าสั้น ๆ ว่าทำงานด้านไหน สนใจร่วมงานแบบไหน" required></textarea>
-      </div>
-      <div class="pf-field">
-        <span class="pf-label">ไฟล์แนบ / Attachment — max 10 MB</span>
-        <div class="pf-drop" id="pfDrop">
-          <label class="pf-file-btn" for="pfFile">เลือกไฟล์ / Choose file</label>
-          <input type="file" id="pfFile" name="attachment" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"/>
-          <span class="pf-file-name" id="pfFileName">พอร์ตโฟลิโอ CV แบบร่าง หรือไฟล์อะไรก็ได้ · any file type</span>
-          <button class="pf-file-clear" type="button" id="pfFileClear" style="display:none" aria-label="Remove file">✕</button>
-        </div>
-      </div>
-      <input type="text" id="pfCompany" name="company" tabindex="-1" autocomplete="off"
-             aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"/>
-      <button class="pf-submit" type="submit">ส่งข้อมูล / Send →</button>
-      <p class="pf-status" id="pfStatus" role="status" aria-live="polite"></p>
-      <p class="pf-note">การกดส่งจะเปิดโปรแกรมอีเมลของคุณพร้อมข้อความ ส่งถึง pirawit.win@gmail.com —
-      <strong>ไฟล์แนบต้องกดแนบอีกครั้งในหน้าต่างอีเมลที่เปิดขึ้น</strong> (เว็บนี้เป็น static site จึงส่งไฟล์เข้าเซิร์ฟเวอร์เองไม่ได้)<br>
-      Sending opens your email app with the message pre-filled — please re-attach the file there.</p>
-    </form>
-  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════
@@ -1003,18 +930,6 @@ p{text-wrap:pretty}
 
     </div>
     <p class="lab-more">More experiments coming soon</p>
-  </section>
-
-  <!-- ═══════ PARTNER CALL — opens the popup ═══════ -->
-  <section class="partner-cta" id="partner">
-    <button class="pcta" type="button" id="partnerOpen">
-      <span>
-        <span class="pcta-flag"><span class="pcta-dot"></span>Open call · กำลังหาทีมร่วมงาน</span>
-        <span class="pcta-title">หาสถาปนิก วิศวกร ผู้รับเหมา ที่ปรึกษา — ได้หมด</span>
-        <span class="pcta-sub">ฝากข้อมูลไว้เผื่อมีโปรเจกต์ร่วมกันในอนาคต · Architects, engineers, contractors and consultants — leave your details and a file, and I will keep them on hand for future projects.</span>
-      </span>
-      <span class="pcta-btn">ฝากข้อมูล / Leave your details ↓</span>
-    </button>
   </section>
 
 
@@ -2009,6 +1924,70 @@ p{text-wrap:pretty}
 </div>
 
 <!-- ═══════════════════════════════════════════════════
+     PAGE: FIND PARTNER
+═══════════════════════════════════════════════════ -->
+<div id="page-partner" class="page">
+  <div class="partner-page">
+    <div class="section-label">Find Partner</div>
+    <div class="partner-panel">
+    <span class="pcta-flag"><span class="pcta-dot"></span>Open call · กำลังหาทีมร่วมงาน</span>
+    <h1 class="pmodal-title">ฝากข้อมูลไว้<br>เผื่อมีโปรเจกต์ร่วมกันในอนาคต</h1>
+    <p class="partner-text-th">หาสถาปนิก วิศวกร ผู้รับเหมา ที่ปรึกษา หรือนักพัฒนา — ร่วมงานกันได้หมด
+    กรอกชื่อ นามสกุล อีเมล และข้อความไว้ แนบไฟล์มาด้วยก็ได้ (ไม่เกิน 10 MB) แล้วผมจะเก็บข้อมูลไว้ติดต่อกลับ</p>
+    <ul class="partner-roles">
+      <li>สถาปนิก / Architect</li>
+      <li>วิศวกร / Engineer</li>
+      <li>ผู้รับเหมา / Contractor</li>
+      <li>ที่ปรึกษา / Consultant</li>
+      <li>BIM &amp; Digital</li>
+    </ul>
+
+    <form class="partner-form" id="partnerForm" novalidate>
+      <div class="pf-row">
+        <div class="pf-field">
+          <label class="pf-label" for="pfFirst">ชื่อ / First name</label>
+          <input class="pf-input" type="text" id="pfFirst" name="firstName" placeholder="ชื่อจริง" autocomplete="given-name" required/>
+        </div>
+        <div class="pf-field">
+          <label class="pf-label" for="pfLast">นามสกุล / Last name</label>
+          <input class="pf-input" type="text" id="pfLast" name="lastName" placeholder="นามสกุล" autocomplete="family-name" required/>
+        </div>
+      </div>
+      <div class="pf-field">
+        <label class="pf-label" for="pfEmail">อีเมลติดต่อกลับ / Email</label>
+        <input class="pf-input" type="email" id="pfEmail" name="email" placeholder="you@studio.com" autocomplete="email" required/>
+      </div>
+      <div class="pf-field">
+        <label class="pf-label" for="pfMessage">ข้อความ / Message</label>
+          <textarea class="pf-textarea" id="pfMessage" name="message" placeholder="เล่าสั้น ๆ ว่าทำงานด้านไหน สนใจร่วมงานแบบไหน" required></textarea>
+      </div>
+      <div class="pf-field">
+        <span class="pf-label">ไฟล์แนบ / Attachment — max 10 MB</span>
+        <div class="pf-drop" id="pfDrop">
+          <label class="pf-file-btn" for="pfFile">เลือกไฟล์ / Choose file</label>
+          <input type="file" id="pfFile" name="attachment" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"/>
+          <span class="pf-file-name" id="pfFileName">พอร์ตโฟลิโอ CV แบบร่าง หรือไฟล์อะไรก็ได้ · any file type</span>
+          <button class="pf-file-clear" type="button" id="pfFileClear" style="display:none" aria-label="Remove file">✕</button>
+        </div>
+      </div>
+      <input type="text" id="pfCompany" name="company" tabindex="-1" autocomplete="off"
+             aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"/>
+      <button class="pf-submit" type="submit">ส่งข้อมูล / Send →</button>
+      <p class="pf-status" id="pfStatus" role="status" aria-live="polite"></p>
+      <p class="pf-note">การกดส่งจะเปิดโปรแกรมอีเมลของคุณพร้อมข้อความ ส่งถึง pirawit.win@gmail.com —
+      <strong>ไฟล์แนบต้องกดแนบอีกครั้งในหน้าต่างอีเมลที่เปิดขึ้น</strong> (เว็บนี้เป็น static site จึงส่งไฟล์เข้าเซิร์ฟเวอร์เองไม่ได้)<br>
+      Sending opens your email app with the message pre-filled — please re-attach the file there.</p>
+    </form>
+    </div>
+  </div>
+  <footer>
+    <span>© 2026 Pirawit Sukhaneskul</span>
+    <span class="footer-link" data-nav="about">About</span>
+    <span class="footer-link" data-nav="contact">Contact</span>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
      PAGE: CONTACT
 ═══════════════════════════════════════════════════ -->
 <div id="page-contact" class="page">
@@ -2064,14 +2043,13 @@ p{text-wrap:pretty}
 ═══════════════════════════════════════════════════ -->
 <script>
 (function(){
-  /* --- PARTNER POPUP + FORM --- */
+  /* --- FIND PARTNER FORM --- */
   /* EDIT ME: paste the Apps Script web-app /exec URL here so enquiries land in the
      Google Sheet. Left empty, the form falls back to opening the visitor's mail app. */
   const PARTNER_ENDPOINT = '';
 
-  const partnerModal = document.getElementById('partnerModal');
   const partnerForm  = document.getElementById('partnerForm');
-  if (partnerModal && partnerForm) {
+  if (partnerForm) {
     const pfStatus = document.getElementById('pfStatus');
     const pfFile   = document.getElementById('pfFile');
     const pfDrop   = document.getElementById('pfDrop');
@@ -2079,35 +2057,6 @@ p{text-wrap:pretty}
     const pfClear  = document.getElementById('pfFileClear');
     const MAX_BYTES = 10 * 1024 * 1024;
     const emptyName = pfName.textContent;
-    let lastFocus = null;
-
-    function openPartner() {
-      lastFocus = document.activeElement;
-      partnerModal.hidden = false;
-      partnerModal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => document.getElementById('pfFirst').focus(), 260);
-    }
-    function closePartner() {
-      partnerModal.classList.remove('open');
-      partnerModal.hidden = true;
-      document.body.style.overflow = '';
-      if (lastFocus) lastFocus.focus();
-    }
-    document.getElementById('partnerOpen').addEventListener('click', openPartner);
-
-    /* auto-open on arrival — once per browser session */
-    try {
-      if (!sessionStorage.getItem('partnerSeen')) {
-        sessionStorage.setItem('partnerSeen', '1');
-        setTimeout(openPartner, 700);
-      }
-    } catch (err) { setTimeout(openPartner, 700); }
-    document.getElementById('partnerClose').addEventListener('click', closePartner);
-    partnerModal.querySelector('[data-partner-close]').addEventListener('click', closePartner);
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && partnerModal.classList.contains('open')) closePartner();
-    });
 
     function setFile(file) {
       if (!file) return;
@@ -2231,7 +2180,6 @@ p{text-wrap:pretty}
         pfClear.style.display = 'none';
         pfStatus.style.color = '#9ce6a8';
         pfStatus.textContent = '\u2713 \u0e2a\u0e48\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e23\u0e35\u0e22\u0e1a\u0e23\u0e49\u0e2d\u0e22\u0e41\u0e25\u0e49\u0e27 \u0e02\u0e2d\u0e1a\u0e04\u0e38\u0e13\u0e21\u0e32\u0e01\u0e04\u0e23\u0e31\u0e1a \u2014 \u0e08\u0e30\u0e15\u0e34\u0e14\u0e15\u0e48\u0e2d\u0e01\u0e25\u0e31\u0e1a\u0e17\u0e32\u0e07\u0e2d\u0e35\u0e40\u0e21\u0e25';
-        setTimeout(closePartner, 2600);
 
       } catch (err) {
         pfStatus.style.color = '#e2725b';
