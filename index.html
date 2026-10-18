@@ -49,7 +49,7 @@ button{cursor:pointer;font-family:inherit}
 #nav.solid{background:rgba(245,244,240,.96);box-shadow:0 1px 0 var(--border)}
 .nav-logo{font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dark);cursor:pointer}
 .nav-logo.light{color:var(--dark)}
-.nav-links{display:flex;gap:30px}
+.nav-links{display:flex;gap:30px;position:absolute;left:50%;transform:translateX(-50%)}
 .nav-links a{font-size:13.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dark);cursor:pointer;transition:opacity .2s}
 .nav-links a:hover{opacity:.6}
 .nav-links a.active{color:var(--dark);opacity:1;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px}
@@ -464,6 +464,9 @@ p{text-wrap:pretty}
   .skills-cats{grid-template-columns:repeat(2,1fr)}
   .cv-grid{grid-template-columns:1fr;gap:0}
   .pd-chart-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:900px){
+  .nav-links{gap:16px}
 }
 @media(max-width:800px){
   :root{--pad:24px}
